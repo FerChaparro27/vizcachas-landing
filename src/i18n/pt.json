@@ -83,19 +83,16 @@
     "intro": "Várias missões tripuladas e robóticas futuras têm como alvo o polo sul lunar, onde há gelo preso em crateras em sombra permanente. Mas a mesma geometria que preserva esse gelo torna a região difícil para operar.",
     "points": [
       {
-        "figure": "≈1,5°",
-        "title": "O Sol rasante no horizonte",
-        "body": "O eixo de rotação da Lua é inclinado apenas cerca de 1,5° em relação à eclíptica. Perto dos polos o Sol nunca sobe mais do que alguns graus, então a borda de uma cratera ou uma colina pode deixar um módulo na sombra por dias."
+        "title": "O Sol mal aparece",
+        "body": "Perto do polo, o Sol não sobe: ele gira rente ao horizonte. Uma colina ou a borda de uma cratera bastam para deixar um módulo no escuro por dias."
       },
       {
-        "figure": "±7–8°",
         "title": "A Terra também fica baixa",
-        "body": "Como a Lua sempre mostra a mesma face para nós, a Terra fica quase fixa no céu lunar. Vista do polo, ela está perto do horizonte, e a libração a faz subir e descer lentamente."
+        "body": "Do polo, a Terra aparece quase sobre o horizonte. Se o relevo a encobre, a comunicação direta é cortada."
       },
       {
-        "figure": "168 h → 0 h",
-        "title": "Energia e comunicação definem a missão",
-        "body": "Painéis solares precisam do Sol acima do horizonte. O rádio direto para a Terra precisa de uma linha de visada livre. Se o lançamento atrasar alguns dias, as duas coisas podem mudar."
+        "title": "Poucos dias mudam tudo",
+        "body": "Com um atraso de duas semanas, o mesmo lugar pode passar de ter Sol a semana toda a não ter nenhum."
       }
     ],
     "hardTitle": "Por que é difícil hoje",
@@ -103,19 +100,18 @@
     "hard": [
       {
         "title": "Códigos técnicos",
-        "caption": "Escolher a Lua como observador ou o Sol como alvo exige conhecer códigos de corpos e dezenas de opções de configuração."
+        "caption": "Só para começar é preciso conhecer códigos e dezenas de opções."
       },
       {
         "title": "Tabelas densas",
-        "caption": "A resposta para “tem Sol?” fica enterrada em tabelas largas com unidades misturadas e símbolos explicados longe dos dados."
+        "caption": "A resposta fica escondida em tabelas longas e cheias de símbolos."
       },
       {
-        "title": "Polos difíceis de ler",
-        "caption": "Projeções de mapa de uso geral distorcem as regiões polares, então relevo, luz e sombra são difíceis de ler justamente onde as missões estão indo."
+        "title": "Mapas distorcidos",
+        "caption": "Os mapas comuns esticam os polos justamente onde as missões vão."
       }
     ],
-    "conclusionLead": "A informação existe, ",
-    "conclusionEmphasis": "mas era difícil de usar."
+    "conclusion": "A informação existe, mas era difícil de usar."
   },
   "showcase": {
     "kicker": "Veja o que é possível",
@@ -254,7 +250,13 @@
     "licenseTitle": "Licença",
     "license": "O código é publicado sob a licença MIT. Os dados pertencem às suas fontes e são usados conforme seus próprios termos.",
     "disclaimerTitle": "Aviso de independência",
-    "disclaimer": "O Lunar Landing Site Navigator é um projeto independente. Não é afiliado, endossado nem patrocinado pela NASA, pelo JPL, pela Caltech, pelo USGS ou por qualquer agência espacial. Os dados vêm de fontes públicas, citadas acima; usá-los não implica endosso de seus provedores."
+    "disclaimer": "O Lunar Landing Site Navigator é um projeto independente. Não é afiliado, endossado nem patrocinado pela NASA, pelo JPL, pela Caltech, pelo USGS ou por qualquer agência espacial. Os dados vêm de fontes públicas, citadas abaixo; usá-los não implica endosso de seus provedores.",
+    "sectionTitle": "Dados, créditos e citação",
+    "groups": [
+      "Fontes de dados",
+      "Software, IA e licença",
+      "Como citar"
+    ]
   },
   "cite": {
     "kicker": "Citar",

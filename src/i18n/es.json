@@ -83,19 +83,16 @@
     "intro": "Varias misiones tripuladas y robóticas próximas apuntan al polo sur lunar, donde hay hielo atrapado en cráteres en sombra permanente. Pero la misma geometría que conserva ese hielo hace que la región sea difícil para operar.",
     "points": [
       {
-        "figure": "≈1,5°",
-        "title": "El Sol roza el horizonte",
-        "body": "El eje de rotación de la Luna está inclinado apenas unos 1,5° respecto de la eclíptica. Cerca de los polos el Sol nunca sube más que unos pocos grados, así que el borde de un cráter o una loma pueden dejar a un módulo en sombra durante días."
+        "title": "El Sol apenas se asoma",
+        "body": "Cerca del polo, el Sol no sube: da vueltas pegado al horizonte. Una loma o el borde de un cráter alcanzan para dejar un módulo a oscuras durante días."
       },
       {
-        "figure": "±7–8°",
-        "title": "La Tierra también está baja",
-        "body": "Como la Luna nos muestra siempre la misma cara, la Tierra queda casi fija en el cielo lunar. Vista desde el polo está cerca del horizonte, y la libración la hace subir y bajar lentamente."
+        "title": "La Tierra también queda baja",
+        "body": "Desde el polo, la Tierra se ve casi sobre el horizonte. Si el relieve la tapa, se corta la comunicación directa."
       },
       {
-        "figure": "168 h → 0 h",
-        "title": "Energía y comunicación definen la misión",
-        "body": "Los paneles solares necesitan el Sol sobre el horizonte. La radio directa a la Tierra necesita una línea de vista despejada. Si el lanzamiento se atrasa unos días, las dos cosas pueden cambiar."
+        "title": "Unos días lo cambian todo",
+        "body": "Con un atraso de dos semanas, el mismo lugar puede pasar de tener Sol toda la semana a no tenerlo nunca."
       }
     ],
     "hardTitle": "Por qué hoy es difícil",
@@ -103,19 +100,18 @@
     "hard": [
       {
         "title": "Códigos técnicos",
-        "caption": "Elegir la Luna como observador o el Sol como objetivo exige conocer códigos de cuerpos y decenas de opciones de configuración."
+        "caption": "Para empezar hay que conocer códigos y decenas de opciones."
       },
       {
         "title": "Tablas densas",
-        "caption": "La respuesta a “¿hay Sol?” queda enterrada en tablas anchas con unidades mezcladas y símbolos explicados lejos de los datos."
+        "caption": "La respuesta queda escondida en tablas largas y con símbolos."
       },
       {
-        "title": "Polos difíciles de leer",
-        "caption": "Las proyecciones de mapa de uso general deforman las regiones polares, así que el relieve, la luz y la sombra cuestan leerse justo donde van las misiones."
+        "title": "Mapas deformados",
+        "caption": "Los mapas comunes estiran los polos justo donde van las misiones."
       }
     ],
-    "conclusionLead": "La información existe, ",
-    "conclusionEmphasis": "pero era difícil de usar."
+    "conclusion": "La información existe, pero era difícil de usar."
   },
   "showcase": {
     "kicker": "Mirá lo que es posible",
@@ -254,7 +250,13 @@
     "licenseTitle": "Licencia",
     "license": "El código se publica bajo la licencia MIT. Los datos pertenecen a sus fuentes y se usan según sus propios términos.",
     "disclaimerTitle": "Aviso de independencia",
-    "disclaimer": "Lunar Landing Site Navigator es un proyecto independiente. No está afiliado, avalado ni patrocinado por la NASA, el JPL, Caltech, el USGS ni ninguna agencia espacial. Los datos provienen de fuentes públicas, citadas arriba; usarlos no implica aval de sus proveedores."
+    "disclaimer": "Lunar Landing Site Navigator es un proyecto independiente. No está afiliado, avalado ni patrocinado por la NASA, el JPL, Caltech, el USGS ni ninguna agencia espacial. Los datos provienen de fuentes públicas, citadas abajo; usarlos no implica aval de sus proveedores.",
+    "sectionTitle": "Datos, créditos y cita",
+    "groups": [
+      "Fuentes de datos",
+      "Software, IA y licencia",
+      "Cómo citar"
+    ]
   },
   "cite": {
     "kicker": "Citar",

@@ -83,19 +83,16 @@
     "intro": "Plusieurs missions habitées et robotiques à venir visent le pôle Sud lunaire, où de la glace est piégée dans des cratères en ombre permanente. Mais la géométrie même qui préserve cette glace rend la région difficile à exploiter.",
     "points": [
       {
-        "figure": "≈1,5°",
-        "title": "Le Soleil rase l'horizon",
-        "body": "L'axe de rotation de la Lune n'est incliné que d'environ 1,5° par rapport à l'écliptique. Près des pôles, le Soleil ne monte jamais de plus de quelques degrés : le rebord d'un cratère ou une colline peut laisser un atterrisseur dans l'ombre pendant des jours."
+        "title": "Le Soleil se montre à peine",
+        "body": "Près du pôle, le Soleil ne monte pas : il tourne au ras de l’horizon. Une colline ou le rebord d’un cratère suffit à laisser un atterrisseur dans le noir pendant des jours."
       },
       {
-        "figure": "±7–8°",
         "title": "La Terre est basse, elle aussi",
-        "body": "Comme la Lune nous montre toujours la même face, la Terre reste presque fixe dans le ciel lunaire. Vue du pôle, elle est proche de l'horizon, et la libration la fait monter et descendre lentement."
+        "body": "Depuis le pôle, la Terre apparaît presque sur l’horizon. Si le relief la masque, la communication directe est coupée."
       },
       {
-        "figure": "168 h → 0 h",
-        "title": "L'énergie et la communication décident de la mission",
-        "body": "Les panneaux solaires ont besoin du Soleil au-dessus de l'horizon. La radio directe vers la Terre a besoin d'une ligne de visée dégagée. Si le lancement glisse de quelques jours, les deux peuvent changer."
+        "title": "Quelques jours changent tout",
+        "body": "Avec deux semaines de retard, un même lieu peut passer d’une semaine entière de Soleil à aucune heure."
       }
     ],
     "hardTitle": "Pourquoi c'est difficile aujourd'hui",
@@ -103,19 +100,18 @@
     "hard": [
       {
         "title": "Codes techniques",
-        "caption": "Choisir la Lune comme observateur ou le Soleil comme cible exige de connaître des codes d’astres et des dizaines d’options de configuration."
+        "caption": "Pour commencer, il faut connaître des codes et des dizaines d’options."
       },
       {
         "title": "Tableaux denses",
-        "caption": "La réponse à « y a-t-il du Soleil ? » est noyée dans de larges tableaux aux unités mélangées, avec des symboles expliqués loin des données."
+        "caption": "La réponse se cache dans de longs tableaux remplis de symboles."
       },
       {
-        "title": "Pôles difficiles à lire",
-        "caption": "Les projections cartographiques généralistes déforment les régions polaires : relief, lumière et ombre y sont difficiles à lire, précisément là où vont les missions."
+        "title": "Cartes déformées",
+        "caption": "Les cartes courantes étirent les pôles, justement là où vont les missions."
       }
     ],
-    "conclusionLead": "L’information existe, ",
-    "conclusionEmphasis": "mais elle était difficile à utiliser."
+    "conclusion": "L’information existe, mais elle était difficile à utiliser."
   },
   "showcase": {
     "kicker": "Ce qui est possible",
@@ -254,7 +250,13 @@
     "licenseTitle": "Licence",
     "license": "Le code est publié sous licence MIT. Les données appartiennent à leurs sources et sont utilisées selon leurs propres conditions.",
     "disclaimerTitle": "Avis d’indépendance",
-    "disclaimer": "Lunar Landing Site Navigator est un projet indépendant. Il n’est ni affilié, ni approuvé, ni parrainé par la NASA, le JPL, Caltech, l’USGS ou une quelconque agence spatiale. Les données proviennent de sources publiques, citées ci-dessus ; leur utilisation n’implique aucune approbation de leurs fournisseurs."
+    "disclaimer": "Lunar Landing Site Navigator est un projet indépendant. Il n’est ni affilié, ni approuvé, ni parrainé par la NASA, le JPL, Caltech, l’USGS ou une quelconque agence spatiale. Les données proviennent de sources publiques, citées ci-dessous ; leur utilisation n’implique aucune approbation de leurs fournisseurs.",
+    "sectionTitle": "Données, crédits et citation",
+    "groups": [
+      "Sources de données",
+      "Logiciels, IA et licence",
+      "Comment citer"
+    ]
   },
   "cite": {
     "kicker": "Citer",

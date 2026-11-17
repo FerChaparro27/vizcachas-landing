@@ -185,12 +185,40 @@ const bibtex = `@software{vizcachas2026navigator,
       <p class="kicker">{d.problem.kicker}</p>
       <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.problem.title}</h2>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.problem.intro}</p>
-      <!-- Three points as open columns led by a real figure (no boxes). -->
+      <!-- Row 1: the three conditions at the pole. Open columns, each led by a small line illustration. -->
       <div class="mt-14 grid md:grid-cols-3 md:divide-x md:divide-line">
         {
           d.problem.points.map((p, i) => (
             <article class:list={['border-t border-line py-8 md:border-t-0 md:py-0', i === 0 ? 'md:pr-8' : i === 1 ? 'md:px-8' : 'md:pl-8']}>
-              <p class:list={['font-mono text-4xl tracking-tight lg:text-5xl', i === 1 ? 'text-earth-ink' : 'text-sun-ink']}>{p.figure}</p>
+              <svg viewBox="0 0 160 80" class="h-20 w-auto" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                {i === 0 && (
+                  <g>
+                    <path d="M4 64 H64 Q84 64 96 40 Q104 28 114 40 Q124 54 156 56" stroke="var(--ink-muted)" stroke-width="1.5" />
+                    <path d="M6 58 Q60 50 110 52 T156 52" stroke="var(--sun-ink)" stroke-width="1.5" stroke-dasharray="3 4" />
+                    <circle cx="118" cy="50" r="8" fill="var(--sun)" opacity="0.35" />
+                    <circle cx="58" cy="54" r="7" fill="var(--sun)" />
+                  </g>
+                )}
+                {i === 1 && (
+                  <g>
+                    <path d="M4 64 H156" stroke="var(--ink-muted)" stroke-width="1.5" />
+                    <path d="M20 64 l7 -11 l7 11" stroke="var(--ink)" stroke-width="1.5" />
+                    <circle cx="118" cy="48" r="10" fill="var(--earth)" />
+                    <path d="M27 52 L108 47" stroke="var(--earth-ink)" stroke-width="1.5" stroke-dasharray="3 4" />
+                  </g>
+                )}
+                {i === 2 && (
+                  <g>
+                    {[0, 1, 2, 3, 4, 5, 6].map((k) => (
+                      <rect x={4 + k * 21} y="14" width="16" height="16" rx="3" fill="var(--sun)" />
+                    ))}
+                    {[0, 1, 2, 3, 4, 5, 6].map((k) => (
+                      <rect x={4 + k * 21} y="50" width="16" height="16" rx="3" stroke="var(--ink-muted)" stroke-width="1.3" />
+                    ))}
+                    <path d="M80 34 v10 m-4 -4 l4 4 l4 -4" stroke="var(--ink-muted)" stroke-width="1.5" />
+                  </g>
+                )}
+              </svg>
               <h3 class="mt-5 font-serif text-xl font-semibold">{p.title}</h3>
               <p class="mt-2 leading-relaxed text-muted">{p.body}</p>
             </article>
@@ -198,30 +226,25 @@ const bibtex = `@software{vizcachas2026navigator,
         }
       </div>
 
-      <!-- Why it is hard today: a title column + a ruled list. -->
-      <div class="mt-24 grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
-        <div>
-          <h3 class="font-serif text-2xl font-semibold sm:text-3xl">{d.problem.hardTitle}</h3>
-          <p class="mt-3 leading-relaxed text-muted">{d.problem.hardIntro}</p>
-        </div>
-        <ul>
-          {
-            d.problem.hard.map((h, i) => (
-              <li class="flex gap-5 border-t border-line py-6 last:border-b">
-                <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="mt-0.5 shrink-0 text-muted">
-                  <path d={hardIcons[i]} />
-                </svg>
-                <div>
-                  <h4 class="font-semibold">{h.title}</h4>
-                  <p class="mt-1 leading-relaxed text-muted">{h.caption}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
+      <!-- Row 2: why it is hard today. Same column pattern as row 1, with icons. -->
+      <h3 class="mt-24 font-serif text-2xl font-semibold sm:text-3xl">{d.problem.hardTitle}</h3>
+      <p class="mt-3 max-w-3xl leading-relaxed text-muted">{d.problem.hardIntro}</p>
+      <div class="mt-10 grid md:grid-cols-3 md:divide-x md:divide-line">
+        {
+          d.problem.hard.map((h, i) => (
+            <article class:list={['border-t border-line py-8 md:border-t-0 md:py-0', i === 0 ? 'md:pr-8' : i === 1 ? 'md:px-8' : 'md:pl-8']}>
+              <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" class="text-muted">
+                <path d={hardIcons[i]} />
+              </svg>
+              <h4 class="mt-5 font-serif text-xl font-semibold">{h.title}</h4>
+              <p class="mt-2 leading-relaxed text-muted">{h.caption}</p>
+            </article>
+          ))
+        }
       </div>
-      <p class="mx-auto mt-24 max-w-4xl text-center font-serif text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl">
-        {d.problem.conclusionLead}<span class="marker">{d.problem.conclusionEmphasis}</span>
+
+      <p class="mx-auto mt-24 max-w-4xl text-center font-serif text-4xl leading-tight font-semibold tracking-tight text-balance text-earth-ink sm:text-5xl">
+        {d.problem.conclusion}
       </p>
     </div>
   </section>
@@ -384,63 +407,6 @@ const bibtex = `@software{vizcachas2026navigator,
     </div>
   </section>
 
-  <!-- DATA & CREDITS -->
-  <section id="data" class="border-t border-line">
-    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <p class="kicker">{d.data.kicker}</p>
-      <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.data.title}</h2>
-      <div class="mt-10 overflow-hidden rounded-2xl border border-line">
-        <table class="w-full text-left text-sm">
-          <tbody>
-            {
-              d.data.sources.map((s) => (
-                <tr class="border-b border-line last:border-0 even:bg-surface">
-                  <th scope="row" class="px-4 py-3 align-top font-medium">
-                    <a href={s.url} class="underline decoration-line underline-offset-4 hover:decoration-ink">{s.name}</a>
-                    <span class="mt-0.5 block font-mono text-xs font-normal text-muted">{s.org}</span>
-                  </th>
-                  <td class="px-4 py-3 align-top text-muted">{s.use}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-      <div class="mt-10 grid gap-8 md:grid-cols-3">
-        <div><h3 class="font-semibold">{d.data.softwareTitle}</h3><p class="mt-2 text-sm leading-relaxed text-muted">{d.data.software}</p></div>
-        <div><h3 class="font-semibold">{d.data.aiTitle}</h3><p class="mt-2 text-sm leading-relaxed text-muted">{d.data.ai}</p></div>
-        <div><h3 class="font-semibold">{d.data.licenseTitle}</h3><p class="mt-2 text-sm leading-relaxed text-muted">{d.data.license}</p></div>
-      </div>
-      <aside id="independence" class="mt-10 rounded-2xl border border-line border-l-4 border-l-earth bg-surface p-6">
-        <h3 class="font-semibold">{d.data.disclaimerTitle}</h3>
-        <p class="mt-2 max-w-4xl text-sm leading-relaxed text-muted">{d.data.disclaimer}</p>
-      </aside>
-    </div>
-  </section>
-
-  <!-- CITE: Nerfies BibTeX block -->
-  <section id="cite" class="mx-auto max-w-4xl px-4 pb-20 sm:px-6">
-    <p class="kicker">{d.cite.kicker}</p>
-    <h2 class="mt-3 font-serif text-3xl font-semibold tracking-tight">{d.cite.title}</h2>
-    <p class="mt-3 leading-relaxed text-muted">{d.cite.intro}</p>
-    {
-      [
-        { label: d.cite.toolLabel, text: bibtex, id: 'cite-tool' },
-        { label: d.cite.dataLabel, text: d.cite.dataCitation, id: 'cite-data' },
-      ].map((c) => (
-        <div class="mt-6">
-          <div class="flex items-center justify-between gap-3">
-            <h3 class="text-sm font-semibold">{c.label}</h3>
-            <button type="button" class="copy-btn rounded-full border border-line px-3 py-1 text-xs hover:border-ink" data-copy={c.id} data-copied={d.cite.copied}>
-              {d.cite.copy}
-            </button>
-          </div>
-          <pre id={c.id} class="mt-2 overflow-x-auto rounded-xl bg-surface-2 p-4 font-mono text-xs leading-relaxed whitespace-pre-wrap">{c.text}</pre>
-        </div>
-      ))
-    }
-  </section>
-
   <!-- TEAM -->
   <section id="team" class="border-t border-line">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -479,7 +445,81 @@ const bibtex = `@software{vizcachas2026navigator,
       </div>
     </div>
   </section>
+
+  <!-- DATA, CREDITS AND CITATION: reference material, collapsed. The independence notice stays visible. -->
+  <section id="data" class="mx-auto mt-24 max-w-4xl px-4 sm:px-6">
+    <h2 class="font-serif text-2xl font-semibold">{d.data.sectionTitle}</h2>
+    <p id="independence" class="mt-3 text-sm leading-relaxed text-muted">
+      <strong class="font-semibold text-ink">{d.data.disclaimerTitle}.</strong> {d.data.disclaimer}
+    </p>
+
+    <div class="mt-6 border-b border-line">
+      <details id="data-sources" class="ref-group">
+        <summary>{d.data.groups[0]}</summary>
+        <table class="mb-6 w-full text-left text-sm">
+          <tbody>
+            {
+              d.data.sources.map((s) => (
+                <tr class="border-t border-line">
+                  <th scope="row" class="py-3 pr-4 align-top font-medium">
+                    <a href={s.url} class="underline decoration-line underline-offset-4 hover:decoration-ink">{s.name}</a>
+                    <span class="mt-0.5 block font-mono text-xs font-normal text-muted">{s.org}</span>
+                  </th>
+                  <td class="py-3 align-top text-muted">{s.use}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </details>
+
+      <details id="data-software" class="ref-group">
+        <summary>{d.data.groups[1]}</summary>
+        <div class="mb-6 grid gap-6 text-sm md:grid-cols-3">
+          <div><h3 class="font-semibold">{d.data.softwareTitle}</h3><p class="mt-1.5 leading-relaxed text-muted">{d.data.software}</p></div>
+          <div><h3 class="font-semibold">{d.data.aiTitle}</h3><p class="mt-1.5 leading-relaxed text-muted">{d.data.ai}</p></div>
+          <div><h3 class="font-semibold">{d.data.licenseTitle}</h3><p class="mt-1.5 leading-relaxed text-muted">{d.data.license}</p></div>
+        </div>
+      </details>
+
+      <details id="data-cite" class="ref-group">
+        <summary>{d.data.groups[2]}</summary>
+        <div class="mb-6">
+          <p class="text-sm leading-relaxed text-muted">{d.cite.intro}</p>
+          {
+            [
+              { label: d.cite.toolLabel, text: bibtex, id: 'cite-tool' },
+              { label: d.cite.dataLabel, text: d.cite.dataCitation, id: 'cite-data' },
+            ].map((c) => (
+              <div class="mt-5">
+                <div class="flex items-center justify-between gap-3">
+                  <h3 class="text-sm font-semibold">{c.label}</h3>
+                  <button type="button" class="copy-btn rounded-full border border-line px-3 py-1 text-xs hover:border-ink" data-copy={c.id} data-copied={d.cite.copied}>
+                    {d.cite.copy}
+                  </button>
+                </div>
+                <pre id={c.id} class="mt-2 overflow-x-auto rounded-lg bg-surface-2 p-4 font-mono text-xs leading-relaxed whitespace-pre-wrap">{c.text}</pre>
+              </div>
+            ))
+          }
+        </div>
+      </details>
+    </div>
+  </section>
 </Base>
+
+<style>
+  .ref-group { border-top: 1px solid var(--line); }
+  .ref-group > summary {
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; list-style: none; padding: 1rem 0; font-weight: 600;
+  }
+  .ref-group > summary::-webkit-details-marker { display: none; }
+  .ref-group > summary::after {
+    content: '+'; font-family: var(--font-mono); font-weight: 400; color: var(--ink-muted);
+  }
+  .ref-group[open] > summary::after { content: '−'; }
+</style>
 
 <script>
   // Showcase carousel: slow continuous scroll in a seamless loop.
@@ -541,6 +581,17 @@ const bibtex = `@software{vizcachas2026navigator,
       });
     });
   }
+  // Open the matching collapsed block when the URL points to it (e.g. #data-cite from the footer).
+  const openFromHash = () => {
+    const el = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    if (el instanceof HTMLDetailsElement) {
+      el.open = true;
+      el.scrollIntoView({ block: 'start' });
+    }
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+
   // Copy buttons for the citation blocks.
   document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
     btn.addEventListener('click', async () => {

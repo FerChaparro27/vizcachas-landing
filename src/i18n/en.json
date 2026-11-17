@@ -83,19 +83,16 @@
     "intro": "Several upcoming crewed and robotic missions are targeting the lunar south pole, where ice is trapped in permanently shadowed craters. But the same geometry that preserves that ice makes the region hard to work in.",
     "points": [
       {
-        "figure": "≈1.5°",
-        "title": "The Sun grazes the horizon",
-        "body": "The Moon's spin axis is tilted only about 1.5° from the ecliptic. Near the poles the Sun never climbs more than a few degrees, so a crater rim or a hill can put a lander in shadow for days."
+        "title": "The Sun barely peeks out",
+        "body": "Near the pole the Sun doesn’t climb: it circles close to the horizon. A hill or a crater rim is enough to leave a lander in the dark for days."
       },
       {
-        "figure": "±7–8°",
         "title": "The Earth sits low too",
-        "body": "Because the Moon always shows the same face to us, the Earth hangs almost fixed in the lunar sky. Seen from the pole it is close to the horizon, and libration slowly moves it up and down."
+        "body": "From the pole, the Earth appears almost on the horizon. If the terrain blocks it, direct communication is cut."
       },
       {
-        "figure": "168 h → 0 h",
-        "title": "Power and communication decide the mission",
-        "body": "Solar panels need the Sun above the horizon. Direct-to-Earth radio needs a clear line of sight. If a launch slips by a few days, both can change."
+        "title": "A few days change everything",
+        "body": "With a two-week delay, the same place can go from having Sun all week to having none at all."
       }
     ],
     "hardTitle": "Why it is hard today",
@@ -103,19 +100,18 @@
     "hard": [
       {
         "title": "Technical codes",
-        "caption": "Choosing the Moon as the observer, or the Sun as the target, requires knowing body codes and dozens of configuration options."
+        "caption": "Just getting started means knowing codes and dozens of options."
       },
       {
         "title": "Dense tables",
-        "caption": "The answer to “is there Sun?” is buried in wide tables with mixed units and symbols explained far from the data."
+        "caption": "The answer is hidden in long tables full of symbols."
       },
       {
-        "title": "Hard-to-read poles",
-        "caption": "General-purpose map projections distort the polar regions, so relief, light and shadow are difficult to read exactly where missions are heading."
+        "title": "Distorted maps",
+        "caption": "Common maps stretch the poles, right where missions are going."
       }
     ],
-    "conclusionLead": "The information exists, ",
-    "conclusionEmphasis": "but it was hard to use."
+    "conclusion": "The information exists, but it was hard to use."
   },
   "showcase": {
     "kicker": "See what is possible",
@@ -254,7 +250,13 @@
     "licenseTitle": "License",
     "license": "The code is released under the MIT License. The data belong to their sources and are used under their own terms.",
     "disclaimerTitle": "Independence notice",
-    "disclaimer": "Lunar Landing Site Navigator is an independent project. It is not affiliated with, endorsed by, or sponsored by NASA, JPL, Caltech, USGS or any space agency. The data come from public sources, credited above; using them does not imply endorsement by their providers."
+    "disclaimer": "Lunar Landing Site Navigator is an independent project. It is not affiliated with, endorsed by, or sponsored by NASA, JPL, Caltech, USGS or any space agency. The data come from public sources, listed below; using them does not imply endorsement by their providers.",
+    "sectionTitle": "Data, credits and citation",
+    "groups": [
+      "Data sources",
+      "Software, AI and license",
+      "How to cite"
+    ]
   },
   "cite": {
     "kicker": "Cite",
