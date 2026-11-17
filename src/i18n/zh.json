@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Lunar Landing Site Navigator（月球着陆点导航器）— Vizcachas fuera de órbita",
-    "description": "某个月球着陆点在指定日期能否获得阳光，并与地球保持视线通信？这是一个为 NASA Space Apps Challenge 2026 开发的开放教育工具，数据来自 NASA/JPL Horizons。",
+    "description": "某个月球着陆点在指定日期能否获得阳光，并与地球保持视线通信？这是一个免费、开源的教育工具，利用公开的星历和地形数据进行计算。",
     "learnTitle": "了解其中的科学 — Lunar Landing Site Navigator",
     "learnDescription": "关于月球天空几何的教学模块：方位角与高度、地平线、极区光照以及与地球的通信，并附有课堂活动。"
   },
@@ -19,7 +19,7 @@
     "menu": "菜单"
   },
   "hero": {
-    "badge": "NASA Space Apps Challenge 2026 · Lunar Landing Site Navigator",
+    "badge": "开源 · 教育 · 免费",
     "title": "Lunar Landing Site Navigator",
     "question": "如果我在这个日期降落在月球的这个地点，会有阳光吗？能和地球通话吗？",
     "lede": "在月球南极附近，太阳和地球几乎只是刚刚露出地平线，任何一座山都可能把它们挡住。我们的开放工具输入一个着陆点和一个日期，计算太阳和地球的位置，把它们画在当地地平线上，并显示什么时候有能源、什么时候能通信。",
@@ -27,16 +27,28 @@
     "ctaLearn": "了解其中的科学",
     "figure": "2026 年 11 月 20 日从 Intuitive Machines 2 着陆点（Mons Mouton，南纬 84.8°）看到的天空。太阳仅高出地平线 6.5°。下方面板显示根据 LOLA 地形数据得到的真实地平线轮廓。",
     "stats": [
-      { "value": "14", "label": "个真实着陆点，从阿波罗 11 号到 IM-2" },
-      { "value": "1 h", "label": "JPL Horizons 星历的时间步长" },
-      { "value": "360°", "label": "每个着陆点的地平线轮廓" },
-      { "value": "2027", "label": "日期覆盖至 2027 年 12 月" }
+      {
+        "value": "14",
+        "label": "个真实着陆点，从阿波罗 11 号到 IM-2"
+      },
+      {
+        "value": "1 h",
+        "label": "JPL Horizons 星历的时间步长"
+      },
+      {
+        "value": "360°",
+        "label": "每个着陆点的地平线轮廓"
+      },
+      {
+        "value": "2027",
+        "label": "日期覆盖至 2027 年 12 月"
+      }
     ]
   },
   "problem": {
     "kicker": "§1 · 问题",
     "title": "在月球南极，阳光和信号都很稀缺",
-    "intro": "阿尔忒弥斯计划和 NASA CLPS 计划的商业着陆器都在前往月球南极，那里的永久阴影陨石坑中封存着水冰。但正是保存这些冰的几何条件，让这一区域难以开展作业。",
+    "intro": "多项即将进行的载人和无人任务都瞄准了月球南极，那里的永久阴影陨石坑中封存着水冰。但正是保存这些冰的几何条件，让这一区域难以开展作业。",
     "points": [
       {
         "title": "太阳贴着地平线",
@@ -52,26 +64,26 @@
       }
     ],
     "hardTitle": "为什么现在很难",
-    "hardIntro": "这些数据在 NASA 的工具中已经存在，但这些工具是为专业人员设计的。我们只用一个问题来测试它们：“沙克尔顿陨石坑在 11 月有阳光吗？”",
+    "hardIntro": "基础数据是公开的，但提供这些数据的专业星历和制图工具是为专业人员设计的。要回答“这个陨石坑 11 月有阳光吗？”这样简单的问题，也需要专业知识。",
     "hard": [
       {
-        "tool": "JPL Horizons",
-        "caption": "把 “moon” 作为观测者位置搜索时，列出的是名字里带 “Moon” 的地球天文台。要选中月球，必须知道 @301 这样的代码。"
+        "title": "技术代码",
+        "caption": "要把月球设为观测者、把太阳设为目标，必须知道天体代码和几十个配置选项。"
       },
       {
-        "tool": "JPL Horizons",
-        "caption": "“有没有阳光？”的答案是日期旁边的一个星号，其含义在大约 70 行之后才解释，而且藏在一张单位混杂的 15 列表格里。"
+        "title": "密集的表格",
+        "caption": "“有没有阳光？”的答案埋在单位混杂的宽表格里，符号的解释远离数据本身。"
       },
       {
-        "tool": "NASA Moon Trek",
-        "caption": "搜索沙克尔顿时，南极显示为被拉伸的条纹，根本无法分辨地形、光照和阴影。"
+        "title": "难以判读的极区",
+        "caption": "通用地图投影会扭曲极区，因此恰恰在任务前往的地方，地形、光照和阴影都很难判读。"
       }
     ],
-    "conclusion": "Horizons 精确地知道太阳在哪里，但这些工具没有一个能直接回答这个问题。我们想要的是：一个屏幕、一个问题，以及任何人都能信赖的数字。"
+    "conclusion": "信息是存在的，但没有任何一个视图能直接回答这个问题。我们想要的是：一个屏幕、一个问题，以及任何人都能核查来源的数字。"
   },
   "solution": {
     "kicker": "§2 · 我们的方案",
-    "title": "一个屏幕，一个问题，经过验证的数字",
+    "title": "一个屏幕，一个问题，可追溯的数字",
     "intro": "选择一个着陆点和一个日期。工具会显示太阳和地球在当地地平线上的位置、太阳高度、未来几天的日照时数和可见地球时数，以及距离下一次日落或地落的倒计时。",
     "pipelineTitle": "工作原理",
     "pipeline": [
@@ -96,23 +108,41 @@
         "body": "JavaScript、Vite 和 three.js 读取预计算的 JSON，并将每个天体与地平线进行比较。"
       }
     ],
-    "pipelineNote": "一个可选的实时 API（FastAPI）可针对月球上任意经纬度查询 Horizons，并以相同格式返回结果。",
+    "pipelineNote": "每小时采样之间的数值经过插值，地平线轮廓由高程数据推导而来；这些处理由我们完成，而非数据提供方。一个可选的实时 API（FastAPI）可针对月球上任意经纬度查询 Horizons。",
     "featuresTitle": "你可以做什么",
     "features": [
-      { "title": "3D 天空视图", "body": "按真实角尺寸在地平线上显示太阳和地球，并提供 2D 罗盘和高度标尺作为备用视图。" },
-      { "title": "太阳高度优先", "body": "太阳在地平线以上的高度是屏幕上最醒目的数字，因为它决定了太阳能。" },
-      { "title": "时间线与倒计时", "body": "时间播放器、7 天太阳与地球可见性时间线，以及距离下一次落下的实时倒计时。" },
-      { "title": "场景比较", "body": "并排比较两到三个“地点—日期”场景。工具会标出哪个日照时数更多、哪个可见地球时数更多，由你来做决定。" },
-      { "title": "极区地图", "body": "选择历史任务、输入坐标，或直接在任一极区的立体投影地图上点击。" },
-      { "title": "开放与多语言", "body": "MIT 许可的代码、移动端布局，界面支持英语、西班牙语、印地语和简体中文。" }
+      {
+        "title": "3D 天空视图",
+        "body": "按真实角尺寸在地平线上显示太阳和地球，并提供 2D 罗盘和高度标尺作为备用视图。"
+      },
+      {
+        "title": "太阳高度优先",
+        "body": "太阳在地平线以上的高度是屏幕上最醒目的数字，因为它决定了太阳能。"
+      },
+      {
+        "title": "时间线与倒计时",
+        "body": "时间播放器、7 天太阳与地球可见性时间线，以及距离下一次落下的实时倒计时。"
+      },
+      {
+        "title": "场景比较",
+        "body": "并排比较两到三个“地点—日期”场景。工具会标出哪个日照时数更多、哪个可见地球时数更多，由你来做决定。"
+      },
+      {
+        "title": "极区地图",
+        "body": "选择历史任务、输入坐标，或直接在任一极区的立体投影地图上点击。"
+      },
+      {
+        "title": "开放与多语言",
+        "body": "MIT 许可的代码、移动端布局，界面支持英语、西班牙语、印地语和简体中文。"
+      }
     ],
     "shots": [
       "详情面板：太阳和地球的方位角、高度、状态和倒计时，以及未来 24 小时、7 天和 30 天的可见时数。",
       "选择着陆点：历史任务、指定坐标，或可点击的极区地图（USGS SIM 3316 拼接图）。",
       "手机上的天空视图。"
     ],
-    "validationTitle": "我们如何确认结果正确",
-    "validationBody": "每个位置都来自 NASA 的官方星历服务 JPL Horizons，它已经考虑了天平动和月球轨道的变化。验证面板和自动化测试会把我们的数值与保存的 Horizons 结果进行比较，并显示差值。",
+    "validationTitle": "我们如何核查数字",
+    "validationBody": "太阳和地球的位置根据从 JPL Horizons 系统（NASA/JPL Solar System Dynamics）获取的星历计算。验证面板和自动化测试会把应用的数值与从该系统保存的参考结果进行比较并显示差值，任何人都可以核查。",
     "limitsTitle": "坦诚说明局限",
     "limitsBody": "只有具备高程数据的着陆点才使用真实的 LOLA 地形作为地平线轮廓；其他地点使用理想的平坦地平线，应用会明确提示。地平线以下的地面纹理和星空仅作示意。",
     "learnTeaser": "想理解每个数字背后的几何原理吗？",
@@ -122,34 +152,60 @@
     "kicker": "§3 · 数据与致谢",
     "title": "基于开放数据和开源软件构建",
     "sources": [
-      { "name": "JPL Horizons System", "org": "NASA / JPL", "use": "应用中所有太阳和地球位置的数据来源。", "url": "https://ssd.jpl.nasa.gov/horizons/" },
-      { "name": "LOLA 高程数据", "org": "NASA LRO", "use": "为有地形数据的着陆点提供真实地平线轮廓。", "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm" },
-      { "name": "Quickmap", "org": "ASU / LROC", "use": "核对着陆点坐标和地形。", "url": "https://quickmap.lroc.asu.edu/" },
-      { "name": "Moon Trek", "org": "NASA", "use": "探索着陆点及其地形。", "url": "https://trek.nasa.gov/moon/" },
-      { "name": "Moon Exploration", "org": "CSA", "use": "国际月球探索的背景资料。", "url": "https://www.asc-csa.gc.ca/eng/astronomy/moon-exploration/" },
-      { "name": "月球影像拼接图（SIM 3316）", "org": "USGS", "use": "用于选择着陆点的极区地图。", "url": "https://pubs.usgs.gov/sim/3316/" }
+      {
+        "name": "JPL Horizons System",
+        "org": "NASA/JPL SSD",
+        "use": "应用中所有太阳和地球位置的数据来源。",
+        "url": "https://ssd.jpl.nasa.gov/horizons/"
+      },
+      {
+        "name": "LOLA 高程数据",
+        "org": "NASA LRO · LOLA (PDS)",
+        "use": "为有地形数据的着陆点提供真实地平线轮廓。",
+        "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm"
+      },
+      {
+        "name": "Quickmap",
+        "org": "ASU · LROC",
+        "use": "核对着陆点坐标和地形。",
+        "url": "https://quickmap.lroc.asu.edu/"
+      },
+      {
+        "name": "Moon Trek",
+        "org": "NASA",
+        "use": "探索着陆点及其地形。",
+        "url": "https://trek.nasa.gov/moon/"
+      },
+      {
+        "name": "月球影像拼接图（SIM 3316）",
+        "org": "USGS",
+        "use": "用于选择着陆点的极区地图。",
+        "url": "https://pubs.usgs.gov/sim/3316/"
+      }
     ],
     "softwareTitle": "软件",
     "software": "three.js、Vite、Python、NumPy、Requests、rasterio、pyproj、Matplotlib、pytest、jsonschema、FastAPI、Uvicorn、HTTPX、Astro 和 Tailwind CSS。太阳和地球图片：Figma Community 文件 “Space Elements”。",
     "aiTitle": "AI 使用说明",
     "ai": "我们使用 Claude（Anthropic）作为编程助手，每一处修改都经过团队成员审核。团队标志由 ChatGPT 生成。除西班牙语外的译文均由 AI 翻译，未经母语人士审校。数字并非由 AI 生成：它们来自 JPL Horizons，并经过自动化测试验证。",
     "licenseTitle": "许可",
-    "license": "代码以 MIT 许可证发布。数据归各自来源所有，遵循其各自条款。NASA Space Apps Challenge 标志仅用于标识该活动；本项目未获得 NASA 背书。"
+    "license": "代码以 MIT 许可证发布。数据归各自来源所有，并按其各自条款使用。",
+    "citationTitle": "如何引用星历数据",
+    "citation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov",
+    "disclaimerTitle": "独立性声明",
+    "disclaimer": "Lunar Landing Site Navigator 是一个独立项目，与 NASA、JPL、加州理工学院、USGS 或任何航天机构均无隶属关系，也未获得其认可或赞助。数据来自上方列出的公开来源；使用这些数据并不意味着得到其提供方的认可。"
   },
   "team": {
     "kicker": "§4 · 团队",
     "title": "Vizcachas fuera de órbita",
-    "intro": "我们在 NASA Space Apps Challenge 2026 黑客松期间开发了这个工具，并将继续把它完善为一个开放的教育资源。",
-    "repo": "在 GitHub 上查看代码",
-    "challenge": "阅读挑战说明"
+    "intro": "一个独立的开源教育项目。我们会持续改进它，让学生、教师和航天爱好者都能用真实数据探索月球的天空。",
+    "repo": "在 GitHub 上查看代码"
   },
   "footer": {
     "tagline": "一个用来读懂月球天空的开放工具。",
     "app": "打开应用",
     "repo": "源代码",
-    "challenge": "挑战",
-    "event": "为 NASA Space Apps Challenge 2026 而作。",
-    "translationNote": "由 AI 翻译，未经母语人士审校。"
+    "translationNote": "由 AI 翻译，未经母语人士审校。",
+    "disclaimer": "独立项目，与 NASA 或任何航天机构无隶属关系，也未获其认可。"
   },
   "learn": {
     "kicker": "教学模块",
@@ -233,16 +289,46 @@
     },
     "glossaryTitle": "术语表",
     "glossary": [
-      { "term": "方位角", "def": "水平方向，从北方（0°）开始按顺时针方向量到 360°。" },
-      { "term": "高度", "def": "天体在当地地平线以上的角度；负值表示在地平线以下。" },
-      { "term": "站心", "def": "从表面上的某一点量度，而不是从天体中心量度。" },
-      { "term": "星历", "def": "天体位置随时间变化的数据表。JPL Horizons 可以生成星历。" },
-      { "term": "天平动", "def": "月球的视摆动，使我们随着时间推移能从地球上看到其表面的约 59%。" },
-      { "term": "LOLA", "def": "月球轨道器激光高度计，NASA 月球勘测轨道飞行器上的仪器，测绘了月球的高程。" },
-      { "term": "PSR", "def": "永久阴影区：两极附近从未受到阳光直射的陨石坑底部。" },
-      { "term": "DTE", "def": "直接对地通信：着陆器与地球之间不经中继的通信。" },
-      { "term": "CLPS", "def": "商业月球有效载荷服务，NASA 向企业购买月球运输服务的计划。" },
-      { "term": "月球日", "def": "约 29.5 个地球日，即同一地点从一次日出到下一次日出的时间。" }
+      {
+        "term": "方位角",
+        "def": "水平方向，从北方（0°）开始按顺时针方向量到 360°。"
+      },
+      {
+        "term": "高度",
+        "def": "天体在当地地平线以上的角度；负值表示在地平线以下。"
+      },
+      {
+        "term": "站心",
+        "def": "从表面上的某一点量度，而不是从天体中心量度。"
+      },
+      {
+        "term": "星历",
+        "def": "天体位置随时间变化的数据表。JPL Horizons 可以生成星历。"
+      },
+      {
+        "term": "天平动",
+        "def": "月球的视摆动，使我们随着时间推移能从地球上看到其表面的约 59%。"
+      },
+      {
+        "term": "LOLA",
+        "def": "月球轨道器激光高度计，NASA 月球勘测轨道飞行器上的仪器，测绘了月球的高程。"
+      },
+      {
+        "term": "PSR",
+        "def": "永久阴影区：两极附近从未受到阳光直射的陨石坑底部。"
+      },
+      {
+        "term": "DTE",
+        "def": "直接对地通信：着陆器与地球之间不经中继的通信。"
+      },
+      {
+        "term": "CLPS",
+        "def": "商业月球有效载荷服务，NASA 向企业购买月球运输服务的计划。"
+      },
+      {
+        "term": "月球日",
+        "def": "约 29.5 个地球日，即同一地点从一次日出到下一次日出的时间。"
+      }
     ],
     "activitiesTitle": "课堂活动",
     "activitiesIntro": "每个活动需要 20 到 40 分钟，只需一个浏览器。请在另一个标签页中打开工具。",

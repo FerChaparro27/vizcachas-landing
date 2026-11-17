@@ -1,6 +1,8 @@
 # Lunar Landing Site Navigator — project site
 
-Presentation and educational site for **Lunar Landing Site Navigator**, built by the team *Vizcachas fuera de órbita* for the NASA Space Apps Challenge 2026.
+Presentation and educational site for **Lunar Landing Site Navigator**, an independent, open-source educational tool by *Vizcachas fuera de órbita*.
+
+> Independent project. Not affiliated with, endorsed by, or sponsored by NASA, JPL, Caltech, USGS or any space agency. NASA/JPL, LRO/LOLA, ASU/LROC and USGS appear only as factual credits for the public data the tool uses. Do not add agency logos, insignia or mission patches to this site.
 
 - The tool: https://vizcachasfueradeorbita.vercel.app/
 - Tool source code: https://github.com/VainstubTomas/NASA-APP-CHALLENGE
@@ -40,11 +42,11 @@ Import the repo in Vercel. It detects Astro automatically: the build command is 
 | `src/components/HomePage.astro` | Main page: hero, problem, solution, data, team |
 | `src/components/LearnPage.astro` | Educational module (`/learn`) |
 | `src/components/ConceptFigure.astro` | Schematic SVG figures for the module |
-| `src/assets/shots/` | Screenshots of the tool and of the NASA tools (optimized at build time) |
-| `public/assets/` | Logo, favicon and images taken from the app repo |
+| `src/assets/shots/` | Screenshots of the tool (optimized at build time) |
+| `public/assets/` | Team logo and favicon |
 
 ## Credits
-The app screenshots were taken from the deployed tool. The screenshots of Horizons, Quickmap and Moon Trek, the logo and the images come from the app repo (see its README for their sources). The NASA Space Apps Challenge logo is used only to identify the event.
+The app screenshots were taken from the deployed tool. The team logo and the images come from the app repo (see its README for their sources). Ephemeris data citation, as suggested by JPL SSD: "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov".
 
 ## License
 MIT

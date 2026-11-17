@@ -1,19 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { t, appUrl, localePath, REPO_URL, CHALLENGE_URL, type Locale } from '../i18n';
+import { t, appUrl, localePath, REPO_URL, type Locale } from '../i18n';
 import skyPole from '../assets/shots/app-sky-pole.png';
 import details from '../assets/shots/app-details.png';
 import map from '../assets/shots/app-map.png';
 import mobile from '../assets/shots/app-mobile.png';
-import hz02 from '../assets/shots/02-horizons-buscar-luna.png';
-import hz07 from '../assets/shots/07-horizons-resultado-tabla.png';
-import mt12 from '../assets/shots/12-moontrek-shackleton.png';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 const d = t(lang);
-const hardShots = [hz02, hz07, mt12];
+// Simple line icons for the "why it is hard today" cards: codes, table, distorted map.
+const hardIcons = [
+  'M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16',
+  'M3 5h18v14H3zM3 10h18M3 15h18M9 5v14M15 5v14',
+  'M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v16M15 6v16',
+];
 const team = [
   'Mateo Cerri',
   'Fernando Chaparro',
@@ -30,13 +32,10 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
   <section class="border-b border-line">
     <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center">
       <div>
-        <a
-          href={CHALLENGE_URL}
-          class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted hover:text-ink"
-        >
+        <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
           <span class="h-1.5 w-1.5 rounded-full bg-sun"></span>
           {d.hero.badge}
-        </a>
+        </p>
         <h1 class="mt-6 font-serif text-4xl leading-[1.1] font-semibold tracking-tight sm:text-5xl">
           {d.hero.title}
         </h1>
@@ -110,14 +109,13 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
     <div class="mt-8 grid gap-6 md:grid-cols-3">
       {
         d.problem.hard.map((h, i) => (
-          <figure>
-            <div class="aspect-[4/3] overflow-hidden rounded-lg border border-line bg-surface-2">
-              <Image src={hardShots[i]} alt={h.caption} width={720} class="h-full w-full object-cover object-top" />
-            </div>
-            <figcaption class="figure-caption mt-3">
-              <b>Fig. {i + 2}. {h.tool}.</b> {h.caption}
-            </figcaption>
-          </figure>
+          <article class="rounded-lg border border-dashed border-line p-6">
+            <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="text-muted">
+              <path d={hardIcons[i]} />
+            </svg>
+            <h4 class="mt-3 font-semibold">{h.title}</h4>
+            <p class="mt-1.5 text-sm leading-relaxed text-muted">{h.caption}</p>
+          </article>
         ))
       }
     </div>
@@ -175,19 +173,19 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
           <div class="overflow-hidden rounded-lg border border-line bg-black">
             <Image src={details} alt={d.solution.shots[0]} widths={[640, 1024, 1440]} sizes="(min-width: 1024px) 520px, 100vw" class="h-auto w-full" />
           </div>
-          <figcaption class="figure-caption mt-3"><b>Fig. 5.</b> {d.solution.shots[0]}</figcaption>
+          <figcaption class="figure-caption mt-3"><b>Fig. 2.</b> {d.solution.shots[0]}</figcaption>
         </figure>
         <figure>
           <div class="overflow-hidden rounded-lg border border-line bg-black">
             <Image src={map} alt={d.solution.shots[1]} widths={[480, 960]} sizes="(min-width: 1024px) 380px, 100vw" class="h-auto w-full" />
           </div>
-          <figcaption class="figure-caption mt-3"><b>Fig. 6.</b> {d.solution.shots[1]}</figcaption>
+          <figcaption class="figure-caption mt-3"><b>Fig. 3.</b> {d.solution.shots[1]}</figcaption>
         </figure>
         <figure class="mx-auto max-w-[240px] lg:max-w-none">
           <div class="overflow-hidden rounded-[1.25rem] border-4 border-ink/80 bg-black">
             <Image src={mobile} alt={d.solution.shots[2]} widths={[240, 480]} sizes="240px" class="h-auto w-full" />
           </div>
-          <figcaption class="figure-caption mt-3"><b>Fig. 7.</b> {d.solution.shots[2]}</figcaption>
+          <figcaption class="figure-caption mt-3"><b>Fig. 4.</b> {d.solution.shots[2]}</figcaption>
         </figure>
       </div>
 
@@ -251,6 +249,16 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
         <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.license}</p>
       </div>
     </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-[1.4fr_1fr]">
+      <aside id="independence" class="rounded-lg border border-line border-l-4 border-l-earth bg-surface p-6">
+        <h3 class="font-semibold">{d.data.disclaimerTitle}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.disclaimer}</p>
+      </aside>
+      <div class="rounded-lg border border-line p-6">
+        <h3 class="font-semibold">{d.data.citationTitle}</h3>
+        <p class="mt-2 break-words rounded bg-surface-2 p-3 font-mono text-xs leading-relaxed">{d.data.citation}</p>
+      </div>
+    </div>
   </section>
 
   <!-- TEAM -->
@@ -264,7 +272,6 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
         </div>
         <div class="flex flex-wrap gap-3 text-sm">
           <a href={REPO_URL} class="rounded border border-line bg-surface px-4 py-2 hover:border-ink">{d.team.repo} ↗</a>
-          <a href={CHALLENGE_URL} class="rounded border border-line bg-surface px-4 py-2 hover:border-ink">{d.team.challenge} ↗</a>
         </div>
       </div>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.team.intro}</p>

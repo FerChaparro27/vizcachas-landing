@@ -40,5 +40,3 @@ export function appUrl(lang: Locale): string {
   return `${APP_URL}?lang=${appLangs.has(lang) ? lang : 'en'}`;
 }
 export const REPO_URL = 'https://github.com/VainstubTomas/NASA-APP-CHALLENGE';
-export const CHALLENGE_URL =
-  'https://www.spaceappschallenge.org/2026/challenges/lunar-landing-site-navigator/';

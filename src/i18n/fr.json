@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Lunar Landing Site Navigator — Vizcachas fuera de órbita",
-    "description": "Un site d'alunissage aura-t-il du Soleil et une ligne de visée vers la Terre à une date donnée ? Un outil ouvert et pédagogique construit avec les données NASA/JPL Horizons pour le NASA Space Apps Challenge 2026.",
+    "description": "Un site d’alunissage aura-t-il du Soleil et une ligne de visée vers la Terre à une date donnée ? Un outil pédagogique gratuit et open source qui le calcule à partir de données publiques d’éphémérides et de terrain.",
     "learnTitle": "Comprendre la science — Lunar Landing Site Navigator",
     "learnDescription": "Un module pédagogique sur la géométrie du ciel lunaire : azimut et hauteur, horizons, éclairement polaire et communication avec la Terre, avec des activités pour la classe."
   },
@@ -19,7 +19,7 @@
     "menu": "Menu"
   },
   "hero": {
-    "badge": "NASA Space Apps Challenge 2026 · Lunar Landing Site Navigator",
+    "badge": "Open source · Pédagogique · Gratuit",
     "title": "Lunar Landing Site Navigator",
     "question": "Si je me pose à cet endroit de la Lune à cette date, aurai-je du Soleil et pourrai-je parler avec la Terre ?",
     "lede": "Près du pôle Sud lunaire, le Soleil et la Terre dépassent à peine l'horizon, et la moindre montagne peut les cacher. Notre outil ouvert prend un site d'alunissage et une date, calcule où se trouvent le Soleil et la Terre, les dessine au-dessus de l'horizon local et montre quand il y a de l'énergie et quand il y a de la communication.",
@@ -27,16 +27,28 @@
     "ctaLearn": "Comprendre la science",
     "figure": "Vue du ciel depuis le site d'Intuitive Machines 2 (Mons Mouton, 84,8° S) le 20 novembre 2026. Le Soleil n'est qu'à 6,5° au-dessus de l'horizon. Le panneau du bas montre le profil réel de l'horizon, calculé à partir des données de terrain LOLA.",
     "stats": [
-      { "value": "14", "label": "sites d'alunissage réels, d'Apollo 11 à IM-2" },
-      { "value": "1 h", "label": "pas de temps des éphémérides JPL Horizons" },
-      { "value": "360°", "label": "profil d'horizon par site" },
-      { "value": "2027", "label": "dates couvertes jusqu'en décembre 2027" }
+      {
+        "value": "14",
+        "label": "sites d'alunissage réels, d'Apollo 11 à IM-2"
+      },
+      {
+        "value": "1 h",
+        "label": "pas de temps des éphémérides JPL Horizons"
+      },
+      {
+        "value": "360°",
+        "label": "profil d'horizon par site"
+      },
+      {
+        "value": "2027",
+        "label": "dates couvertes jusqu'en décembre 2027"
+      }
     ]
   },
   "problem": {
     "kicker": "§1 · Le problème",
     "title": "Au pôle Sud lunaire, la lumière et le signal sont rares",
-    "intro": "Artemis et les atterrisseurs commerciaux du programme CLPS de la NASA se dirigent vers le pôle Sud lunaire, où de la glace est piégée dans des cratères en ombre permanente. Mais la géométrie même qui préserve cette glace rend la région difficile à exploiter.",
+    "intro": "Plusieurs missions habitées et robotiques à venir visent le pôle Sud lunaire, où de la glace est piégée dans des cratères en ombre permanente. Mais la géométrie même qui préserve cette glace rend la région difficile à exploiter.",
     "points": [
       {
         "title": "Le Soleil rase l'horizon",
@@ -52,26 +64,26 @@
       }
     ],
     "hardTitle": "Pourquoi c'est difficile aujourd'hui",
-    "hardIntro": "Les données existent déjà dans les outils de la NASA, mais ils sont conçus pour des spécialistes. Nous les avons testés avec une seule question : « le cratère Shackleton reçoit-il du Soleil en novembre ? »",
+    "hardIntro": "Les données de base sont publiques, mais les outils professionnels d’éphémérides et de cartographie qui les fournissent sont conçus pour des spécialistes. Répondre à une question simple comme « ce cratère reçoit-il du Soleil en novembre ? » demande de l’expertise.",
     "hard": [
       {
-        "tool": "JPL Horizons",
-        "caption": "En cherchant « moon » comme position de l'observateur, on obtient des observatoires terrestres avec « Moon » dans leur nom. Pour choisir la Lune, il faut connaître des codes comme @301."
+        "title": "Codes techniques",
+        "caption": "Choisir la Lune comme observateur ou le Soleil comme cible exige de connaître des codes d’astres et des dizaines d’options de configuration."
       },
       {
-        "tool": "JPL Horizons",
-        "caption": "La réponse à « y a-t-il du Soleil ? » est un astérisque à côté de la date, expliqué environ 70 lignes plus bas, dans un tableau de 15 colonnes aux unités mélangées."
+        "title": "Tableaux denses",
+        "caption": "La réponse à « y a-t-il du Soleil ? » est noyée dans de larges tableaux aux unités mélangées, avec des symboles expliqués loin des données."
       },
       {
-        "tool": "NASA Moon Trek",
-        "caption": "En cherchant Shackleton, le pôle Sud apparaissait comme des bandes étirées. Impossible de lire le relief, la lumière ou l'ombre."
+        "title": "Pôles difficiles à lire",
+        "caption": "Les projections cartographiques généralistes déforment les régions polaires : relief, lumière et ombre y sont difficiles à lire, précisément là où vont les missions."
       }
     ],
-    "conclusion": "Horizons sait exactement où se trouve le Soleil, mais aucun de ces outils ne répond directement à la question. Nous voulions un écran, une question et des chiffres auxquels chacun peut se fier."
+    "conclusion": "L’information existe, mais aucune vue ne répond directement à la question. Nous voulions un écran, une question et des chiffres dont chacun peut vérifier l’origine."
   },
   "solution": {
     "kicker": "§2 · Notre solution",
-    "title": "Un écran, une question, des chiffres vérifiés",
+    "title": "Un écran, une question, des chiffres traçables",
     "intro": "Choisissez un site d'alunissage et une date. L'outil montre le Soleil et la Terre au-dessus de l'horizon local, la hauteur du Soleil, les heures d'ensoleillement et de visibilité de la Terre pour les jours à venir, et un compte à rebours jusqu'au prochain coucher du Soleil ou de la Terre.",
     "pipelineTitle": "Comment ça marche",
     "pipeline": [
@@ -96,23 +108,41 @@
         "body": "JavaScript, Vite et three.js lisent le JSON précalculé et comparent chaque astre à l'horizon."
       }
     ],
-    "pipelineNote": "Une API en direct optionnelle (FastAPI) interroge Horizons pour n'importe quelle latitude et longitude lunaires et répond dans le même format.",
+    "pipelineNote": "Les valeurs entre les échantillons horaires sont interpolées et les profils d’horizon sont dérivés des données d’altitude ; ce traitement est le nôtre, pas celui des fournisseurs de données. Une API en direct optionnelle (FastAPI) peut interroger Horizons pour n’importe quelle latitude et longitude lunaires.",
     "featuresTitle": "Ce que vous pouvez faire",
     "features": [
-      { "title": "Vue du ciel en 3D", "body": "Le Soleil et la Terre à leur vraie échelle angulaire au-dessus de l'horizon, avec une boussole 2D et une règle de hauteur en solution de repli." },
-      { "title": "La hauteur du Soleil d'abord", "body": "La hauteur du Soleil au-dessus de l'horizon est le chiffre le plus visible à l'écran, car elle détermine l'énergie solaire." },
-      { "title": "Chronologie et compte à rebours", "body": "Un lecteur temporel, une frise de 7 jours de visibilité du Soleil et de la Terre, et un compte à rebours en direct jusqu'au prochain coucher." },
-      { "title": "Comparaison de scénarios", "body": "Deux ou trois scénarios site–date côte à côte. L'outil indique lequel a le plus d'heures de Soleil et lequel a le plus d'heures de Terre, et vous laisse décider." },
-      { "title": "Cartes polaires", "body": "Choisissez une mission historique, saisissez des coordonnées ou cliquez directement sur une carte stéréographique de l'un ou l'autre pôle." },
-      { "title": "Ouvert et multilingue", "body": "Code sous licence MIT, affichage mobile et interface en anglais, espagnol, hindi et chinois simplifié." }
+      {
+        "title": "Vue du ciel en 3D",
+        "body": "Le Soleil et la Terre à leur vraie échelle angulaire au-dessus de l'horizon, avec une boussole 2D et une règle de hauteur en solution de repli."
+      },
+      {
+        "title": "La hauteur du Soleil d'abord",
+        "body": "La hauteur du Soleil au-dessus de l'horizon est le chiffre le plus visible à l'écran, car elle détermine l'énergie solaire."
+      },
+      {
+        "title": "Chronologie et compte à rebours",
+        "body": "Un lecteur temporel, une frise de 7 jours de visibilité du Soleil et de la Terre, et un compte à rebours en direct jusqu'au prochain coucher."
+      },
+      {
+        "title": "Comparaison de scénarios",
+        "body": "Deux ou trois scénarios site–date côte à côte. L'outil indique lequel a le plus d'heures de Soleil et lequel a le plus d'heures de Terre, et vous laisse décider."
+      },
+      {
+        "title": "Cartes polaires",
+        "body": "Choisissez une mission historique, saisissez des coordonnées ou cliquez directement sur une carte stéréographique de l'un ou l'autre pôle."
+      },
+      {
+        "title": "Ouvert et multilingue",
+        "body": "Code sous licence MIT, affichage mobile et interface en anglais, espagnol, hindi et chinois simplifié."
+      }
     ],
     "shots": [
       "Panneau de détails : azimut, hauteur, état et compte à rebours pour le Soleil et la Terre, ainsi que les heures visibles sur les prochaines 24 h, 7 jours et 30 jours.",
       "Choix du site : missions historiques, coordonnées précises ou carte polaire cliquable (mosaïque USGS SIM 3316).",
       "Vue du ciel sur mobile."
     ],
-    "validationTitle": "Comment nous savons que c'est juste",
-    "validationBody": "Chaque position provient de JPL Horizons, le service officiel d'éphémérides de la NASA, qui tient déjà compte de la libration et des variations orbitales de la Lune. Un panneau de validation et des tests automatiques comparent nos valeurs à des réponses Horizons enregistrées et affichent l'écart.",
+    "validationTitle": "Comment nous vérifions les chiffres",
+    "validationBody": "Les positions du Soleil et de la Terre sont calculées à partir d’éphémérides obtenues auprès du système JPL Horizons (NASA/JPL Solar System Dynamics). Un panneau de validation et des tests automatiques comparent les valeurs de l’application à des réponses de référence enregistrées depuis ce même système et affichent l’écart, pour que chacun puisse les vérifier.",
     "limitsTitle": "Des limites assumées",
     "limitsBody": "La silhouette de l'horizon utilise le terrain réel LOLA uniquement pour les sites disposant de données d'altitude ; ailleurs, l'application utilise un horizon idéal plat et le signale. La texture du sol sous l'horizon et les étoiles sont illustratives.",
     "learnTeaser": "Envie de comprendre la géométrie derrière chaque chiffre ?",
@@ -122,34 +152,60 @@
     "kicker": "§3 · Données et crédits",
     "title": "Construit avec des données ouvertes et des logiciels libres",
     "sources": [
-      { "name": "JPL Horizons System", "org": "NASA / JPL", "use": "Source de chaque position du Soleil et de la Terre dans l'application.", "url": "https://ssd.jpl.nasa.gov/horizons/" },
-      { "name": "Données d'altitude LOLA", "org": "NASA LRO", "use": "Profils d'horizon réels pour les sites disposant de données de terrain.", "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm" },
-      { "name": "Quickmap", "org": "ASU / LROC", "use": "Vérification des coordonnées et du terrain des sites.", "url": "https://quickmap.lroc.asu.edu/" },
-      { "name": "Moon Trek", "org": "NASA", "use": "Exploration des sites et de leur topographie.", "url": "https://trek.nasa.gov/moon/" },
-      { "name": "Moon Exploration", "org": "ASC / CSA", "use": "Contexte sur l'exploration lunaire internationale.", "url": "https://www.asc-csa.gc.ca/eng/astronomy/moon-exploration/" },
-      { "name": "Mosaïque d'images de la Lune (SIM 3316)", "org": "USGS", "use": "Cartes polaires utilisées pour choisir le site.", "url": "https://pubs.usgs.gov/sim/3316/" }
+      {
+        "name": "JPL Horizons System",
+        "org": "NASA/JPL SSD",
+        "use": "Source de chaque position du Soleil et de la Terre dans l'application.",
+        "url": "https://ssd.jpl.nasa.gov/horizons/"
+      },
+      {
+        "name": "Données d'altitude LOLA",
+        "org": "NASA LRO · LOLA (PDS)",
+        "use": "Profils d'horizon réels pour les sites disposant de données de terrain.",
+        "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm"
+      },
+      {
+        "name": "Quickmap",
+        "org": "ASU · LROC",
+        "use": "Vérification des coordonnées et du terrain des sites.",
+        "url": "https://quickmap.lroc.asu.edu/"
+      },
+      {
+        "name": "Moon Trek",
+        "org": "NASA",
+        "use": "Exploration des sites et de leur topographie.",
+        "url": "https://trek.nasa.gov/moon/"
+      },
+      {
+        "name": "Mosaïque d'images de la Lune (SIM 3316)",
+        "org": "USGS",
+        "use": "Cartes polaires utilisées pour choisir le site.",
+        "url": "https://pubs.usgs.gov/sim/3316/"
+      }
     ],
     "softwareTitle": "Logiciels",
     "software": "three.js, Vite, Python, NumPy, Requests, rasterio, pyproj, Matplotlib, pytest, jsonschema, FastAPI, Uvicorn, HTTPX, Astro et Tailwind CSS. Images du Soleil et de la Terre : fichier Figma Community « Space Elements ».",
     "aiTitle": "Utilisation de l'IA",
     "ai": "Nous avons utilisé Claude (Anthropic) comme assistant de programmation, et chaque modification a été relue par un membre de l'équipe. Le logo de l'équipe a été généré avec ChatGPT. Les traductions autres que l'espagnol ont été faites avec l'IA et n'ont pas été relues par des locuteurs natifs. Les chiffres ne sont pas générés par IA : ils proviennent de JPL Horizons et sont vérifiés par des tests automatiques.",
     "licenseTitle": "Licence",
-    "license": "Le code est publié sous licence MIT. Les données appartiennent à leurs sources, selon leurs propres conditions. Le logo du NASA Space Apps Challenge sert uniquement à identifier l'événement ; ce projet n'est pas approuvé par la NASA."
+    "license": "Le code est publié sous licence MIT. Les données appartiennent à leurs sources et sont utilisées selon leurs propres conditions.",
+    "citationTitle": "Comment citer les données d’éphémérides",
+    "citation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov",
+    "disclaimerTitle": "Avis d’indépendance",
+    "disclaimer": "Lunar Landing Site Navigator est un projet indépendant. Il n’est ni affilié, ni approuvé, ni parrainé par la NASA, le JPL, Caltech, l’USGS ou une quelconque agence spatiale. Les données proviennent de sources publiques, citées ci-dessus ; leur utilisation n’implique aucune approbation de leurs fournisseurs."
   },
   "team": {
     "kicker": "§4 · Équipe",
     "title": "Vizcachas fuera de órbita",
-    "intro": "Nous avons créé cet outil pendant le hackathon NASA Space Apps Challenge 2026 et nous continuons à l'améliorer comme ressource ouverte et pédagogique.",
-    "repo": "Voir le code sur GitHub",
-    "challenge": "Lire l'énoncé du défi"
+    "intro": "Un projet pédagogique indépendant et open source. Nous continuons à l’améliorer pour que les élèves, les enseignants et les passionnés d’espace puissent explorer le ciel lunaire avec des données réelles.",
+    "repo": "Voir le code sur GitHub"
   },
   "footer": {
     "tagline": "Un outil ouvert pour lire le ciel lunaire.",
     "app": "Ouvrir l'application",
     "repo": "Code source",
-    "challenge": "Défi",
-    "event": "Réalisé pour le NASA Space Apps Challenge 2026.",
-    "translationNote": "Traduit avec l'IA ; non relu par des locuteurs natifs."
+    "translationNote": "Traduit avec l'IA ; non relu par des locuteurs natifs.",
+    "disclaimer": "Projet indépendant, ni affilié ni approuvé par la NASA ou une agence spatiale."
   },
   "learn": {
     "kicker": "Module pédagogique",
@@ -233,16 +289,46 @@
     },
     "glossaryTitle": "Glossaire",
     "glossary": [
-      { "term": "Azimut", "def": "Direction horizontale, mesurée dans le sens horaire depuis le nord (0°) jusqu'à 360°." },
-      { "term": "Hauteur", "def": "Angle au-dessus de l'horizon local ; négative, elle indique que l'astre est en dessous." },
-      { "term": "Topocentrique", "def": "Mesuré depuis un point de la surface, et non depuis le centre de l'astre." },
-      { "term": "Éphémérides", "def": "Tables des positions des astres au cours du temps. JPL Horizons les calcule." },
-      { "term": "Libration", "def": "Le balancement apparent de la Lune qui, avec le temps, permet de voir depuis la Terre environ 59 % de sa surface." },
-      { "term": "LOLA", "def": "Lunar Orbiter Laser Altimeter, instrument du Lunar Reconnaissance Orbiter de la NASA qui a cartographié l'altitude de la Lune." },
-      { "term": "PSR", "def": "Région en ombre permanente : fonds de cratères près des pôles qui ne reçoivent jamais la lumière directe du Soleil." },
-      { "term": "DTE", "def": "Direct-to-Earth : communication entre l'atterrisseur et la Terre sans relais." },
-      { "term": "CLPS", "def": "Commercial Lunar Payload Services, le programme de la NASA qui achète à des entreprises le transport de charges vers la Lune." },
-      { "term": "Jour lunaire", "def": "Environ 29,5 jours terrestres, d'un lever de Soleil au suivant au même endroit." }
+      {
+        "term": "Azimut",
+        "def": "Direction horizontale, mesurée dans le sens horaire depuis le nord (0°) jusqu'à 360°."
+      },
+      {
+        "term": "Hauteur",
+        "def": "Angle au-dessus de l'horizon local ; négative, elle indique que l'astre est en dessous."
+      },
+      {
+        "term": "Topocentrique",
+        "def": "Mesuré depuis un point de la surface, et non depuis le centre de l'astre."
+      },
+      {
+        "term": "Éphémérides",
+        "def": "Tables des positions des astres au cours du temps. JPL Horizons les calcule."
+      },
+      {
+        "term": "Libration",
+        "def": "Le balancement apparent de la Lune qui, avec le temps, permet de voir depuis la Terre environ 59 % de sa surface."
+      },
+      {
+        "term": "LOLA",
+        "def": "Lunar Orbiter Laser Altimeter, instrument du Lunar Reconnaissance Orbiter de la NASA qui a cartographié l'altitude de la Lune."
+      },
+      {
+        "term": "PSR",
+        "def": "Région en ombre permanente : fonds de cratères près des pôles qui ne reçoivent jamais la lumière directe du Soleil."
+      },
+      {
+        "term": "DTE",
+        "def": "Direct-to-Earth : communication entre l'atterrisseur et la Terre sans relais."
+      },
+      {
+        "term": "CLPS",
+        "def": "Commercial Lunar Payload Services, le programme de la NASA qui achète à des entreprises le transport de charges vers la Lune."
+      },
+      {
+        "term": "Jour lunaire",
+        "def": "Environ 29,5 jours terrestres, d'un lever de Soleil au suivant au même endroit."
+      }
     ],
     "activitiesTitle": "Activités pour la classe",
     "activitiesIntro": "Chaque activité dure de 20 à 40 minutes et ne nécessite qu'un navigateur. Ouvrez l'outil dans un autre onglet.",

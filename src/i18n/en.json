@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Lunar Landing Site Navigator — Vizcachas fuera de órbita",
-    "description": "Will a lunar landing site have sunlight and a line of sight to Earth on a given date? An open, educational tool built with NASA/JPL Horizons data for the NASA Space Apps Challenge 2026.",
+    "description": "Will a lunar landing site have sunlight and a line of sight to Earth on a given date? A free, open-source educational tool that computes it from public ephemeris and terrain data.",
     "learnTitle": "Learn the science — Lunar Landing Site Navigator",
     "learnDescription": "An educational module on lunar sky geometry: azimuth and elevation, horizons, polar illumination and communication with Earth, with classroom activities."
   },
@@ -19,7 +19,7 @@
     "menu": "Menu"
   },
   "hero": {
-    "badge": "NASA Space Apps Challenge 2026 · Lunar Landing Site Navigator",
+    "badge": "Open source · Educational · Free",
     "title": "Lunar Landing Site Navigator",
     "question": "If I land at this place on the Moon on this date, will I have Sun, and will I be able to talk to Earth?",
     "lede": "Near the lunar south pole the Sun and the Earth barely rise above the horizon, and any mountain can hide them. Our open tool takes a landing site and a date, finds where the Sun and the Earth are, draws them over the local horizon, and shows when there is power and when there is communication.",
@@ -27,16 +27,28 @@
     "ctaLearn": "Learn the science",
     "figure": "Sky view from the Intuitive Machines 2 site (Mons Mouton, 84.8° S) on 20 Nov 2026. The Sun stands only 6.5° above the horizon. The panel at the bottom shows the real horizon profile from LOLA terrain data.",
     "stats": [
-      { "value": "14", "label": "real landing sites, from Apollo 11 to IM-2" },
-      { "value": "1 h", "label": "time step of the JPL Horizons ephemerides" },
-      { "value": "360°", "label": "horizon profile per site" },
-      { "value": "2027", "label": "dates covered through December 2027" }
+      {
+        "value": "14",
+        "label": "real landing sites, from Apollo 11 to IM-2"
+      },
+      {
+        "value": "1 h",
+        "label": "time step of the JPL Horizons ephemerides"
+      },
+      {
+        "value": "360°",
+        "label": "horizon profile per site"
+      },
+      {
+        "value": "2027",
+        "label": "dates covered through December 2027"
+      }
     ]
   },
   "problem": {
     "kicker": "§1 · The problem",
     "title": "At the lunar south pole, sunlight and signal are scarce",
-    "intro": "Artemis and the commercial landers of NASA's CLPS program are heading to the lunar south pole, where ice is trapped in permanently shadowed craters. But the same geometry that preserves that ice makes the region hard to work in.",
+    "intro": "Several upcoming crewed and robotic missions are targeting the lunar south pole, where ice is trapped in permanently shadowed craters. But the same geometry that preserves that ice makes the region hard to work in.",
     "points": [
       {
         "title": "The Sun grazes the horizon",
@@ -52,26 +64,26 @@
       }
     ],
     "hardTitle": "Why it is hard today",
-    "hardIntro": "The data already exists in NASA tools, but they are built for specialists. We tested them with one question: “does Shackleton crater get sunlight in November?”",
+    "hardIntro": "The underlying data is public, but the professional ephemeris and mapping tools that provide it are built for specialists. Answering a simple question such as “does this crater get sunlight in November?” takes expertise.",
     "hard": [
       {
-        "tool": "JPL Horizons",
-        "caption": "Searching “moon” as the observer location lists Earth observatories with “Moon” in their name. Choosing the Moon requires knowing codes such as @301."
+        "title": "Technical codes",
+        "caption": "Choosing the Moon as the observer, or the Sun as the target, requires knowing body codes and dozens of configuration options."
       },
       {
-        "tool": "JPL Horizons",
-        "caption": "The answer to “is there Sun?” is an asterisk next to the date, explained about 70 lines further down, inside a 15-column table with mixed units."
+        "title": "Dense tables",
+        "caption": "The answer to “is there Sun?” is buried in wide tables with mixed units and symbols explained far from the data."
       },
       {
-        "tool": "NASA Moon Trek",
-        "caption": "When we searched for Shackleton, the south pole appeared as stretched stripes. Relief, light and shadow were impossible to read."
+        "title": "Hard-to-read poles",
+        "caption": "General-purpose map projections distort the polar regions, so relief, light and shadow are difficult to read exactly where missions are heading."
       }
     ],
-    "conclusion": "Horizons knows exactly where the Sun is, but none of these tools answers the question directly. We wanted one screen, one question, and numbers anyone can trust."
+    "conclusion": "The information exists, but no single view answers the question directly. We wanted one screen, one question, and numbers whose origin anyone can check."
   },
   "solution": {
     "kicker": "§2 · Our solution",
-    "title": "One screen, one question, verified numbers",
+    "title": "One screen, one question, traceable numbers",
     "intro": "Pick a landing site and a date. The tool shows the Sun and the Earth over the local horizon, the Sun's elevation, the hours of sunlight and of Earth visibility in the coming days, and a countdown to the next sunset or Earthset.",
     "pipelineTitle": "How it works",
     "pipeline": [
@@ -96,23 +108,41 @@
         "body": "JavaScript, Vite and three.js read the precomputed JSON and compare each body against the horizon."
       }
     ],
-    "pipelineNote": "An optional live API (FastAPI) queries Horizons for any latitude and longitude on the Moon and answers in the same format.",
+    "pipelineNote": "Values between hourly samples are interpolated, and the horizon profiles are derived from the elevation data; these processing steps are ours, not the data providers’. An optional live API (FastAPI) can query Horizons for any latitude and longitude on the Moon.",
     "featuresTitle": "What you can do",
     "features": [
-      { "title": "3D sky view", "body": "The Sun and the Earth at true angular scale over the horizon, with a 2D compass and elevation ruler as a fallback." },
-      { "title": "Solar elevation first", "body": "The Sun's height above the horizon is the most visible number on screen, because it drives solar power." },
-      { "title": "Timeline and countdown", "body": "A time player, a 7-day timeline of Sun and Earth visibility, and a live countdown to the next sunset or Earthset." },
-      { "title": "Scenario comparison", "body": "Two or three site–date scenarios side by side. The tool marks which has more Sun hours and which has more Earth hours, and leaves the decision to you." },
-      { "title": "Polar maps", "body": "Choose a historical mission, type coordinates, or click directly on a stereographic map of either pole." },
-      { "title": "Open and multilingual", "body": "MIT-licensed code, mobile layout, and an interface in English, Spanish, Hindi and Simplified Chinese." }
+      {
+        "title": "3D sky view",
+        "body": "The Sun and the Earth at true angular scale over the horizon, with a 2D compass and elevation ruler as a fallback."
+      },
+      {
+        "title": "Solar elevation first",
+        "body": "The Sun's height above the horizon is the most visible number on screen, because it drives solar power."
+      },
+      {
+        "title": "Timeline and countdown",
+        "body": "A time player, a 7-day timeline of Sun and Earth visibility, and a live countdown to the next sunset or Earthset."
+      },
+      {
+        "title": "Scenario comparison",
+        "body": "Two or three site–date scenarios side by side. The tool marks which has more Sun hours and which has more Earth hours, and leaves the decision to you."
+      },
+      {
+        "title": "Polar maps",
+        "body": "Choose a historical mission, type coordinates, or click directly on a stereographic map of either pole."
+      },
+      {
+        "title": "Open and multilingual",
+        "body": "MIT-licensed code, mobile layout, and an interface in English, Spanish, Hindi and Simplified Chinese."
+      }
     ],
     "shots": [
       "Details panel: azimuth, elevation, status and countdown for the Sun and the Earth, plus visible hours over the next 24 h, 7 days and 30 days.",
       "Site selection: historical missions, specific coordinates, or a clickable polar map (USGS SIM 3316 mosaic).",
       "Mobile layout of the sky view."
     ],
-    "validationTitle": "How we know it is right",
-    "validationBody": "Every position comes from JPL Horizons, NASA's official ephemeris service, which already accounts for libration and the Moon's orbital variations. A validation panel and automated tests compare our values with saved Horizons answers and show the difference.",
+    "validationTitle": "How we check the numbers",
+    "validationBody": "Sun and Earth positions are computed from ephemerides retrieved from the JPL Horizons system (NASA/JPL Solar System Dynamics). A validation panel and automated tests compare the app’s values with reference answers saved from that same system and show the difference, so anyone can check them.",
     "limitsTitle": "Honest limits",
     "limitsBody": "The horizon silhouette uses real LOLA terrain only for sites with elevation data; elsewhere the app uses an ideal flat horizon and says so. The ground texture below the horizon and the stars are illustrative.",
     "learnTeaser": "Want to understand the geometry behind each number?",
@@ -122,34 +152,60 @@
     "kicker": "§3 · Data & credits",
     "title": "Built on open data and open software",
     "sources": [
-      { "name": "JPL Horizons System", "org": "NASA / JPL", "use": "Source of every Sun and Earth position in the app.", "url": "https://ssd.jpl.nasa.gov/horizons/" },
-      { "name": "LOLA elevation data", "org": "NASA LRO", "use": "Real horizon profiles for sites with terrain data.", "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm" },
-      { "name": "Quickmap", "org": "ASU / LROC", "use": "Checking site coordinates and terrain.", "url": "https://quickmap.lroc.asu.edu/" },
-      { "name": "Moon Trek", "org": "NASA", "use": "Exploring the sites and their topography.", "url": "https://trek.nasa.gov/moon/" },
-      { "name": "Moon Exploration", "org": "CSA", "use": "Context on international lunar exploration.", "url": "https://www.asc-csa.gc.ca/eng/astronomy/moon-exploration/" },
-      { "name": "Image mosaic of the Moon (SIM 3316)", "org": "USGS", "use": "Polar maps used for site selection.", "url": "https://pubs.usgs.gov/sim/3316/" }
+      {
+        "name": "JPL Horizons System",
+        "org": "NASA/JPL SSD",
+        "use": "Source of every Sun and Earth position in the app.",
+        "url": "https://ssd.jpl.nasa.gov/horizons/"
+      },
+      {
+        "name": "LOLA elevation data",
+        "org": "NASA LRO · LOLA (PDS)",
+        "use": "Real horizon profiles for sites with terrain data.",
+        "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm"
+      },
+      {
+        "name": "Quickmap",
+        "org": "ASU · LROC",
+        "use": "Checking site coordinates and terrain.",
+        "url": "https://quickmap.lroc.asu.edu/"
+      },
+      {
+        "name": "Moon Trek",
+        "org": "NASA",
+        "use": "Exploring the sites and their topography.",
+        "url": "https://trek.nasa.gov/moon/"
+      },
+      {
+        "name": "Image mosaic of the Moon (SIM 3316)",
+        "org": "USGS",
+        "use": "Polar maps used for site selection.",
+        "url": "https://pubs.usgs.gov/sim/3316/"
+      }
     ],
     "softwareTitle": "Software",
     "software": "three.js, Vite, Python, NumPy, Requests, rasterio, pyproj, Matplotlib, pytest, jsonschema, FastAPI, Uvicorn, HTTPX, Astro and Tailwind CSS. Sun and Earth images: Figma Community file “Space Elements”.",
     "aiTitle": "Use of AI",
     "ai": "We used Claude (Anthropic) as a coding assistant, with every change reviewed by a team member. The team logo was generated with ChatGPT. Translations other than Spanish were made with AI and have not been reviewed by native speakers. The numbers are not AI-generated: they come from JPL Horizons and are checked by automated tests.",
     "licenseTitle": "License",
-    "license": "The code is released under the MIT License. The data belong to their sources, under their own terms. The NASA Space Apps Challenge logo is used only to identify the event; this project is not endorsed by NASA."
+    "license": "The code is released under the MIT License. The data belong to their sources and are used under their own terms.",
+    "citationTitle": "How to cite the ephemeris data",
+    "citation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov",
+    "disclaimerTitle": "Independence notice",
+    "disclaimer": "Lunar Landing Site Navigator is an independent project. It is not affiliated with, endorsed by, or sponsored by NASA, JPL, Caltech, USGS or any space agency. The data come from public sources, credited above; using them does not imply endorsement by their providers."
   },
   "team": {
     "kicker": "§4 · Team",
     "title": "Vizcachas fuera de órbita",
-    "intro": "We built this tool during the NASA Space Apps Challenge 2026 hackathon, and we keep improving it as an open, educational resource.",
-    "repo": "View the code on GitHub",
-    "challenge": "Read the challenge statement"
+    "intro": "An independent, open-source educational project. We keep improving it so students, teachers and space enthusiasts can explore the lunar sky with real data.",
+    "repo": "View the code on GitHub"
   },
   "footer": {
     "tagline": "An open tool to read the lunar sky.",
     "app": "Open the app",
     "repo": "Source code",
-    "challenge": "Challenge",
-    "event": "Made for the NASA Space Apps Challenge 2026.",
-    "translationNote": "Translated with AI; not reviewed by native speakers."
+    "translationNote": "Translated with AI; not reviewed by native speakers.",
+    "disclaimer": "Independent project, not affiliated with or endorsed by NASA or any space agency."
   },
   "learn": {
     "kicker": "Educational module",
@@ -233,16 +289,46 @@
     },
     "glossaryTitle": "Glossary",
     "glossary": [
-      { "term": "Azimuth", "def": "Horizontal direction, measured clockwise from north (0°) to 360°." },
-      { "term": "Elevation", "def": "Angle above the local horizon; negative means below it." },
-      { "term": "Topocentric", "def": "Measured from a point on the surface, not from the center of the body." },
-      { "term": "Ephemeris", "def": "A table of positions of celestial bodies over time. JPL Horizons generates them." },
-      { "term": "Libration", "def": "The apparent wobble of the Moon that lets us see about 59% of its surface from Earth over time." },
-      { "term": "LOLA", "def": "Lunar Orbiter Laser Altimeter, an instrument on NASA's Lunar Reconnaissance Orbiter that mapped the Moon's elevation." },
-      { "term": "PSR", "def": "Permanently shadowed region: crater floors near the poles that never receive direct sunlight." },
-      { "term": "DTE", "def": "Direct-to-Earth: communication between the lander and Earth with no relay." },
-      { "term": "CLPS", "def": "Commercial Lunar Payload Services, the NASA program that buys deliveries to the Moon from companies." },
-      { "term": "Lunar day", "def": "About 29.5 Earth days, from one sunrise to the next at the same place." }
+      {
+        "term": "Azimuth",
+        "def": "Horizontal direction, measured clockwise from north (0°) to 360°."
+      },
+      {
+        "term": "Elevation",
+        "def": "Angle above the local horizon; negative means below it."
+      },
+      {
+        "term": "Topocentric",
+        "def": "Measured from a point on the surface, not from the center of the body."
+      },
+      {
+        "term": "Ephemeris",
+        "def": "A table of positions of celestial bodies over time. JPL Horizons generates them."
+      },
+      {
+        "term": "Libration",
+        "def": "The apparent wobble of the Moon that lets us see about 59% of its surface from Earth over time."
+      },
+      {
+        "term": "LOLA",
+        "def": "Lunar Orbiter Laser Altimeter, an instrument on NASA's Lunar Reconnaissance Orbiter that mapped the Moon's elevation."
+      },
+      {
+        "term": "PSR",
+        "def": "Permanently shadowed region: crater floors near the poles that never receive direct sunlight."
+      },
+      {
+        "term": "DTE",
+        "def": "Direct-to-Earth: communication between the lander and Earth with no relay."
+      },
+      {
+        "term": "CLPS",
+        "def": "Commercial Lunar Payload Services, the NASA program that buys deliveries to the Moon from companies."
+      },
+      {
+        "term": "Lunar day",
+        "def": "About 29.5 Earth days, from one sunrise to the next at the same place."
+      }
     ],
     "activitiesTitle": "Classroom activities",
     "activitiesIntro": "Each activity takes 20 to 40 minutes and needs only a browser. Open the tool in another tab.",
