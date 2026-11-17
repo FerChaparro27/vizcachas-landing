@@ -77,8 +77,8 @@ const { id, L } = Astro.props;
       <line x1="200" y1="148" x2="200" y2="122" stroke="#0b1020" stroke-width="1.5" />
       <circle cx="200" cy="148" r="2.5" fill="#0b1020" />
       <text x="236" y="118" fill="#eef1f7">↙ +r</text>
-      <text x="236" y="160" fill="var(--ink)">elev &lt; 0</text>
-      <text x="200" y="196" fill="var(--ink)" text-anchor="middle" font-family="var(--font-mono)" font-size="12">elev + r &gt; horizon → {L.visible}</text>
+      <text x="236" y="160" fill="var(--ink)">{L.elevation} &lt; 0°</text>
+      <text x="200" y="196" fill="var(--ink)" text-anchor="middle" font-family="var(--font-mono)" font-size="12">{L.elevation} + r &gt; {L.horizon} → {L.visible}</text>
     </g>
   )}
 

@@ -9,12 +9,14 @@ interface Props {
   alt: string;
   /** Name of a loop in public/videos; when set, it replaces the still image. */
   video?: string;
+  /** CSS width of the phone (default: up to 250px). */
+  width?: string;
   class?: string;
 }
-const { src, alt, video, class: cls } = Astro.props;
+const { src, alt, video, width, class: cls } = Astro.props;
 ---
 
-<div class:list={['phone', cls]}>
+<div class:list={['phone', cls]} style={width ? `--phone-w: ${width}` : undefined}>
   <div class="phone-body">
     <span class="phone-notch" aria-hidden="true"></span>
     {
@@ -29,15 +31,15 @@ const { src, alt, video, class: cls } = Astro.props;
 
 <style>
   .phone {
-    width: min(100%, 250px);
+    width: var(--phone-w, min(100%, 250px));
     transform: rotate(-4deg);
     transition: transform 0.5s ease;
   }
   .phone:hover { transform: rotate(0deg) translateY(-4px); }
   .phone-body {
     position: relative;
-    border-radius: 2.4rem;
-    padding: 0.6rem;
+    border-radius: 16% / 7.5%;
+    padding: 4%;
     background: linear-gradient(145deg, #2a3147, #0b1020 55%, #1a2033);
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.08) inset,
@@ -46,11 +48,11 @@ const { src, alt, video, class: cls } = Astro.props;
   }
   .phone-notch {
     position: absolute;
-    top: 1rem;
+    top: 4.2%;
     left: 50%;
     z-index: 1;
-    width: 32%;
-    height: 1.1rem;
+    width: 30%;
+    height: 2.6%;
     transform: translateX(-50%);
     border-radius: 9999px;
     background: #05070d;
@@ -59,7 +61,7 @@ const { src, alt, video, class: cls } = Astro.props;
     display: block;
     width: 100%;
     height: auto;
-    border-radius: 1.9rem;
+    border-radius: 12% / 5.5%;
   }
   @media (prefers-reduced-motion: reduce) {
     .phone, .phone:hover { transition: none; }

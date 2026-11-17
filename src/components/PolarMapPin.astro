@@ -66,9 +66,20 @@ const points = [
   document.querySelectorAll<HTMLElement>('.polar-pin').forEach((root) => {
     const marker = root.querySelector<HTMLElement>('.polar-pin__marker');
     const points: [number, number][] = JSON.parse(root.dataset.points ?? '[]');
-    if (!marker || reduced || points.length < 2) return;
+    if (!marker || points.length < 2) return;
     let i = 0;
     let timer: number | undefined;
+    let visible = false;
+    let paused = reduced; // pause button state; starts paused with reduced motion
+    const update = () => {
+      const run = visible && !paused;
+      if (run && timer === undefined) timer = window.setInterval(next, STEP_MS);
+      if (!run && timer !== undefined) { window.clearInterval(timer); timer = undefined; }
+    };
+    root.addEventListener('motion-toggle', (e) => {
+      paused = (e as CustomEvent<{ paused: boolean }>).detail.paused;
+      update();
+    });
     const next = () => {
       i = (i + 1) % points.length;
       marker.style.left = `${points[i][0]}%`;
@@ -79,8 +90,8 @@ const points = [
       marker.style.animation = '';
     };
     new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && timer === undefined) timer = window.setInterval(next, STEP_MS);
-      if (!e.isIntersecting && timer !== undefined) { window.clearInterval(timer); timer = undefined; }
+      visible = e.isIntersecting;
+      update();
     }).observe(root);
   });
 </script>

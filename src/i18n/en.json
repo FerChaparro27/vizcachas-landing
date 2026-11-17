@@ -35,18 +35,19 @@
       },
       {
         "value": "1 h",
-        "label": "time step of the JPL Horizons ephemerides"
+        "label": "Sun and Earth positions, hour by hour"
       },
       {
         "value": "360°",
-        "label": "horizon profile per site"
+        "label": "real horizon in every direction"
       },
       {
         "value": "2027",
-        "label": "dates covered through December 2027"
+        "label": "dates through December 2027"
       }
     ],
-    "ctaCode": "Source code"
+    "ctaCode": "Source code",
+    "tagline": "A free web tool that shows, for any landing site and date, when the Sun is up and when the Earth is in view."
   },
   "teaser": {
     "caption": "Lunar Landing Site Navigator draws the Sun and the Earth over the real horizon of each landing site, and tells you how long each one stays up.",
@@ -62,7 +63,7 @@
     "items": [
       {
         "title": "Mission planning",
-        "body": "Compare sites and dates side by side and see how a delay changes power and communication.",
+        "body": "Compare sites and dates side by side in the Details panel and see how a delay changes power and communication.",
         "cta": "Compare two dates"
       },
       {
@@ -92,7 +93,7 @@
       },
       {
         "title": "A few days change everything",
-        "body": "With a two-week delay, the same place can go from having Sun all week to having none at all."
+        "body": "With a two-week delay, the same place can go from having Sun all week to having none for the whole week."
       }
     ],
     "hardTitle": "Why it is hard today",
@@ -123,8 +124,8 @@
     "slides": [
       {
         "eyebrow": "South pole",
-        "title": "The Sun only 6.5° above the horizon",
-        "body": "Mons Mouton, 20 Nov 2026. The horizon profile comes from LOLA terrain data."
+        "title": "The Sun just above the horizon",
+        "body": "At Mons Mouton, near the south pole, the Sun stays only a few degrees up. The horizon profile comes from LOLA terrain data."
       },
       {
         "eyebrow": "Far side",
@@ -133,8 +134,8 @@
       },
       {
         "eyebrow": "Scenario comparison",
-        "title": "168 hours of Sun, then none",
-        "body": "The same south-pole site two weeks apart: 168 h of sunlight in one week, 0 h in the other."
+        "title": "Same site, two dates",
+        "body": "The same south-pole site two weeks apart: compare how many hours of Sun and Earth each date gets."
       },
       {
         "eyebrow": "Details",
@@ -196,7 +197,7 @@
       },
       {
         "title": "Polar maps",
-        "body": "Choose a historical mission, type coordinates, or click directly on a stereographic map of either pole."
+        "body": "Choose a historical mission, type coordinates, or click directly on a stereographic map of either pole. For a new point, the first answer can take a few seconds while its data is calculated."
       },
       {
         "title": "Open and mobile-ready",
@@ -246,7 +247,7 @@
     "softwareTitle": "Software",
     "software": "three.js, Vite, Python, NumPy, Requests, rasterio, pyproj, Matplotlib, pytest, jsonschema, FastAPI, Uvicorn, HTTPX, Astro and Tailwind CSS. Sun and Earth images: Figma Community file “Space Elements”.",
     "aiTitle": "Use of AI",
-    "ai": "We used Claude (Anthropic) as a coding assistant, with every change reviewed by a team member. The team logo was generated with ChatGPT. Translations other than Spanish were made with AI and have not been reviewed by native speakers. The numbers are not AI-generated: they come from JPL Horizons and are checked by automated tests.",
+    "ai": "About the tool: we used Claude (Anthropic) as a coding assistant, and every change was reviewed by a team member. The team logo was generated with ChatGPT. The numbers are not AI-generated: they come from JPL Horizons and are checked by automated tests. About this site: its texts were drafted with the help of Claude, and the Portuguese, French, Chinese and Hindi versions have not been reviewed by native speakers.",
     "licenseTitle": "License",
     "license": "The code is released under the MIT License. The data belong to their sources and are used under their own terms.",
     "disclaimerTitle": "Independence notice",
@@ -418,7 +419,7 @@
         "level": "Ages 12+",
         "steps": [
           "Choose Apollo 11 in the tool and pick today's date.",
-          "Move the date slider one day at a time and write down the Sun's elevation each day.",
+          "Use the date field (Search site and date) to move forward one day at a time, and write down the Sun’s elevation each day.",
           "Plot elevation against date. How long until the Sun sets? How long is a full lunar day?"
         ]
       },
@@ -453,5 +454,9 @@
     "back": "Back to the project",
     "tryIt": "Try it in the tool",
     "sourcesLabel": "Sources"
+  },
+  "ui": {
+    "pause": "Pause animation",
+    "play": "Play animation"
   }
 }

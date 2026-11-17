@@ -62,7 +62,7 @@ const li2018: Source = {
 
 const moonFactSheet: Source = {
   authors: 'NSSDCA',
-  year: '—',
+  year: 'n.d.',
   title: 'Moon Fact Sheet',
   venue: 'NASA Space Science Data Coordinated Archive',
   url: 'https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html',
@@ -89,6 +89,6 @@ export const sources: Record<string, Source[]> = {
   horizon: [lola, mazarico],
   refraction: [explanatorySupplement, moonFactSheet],
   poles: [mazarico, speyerer, li2018],
-  earth: [explanatorySupplement, moonFactSheet],
+  earth: [explanatorySupplement],
   dte: [zhang2021, wu2020],
 };

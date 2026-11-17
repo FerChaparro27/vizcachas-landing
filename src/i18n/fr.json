@@ -31,22 +31,23 @@
     "stats": [
       {
         "value": "14",
-        "label": "sites d'alunissage réels, d'Apollo 11 à IM-2"
+        "label": "sites d’alunissage réels, d’Apollo 11 à IM-2"
       },
       {
         "value": "1 h",
-        "label": "pas de temps des éphémérides JPL Horizons"
+        "label": "positions du Soleil et de la Terre, heure par heure"
       },
       {
         "value": "360°",
-        "label": "profil d'horizon par site"
+        "label": "horizon réel dans toutes les directions"
       },
       {
         "value": "2027",
-        "label": "dates couvertes jusqu'en décembre 2027"
+        "label": "dates jusqu’en décembre 2027"
       }
     ],
-    "ctaCode": "Code source"
+    "ctaCode": "Code source",
+    "tagline": "Un outil web gratuit qui montre, pour n’importe quel site d’alunissage et n’importe quelle date, quand le Soleil est levé et quand la Terre est visible."
   },
   "teaser": {
     "caption": "Lunar Landing Site Navigator dessine le Soleil et la Terre au-dessus de l’horizon réel de chaque site d’alunissage et indique combien de temps chacun reste visible.",
@@ -62,7 +63,7 @@
     "items": [
       {
         "title": "Planification de mission",
-        "body": "Comparez sites et dates côte à côte et voyez comment un report change l’énergie et la communication.",
+        "body": "Comparez sites et dates côte à côte dans le panneau Détails et voyez comment un report change l’énergie et la communication.",
         "cta": "Comparer deux dates"
       },
       {
@@ -92,7 +93,7 @@
       },
       {
         "title": "Quelques jours changent tout",
-        "body": "Avec deux semaines de retard, un même lieu peut passer d’une semaine entière de Soleil à aucune heure."
+        "body": "Avec deux semaines de retard, un même lieu peut passer d’une semaine entière de Soleil à une semaine entière sans Soleil."
       }
     ],
     "hardTitle": "Pourquoi c'est difficile aujourd'hui",
@@ -123,8 +124,8 @@
     "slides": [
       {
         "eyebrow": "Pôle Sud",
-        "title": "Le Soleil à seulement 6,5° au-dessus de l’horizon",
-        "body": "Mons Mouton, 20 novembre 2026. Le profil d’horizon provient des données de terrain LOLA."
+        "title": "Le Soleil à peine au-dessus de l’horizon",
+        "body": "À Mons Mouton, près du pôle Sud, le Soleil ne monte que de quelques degrés. Le profil d’horizon provient des données de terrain LOLA."
       },
       {
         "eyebrow": "Face cachée",
@@ -133,8 +134,8 @@
       },
       {
         "eyebrow": "Comparaison de scénarios",
-        "title": "168 heures de Soleil, puis aucune",
-        "body": "Le même site du pôle Sud à deux semaines d’écart : 168 h de Soleil une semaine, 0 h l’autre."
+        "title": "Même lieu, deux dates",
+        "body": "Le même site du pôle Sud à deux semaines d’écart : comparez combien d’heures de Soleil et de Terre chaque date reçoit."
       },
       {
         "eyebrow": "Détails",
@@ -196,7 +197,7 @@
       },
       {
         "title": "Cartes polaires",
-        "body": "Choisissez une mission historique, saisissez des coordonnées ou cliquez directement sur une carte stéréographique de l'un ou l'autre pôle."
+        "body": "Choisissez une mission historique, saisissez des coordonnées ou cliquez directement sur une carte stéréographique de l'un ou l'autre pôle. Pour un nouveau point, la première réponse peut prendre quelques secondes, le temps de calculer ses données."
       },
       {
         "title": "Ouvert et adapté au mobile",
@@ -246,7 +247,7 @@
     "softwareTitle": "Logiciels",
     "software": "three.js, Vite, Python, NumPy, Requests, rasterio, pyproj, Matplotlib, pytest, jsonschema, FastAPI, Uvicorn, HTTPX, Astro et Tailwind CSS. Images du Soleil et de la Terre : fichier Figma Community « Space Elements ».",
     "aiTitle": "Utilisation de l'IA",
-    "ai": "Nous avons utilisé Claude (Anthropic) comme assistant de programmation, et chaque modification a été relue par un membre de l'équipe. Le logo de l'équipe a été généré avec ChatGPT. Les traductions autres que l'espagnol ont été faites avec l'IA et n'ont pas été relues par des locuteurs natifs. Les chiffres ne sont pas générés par IA : ils proviennent de JPL Horizons et sont vérifiés par des tests automatiques.",
+    "ai": "À propos de l’outil : nous avons utilisé Claude (Anthropic) comme assistant de programmation, et chaque modification a été relue par un membre de l’équipe. Le logo de l’équipe a été généré avec ChatGPT. Les chiffres ne sont pas générés par IA : ils proviennent de JPL Horizons et sont vérifiés par des tests automatiques. À propos de ce site : les textes ont été rédigés avec l’aide de Claude, et les versions portugaise, française, chinoise et hindi n’ont pas été relues par des locuteurs natifs.",
     "licenseTitle": "Licence",
     "license": "Le code est publié sous licence MIT. Les données appartiennent à leurs sources et sont utilisées selon leurs propres conditions.",
     "disclaimerTitle": "Avis d’indépendance",
@@ -418,7 +419,7 @@
         "level": "Dès 12 ans",
         "steps": [
           "Choisissez Apollo 11 dans l'outil et la date d'aujourd'hui.",
-          "Avancez le curseur de date d'un jour à la fois et notez chaque jour la hauteur du Soleil.",
+          "Utilisez le champ de date (rechercher un site et une date) pour avancer d’un jour à la fois, et notez chaque jour la hauteur du Soleil.",
           "Tracez la hauteur en fonction de la date. Dans combien de temps le Soleil se couche-t-il ? Combien dure un jour lunaire complet ?"
         ]
       },
@@ -453,5 +454,9 @@
     "back": "Retour au projet",
     "tryIt": "Essayez dans l'outil",
     "sourcesLabel": "Sources"
+  },
+  "ui": {
+    "pause": "Mettre l’animation en pause",
+    "play": "Relancer l’animation"
   }
 }

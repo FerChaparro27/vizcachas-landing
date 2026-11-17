@@ -8,6 +8,7 @@ import map from '../assets/shots/app-map.png';
 import mobile from '../assets/shots/app-mobile.png';
 import farSide from '../assets/shots/app-far-side.png';
 import compare from '../assets/shots/app-compare2.png';
+import learnShot from '../assets/shots/learn-module.png';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
@@ -35,7 +36,7 @@ const featureVideos = [
 ];
 
 // "How it works" diagram: file labels and IM-2's real horizon profile (360 azimuths, LOLA 30 m DEM).
-const pipelineFiles = ['horizons · IM-2', 'horizon.json', 'ephemeris.json', 'app'];
+const pipelineFiles = ['horizons · Sun @ IM-2', 'horizon.json', 'ephemeris.json', 'app'];
 const elev: number[] = im2Horizon.elevation_deg;
 const EL_MIN = -2, EL_MAX = 5;
 const yOf = (el: number) => (100 - ((el - EL_MIN) / (EL_MAX - EL_MIN)) * 90).toFixed(2);
@@ -53,7 +54,7 @@ const panels = [
 // Audience cards: image + deep link.
 const audience = [
   { img: compare, pos: 'object-left-top', href: appUrl(lang, scenarios.compare), ext: true },
-  { img: null, pos: '', href: localePath(lang, 'learn'), ext: false },
+  { img: learnShot, pos: 'object-left-top', href: localePath(lang, 'learn'), ext: false },
   { img: farSide, pos: 'object-center', href: appUrl(lang, scenarios.farSide), ext: true },
 ];
 
@@ -89,7 +90,8 @@ const bibtex = `@software{vizcachas2026navigator,
       {d.hero.title}
     </h1>
     <p class="mx-auto mt-6 max-w-2xl font-serif text-xl leading-snug text-balance italic sm:text-2xl">“{d.hero.question}”</p>
-    <ul class="mt-10 flex flex-wrap justify-center gap-2.5 text-sm font-medium">
+    <p class="mx-auto mt-5 max-w-xl leading-relaxed text-balance text-muted">{d.hero.tagline}</p>
+    <ul class="mt-9 flex flex-wrap justify-center gap-2.5 text-sm font-medium">
       <li>
         <a href={appUrl(lang)} class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-paper hover:opacity-90">
           {d.hero.ctaApp} <span aria-hidden="true">→</span>
@@ -99,12 +101,6 @@ const bibtex = `@software{vizcachas2026navigator,
         <a href={REPO_URL} class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 hover:border-ink">
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>
           {d.hero.ctaCode}
-        </a>
-      </li>
-      <li>
-        <a href={localePath(lang, 'learn')} class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 hover:border-ink">
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l9-3 9 3-9 3-9-3zM7 8v5c0 1.7 2.2 3 5 3s5-1.3 5-3V8M21 6v6"/></svg>
-          {d.hero.ctaLearn}
         </a>
       </li>
     </ul>
@@ -152,28 +148,13 @@ const bibtex = `@software{vizcachas2026navigator,
 
   <!-- AUDIENCE: Shadowmap "solutions" / OpenSpace "every venue" -->
   <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-    <p class="kicker text-center">{d.audience.kicker}</p>
     <h2 class="mt-3 text-center font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.audience.title}</h2>
     <div class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-3">
       {
         d.audience.items.map((a, i) => (
           <a href={audience[i].href} class="group flex flex-col">
             <div class="aspect-[16/10] overflow-hidden rounded-xl bg-[#0b1020] ring-1 ring-line">
-              {audience[i].img ? (
-                <Image src={audience[i].img!} alt="" width={720} class:list={['h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]', audience[i].pos]} />
-              ) : (
-                <div class="flex h-full items-center justify-center bg-surface-2 p-6 transition duration-500 group-hover:scale-[1.03]">
-                  <svg viewBox="0 0 200 110" class="h-full w-auto" aria-hidden="true">
-                    <rect x="0" y="80" width="200" height="30" fill="var(--line)" />
-                    <line x1="0" y1="80" x2="200" y2="80" stroke="var(--ink-muted)" />
-                    <path d="M20 80 Q100 -20 180 80" fill="none" stroke="var(--sun-ink)" stroke-dasharray="4 3" />
-                    <circle cx="100" cy="30" r="9" fill="var(--sun)" />
-                    <path d="M100 80 L100 30" stroke="var(--ink-muted)" stroke-dasharray="2 3" />
-                    <path d="M128 80 A28 28 0 0 0 120 60" fill="none" stroke="var(--earth-ink)" stroke-width="2" />
-                    <text x="134" y="70" font-size="10" fill="var(--earth-ink)" font-family="var(--font-mono)">+62°</text>
-                  </svg>
-                </div>
-              )}
+              <Image src={audience[i].img} alt="" width={720} class:list={['h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]', audience[i].pos]} />
             </div>
             <div class="flex flex-1 flex-col pt-5">
               <h3 class="font-serif text-2xl font-semibold group-hover:underline group-hover:decoration-line group-hover:underline-offset-4">{a.title}</h3>
@@ -191,7 +172,6 @@ const bibtex = `@software{vizcachas2026navigator,
   <!-- PROBLEM -->
   <section id="problem" class="border-t border-line">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <p class="kicker">{d.problem.kicker}</p>
       <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.problem.title}</h2>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.problem.intro}</p>
       <!-- Row 1: the three conditions at the pole. Open columns, each led by a small line illustration. -->
@@ -263,11 +243,14 @@ const bibtex = `@software{vizcachas2026navigator,
     <div class="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div>
-          <p class="kicker !text-[#a9b3c9]">{d.showcase.kicker}</p>
-          <h2 class="mt-3 font-serif text-3xl font-semibold tracking-tight text-[#eef1f7] sm:text-4xl">{d.showcase.title}</h2>
+          <h2 class="font-serif text-3xl font-semibold tracking-tight text-[#eef1f7] sm:text-4xl">{d.showcase.title}</h2>
           <p class="mt-3 max-w-2xl leading-relaxed text-[#a9b3c9]">{d.showcase.intro}</p>
         </div>
         <div class="flex gap-2">
+          <button type="button" id="showcase-toggle" aria-pressed="false" aria-label={d.ui.pause} data-label-pause={d.ui.pause} data-label-play={d.ui.play} class="carousel-btn">
+            <svg class="icon-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" fill="currentColor" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" fill="currentColor" /></svg>
+            <svg class="icon-play hidden" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor" /></svg>
+          </button>
           <button type="button" data-carousel="-1" aria-label={d.showcase.prev} class="carousel-btn">←</button>
           <button type="button" data-carousel="1" aria-label={d.showcase.next} class="carousel-btn">→</button>
         </div>
@@ -296,8 +279,8 @@ const bibtex = `@software{vizcachas2026navigator,
                   <h3 class="mt-1 text-lg font-semibold text-white">{s.title}</h3>
                 </div>
               </div>
-              <div class="flex items-start justify-between gap-4 p-5">
-                <p class="text-sm leading-relaxed text-[#a9b3c9]">{s.body}</p>
+              <div class="flex flex-col gap-3 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                <p class="min-w-0 text-sm leading-relaxed text-[#a9b3c9]">{s.body}</p>
                 <span class="shrink-0 text-sm font-semibold whitespace-nowrap text-[#eef1f7]">{d.showcase.open} ↗</span>
               </div>
             </a>
@@ -309,7 +292,6 @@ const bibtex = `@software{vizcachas2026navigator,
 
   <!-- SOLUTION: how it works -->
   <section id="solution" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-    <p class="kicker">{d.solution.kicker}</p>
     <h2 class="mt-4 max-w-4xl font-serif text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-6xl">
       {d.solution.titleLead}<span class="text-earth-ink">{d.solution.titleEmphasis}</span>
     </h2>
@@ -326,27 +308,74 @@ const bibtex = `@software{vizcachas2026navigator,
               <p class="mt-3 max-w-md text-lg leading-relaxed text-muted">{f.body}</p>
             </div>
             <div class:list={['flex min-w-0', i % 2 === 1 ? 'md:order-1 md:justify-start' : 'md:justify-end']}>
-              {i === 5 ? (
-                <PhoneFrame src={featureShots[i]} alt={f.title} video="mobile" class="mx-auto md:mx-0" />
-              ) : i === 4 ? (
-                <PolarMapPin alt={f.title} class="mx-auto md:mx-0" />
-              ) : (
-                <FeatureVideo
-                  name={featureVideos[i].name}
-                  label={f.title}
-                  width={featureVideos[i].w}
-                  height={featureVideos[i].h}
-                  class="w-full max-w-[520px] rounded-xl bg-[#0b0d12] shadow-2xl shadow-black/25 ring-1 ring-black/10"
-                />
-              )}
+              <!-- Same stage for every visual (one proportion), with a pause/play control. -->
+              <div class="feature-stage relative flex aspect-[5/4] w-full max-w-[520px] items-center justify-center overflow-hidden rounded-xl bg-[#0b0d12] p-5 shadow-2xl shadow-black/25 ring-1 ring-black/10">
+                {i === 5 ? (
+                  <PhoneFrame src={featureShots[i]} alt={f.title} video="mobile" width="33%" />
+                ) : i === 4 ? (
+                  <PolarMapPin alt={f.title} class="aspect-square !h-full !w-auto !bg-transparent !p-0 !shadow-none !outline-none" />
+                ) : (
+                  <FeatureVideo
+                    name={featureVideos[i].name}
+                    label={f.title}
+                    width={featureVideos[i].w}
+                    height={featureVideos[i].h}
+                    class="max-h-full w-full rounded-md object-contain"
+                  />
+                )}
+                <button type="button" class="motion-toggle" aria-pressed="false" aria-label={d.ui.pause} data-label-pause={d.ui.pause} data-label-play={d.ui.play}>
+                  <svg class="icon-pause" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" fill="currentColor" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" fill="currentColor" /></svg>
+                  <svg class="icon-play hidden" width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor" /></svg>
+                </button>
+              </div>
             </div>
           </div>
         ))
       }
     </div>
 
+    <div class="mt-12 flex flex-col items-start justify-between gap-4 rounded-xl bg-ink p-6 text-paper sm:flex-row sm:items-center sm:p-8">
+      <p class="font-serif text-xl">{d.solution.learnTeaser}</p>
+      <a href={localePath(lang, 'learn')} class="shrink-0 rounded-full bg-sun px-5 py-2.5 font-semibold text-[#0b1020] hover:brightness-95">{d.solution.learnCta} →</a>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="border-t border-line">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div class="mt-3 flex items-center gap-4">
+        <img src="/assets/logo-vizcachas.svg" alt="" width="64" height="64" class="h-16 w-16 rounded-full border border-line bg-white p-1 dark:invert" />
+        <h2 class="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.team.title}</h2>
+      </div>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.team.intro}</p>
+      <ul class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-12">
+        {
+          team.map((name) => (
+            <li class="border-t border-line py-5 font-serif text-2xl">{name}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- FINAL CTA: OpenSpace "Start exploring" -->
+  <section class="px-4 sm:px-6">
+    <div class="band relative mx-auto max-w-4xl overflow-hidden rounded-3xl px-6 py-14 text-center ring-1 ring-white/10">
+      <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 -bottom-24 mx-auto h-48 w-[80%] rounded-[50%] bg-[#6cb2ff]/20 blur-3xl"></div>
+      <h2 class="relative font-serif text-3xl font-semibold text-[#eef1f7] sm:text-4xl">{d.cta.title}</h2>
+      <p class="relative mt-3 text-[#a9b3c9]">{d.cta.body}</p>
+      <div class="relative mt-8 flex flex-wrap justify-center gap-3 text-sm font-semibold">
+        <a href={appUrl(lang)} class="rounded-full bg-sun px-5 py-2.5 text-[#0b1020] hover:brightness-95">{d.cta.app} →</a>
+        <a href={REPO_URL} class="rounded-full border border-white/25 px-5 py-2.5 text-[#eef1f7] hover:border-white/60">{d.cta.repo}</a>
+        <a href={localePath(lang, 'learn')} class="rounded-full border border-white/25 px-5 py-2.5 text-[#eef1f7] hover:border-white/60">{d.cta.learn}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS: technical detail, placed near the reference material. -->
+  <section id="how" class="mx-auto mt-28 max-w-6xl px-4 sm:px-6">
     <!-- Pipeline: data-flow diagram. Each stage shows the real thing it produces (IM-2 data from the app repo). -->
-    <h3 class="mt-16 font-serif text-2xl font-semibold sm:text-3xl">{d.solution.pipelineTitle}</h3>
+    <h2 class="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.solution.pipelineTitle}</h2>
     <ol class="mt-8 grid gap-12 md:grid-cols-4 md:gap-10">
       {
         d.solution.pipeline.map((s, i) => (
@@ -358,11 +387,12 @@ const bibtex = `@software{vizcachas2026navigator,
               </div>
               <div class="h-36 overflow-hidden">
                 {i === 0 && (
-                  <pre class="h-full p-3 font-mono text-[0.68rem] leading-relaxed text-[#eef1f7]"><span class="text-[#a9b3c9]">2026-11-20 12:00 UTC</span>
-<span class="text-[#ffc54d]">Sun  </span> az  18.44°  el +6.49°
-<span class="text-[#6cb2ff]">Earth</span> az 323.26°  el +7.98°
-<span class="text-[#a9b3c9]">2026-11-20 13:00 UTC</span>
-…</pre>
+                  <pre class="h-full p-3 font-mono text-[0.66rem] leading-relaxed text-[#eef1f7]"><span class="text-[#a9b3c9]">Date (UT)          Azi°    Elev°</span>
+2026-Nov-20 12:00  18.442  6.487
+2026-Nov-20 13:00  17.933  6.501
+2026-Nov-20 14:00  17.424  6.515
+2026-Nov-20 15:00  16.915  6.528
+<span class="text-[#a9b3c9]">…</span></pre>
                 )}
                 {i === 1 && (
                   <svg viewBox="0 0 360 120" preserveAspectRatio="none" class="h-full w-full" role="img" aria-label="IM-2 horizon profile, 360 azimuths">
@@ -406,44 +436,6 @@ const bibtex = `@software{vizcachas2026navigator,
       <div>
         <h3 class="font-serif text-2xl font-semibold">{d.solution.validationTitle}</h3>
         <p class="mt-3 max-w-3xl font-serif text-xl leading-relaxed text-muted">{d.solution.validationBody}</p>
-      </div>
-    </div>
-
-    <div class="mt-12 flex flex-col items-start justify-between gap-4 rounded-xl bg-ink p-6 text-paper sm:flex-row sm:items-center sm:p-8">
-      <p class="font-serif text-xl">{d.solution.learnTeaser}</p>
-      <a href={localePath(lang, 'learn')} class="shrink-0 rounded-full bg-sun px-5 py-2.5 font-semibold text-[#0b1020] hover:brightness-95">{d.solution.learnCta} →</a>
-    </div>
-  </section>
-
-  <!-- TEAM -->
-  <section id="team" class="border-t border-line">
-    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <p class="kicker">{d.team.kicker}</p>
-      <div class="mt-3 flex items-center gap-4">
-        <img src="/assets/logo-vizcachas.svg" alt="" width="64" height="64" class="h-16 w-16 rounded-full border border-line bg-white p-1 dark:invert" />
-        <h2 class="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.team.title}</h2>
-      </div>
-      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.team.intro}</p>
-      <ul class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-12">
-        {
-          team.map((name) => (
-            <li class="border-t border-line py-5 font-serif text-2xl">{name}</li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <!-- FINAL CTA: OpenSpace "Start exploring" -->
-  <section class="px-4 sm:px-6">
-    <div class="band relative mx-auto max-w-4xl overflow-hidden rounded-3xl px-6 py-14 text-center ring-1 ring-white/10">
-      <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 -bottom-24 mx-auto h-48 w-[80%] rounded-[50%] bg-[#6cb2ff]/20 blur-3xl"></div>
-      <h2 class="relative font-serif text-3xl font-semibold text-[#eef1f7] sm:text-4xl">{d.cta.title}</h2>
-      <p class="relative mt-3 text-[#a9b3c9]">{d.cta.body}</p>
-      <div class="relative mt-8 flex flex-wrap justify-center gap-3 text-sm font-semibold">
-        <a href={appUrl(lang)} class="rounded-full bg-sun px-5 py-2.5 text-[#0b1020] hover:brightness-95">{d.cta.app} →</a>
-        <a href={REPO_URL} class="rounded-full border border-white/25 px-5 py-2.5 text-[#eef1f7] hover:border-white/60">{d.cta.repo}</a>
-        <a href={localePath(lang, 'learn')} class="rounded-full border border-white/25 px-5 py-2.5 text-[#eef1f7] hover:border-white/60">{d.cta.learn}</a>
       </div>
     </div>
   </section>
@@ -540,14 +532,30 @@ const bibtex = `@software{vizcachas2026navigator,
     let hovering = false;
     let visible = true;
     let pausedUntil = 0;
+    let userPaused = reduced; // pause button state; starts paused for reduced motion
     let last = 0;
     let pos = track.scrollLeft;
     const hold = (ms = RESUME_AFTER_MS) => (pausedUntil = performance.now() + ms);
 
+    // Pause / play button (visible control for the moving carousel).
+    const toggle = document.getElementById('showcase-toggle');
+    const syncToggle = () => {
+      if (!toggle) return;
+      toggle.setAttribute('aria-pressed', String(userPaused));
+      toggle.setAttribute('aria-label', userPaused ? toggle.dataset.labelPlay ?? '' : toggle.dataset.labelPause ?? '');
+      toggle.querySelector('.icon-pause')?.classList.toggle('hidden', userPaused);
+      toggle.querySelector('.icon-play')?.classList.toggle('hidden', !userPaused);
+    };
+    toggle?.addEventListener('click', () => {
+      userPaused = !userPaused;
+      syncToggle();
+    });
+    syncToggle();
+
     const step = (now: number) => {
       const dt = last ? Math.min(now - last, 100) : 0;
       last = now;
-      const running = !reduced && visible && !hovering && !document.hidden && now > pausedUntil;
+      const running = !userPaused && visible && !hovering && !document.hidden && now > pausedUntil;
       if (running) {
         const w = loopWidth();
         pos += (SPEED_PX_S * dt) / 1000;
@@ -593,6 +601,32 @@ const bibtex = `@software{vizcachas2026navigator,
   };
   openFromHash();
   window.addEventListener('hashchange', openFromHash);
+
+  // Pause/play control on each feature visual (videos and the polar-map pin).
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLButtonElement>('.motion-toggle').forEach((btn) => {
+    const stage = btn.closest('.feature-stage');
+    const video = stage?.querySelector<HTMLVideoElement>('video');
+    const pin = stage?.querySelector<HTMLElement>('.polar-pin');
+    let paused = reducedMotion;
+    const sync = () => {
+      btn.setAttribute('aria-pressed', String(paused));
+      btn.setAttribute('aria-label', paused ? btn.dataset.labelPlay ?? '' : btn.dataset.labelPause ?? '');
+      btn.querySelector('.icon-pause')?.classList.toggle('hidden', paused);
+      btn.querySelector('.icon-play')?.classList.toggle('hidden', !paused);
+    };
+    btn.addEventListener('click', () => {
+      paused = !paused;
+      if (video) {
+        video.dataset.paused = paused ? '1' : '0';
+        if (paused) video.pause();
+        else { video.preload = 'auto'; video.play().catch(() => {}); }
+      }
+      pin?.dispatchEvent(new CustomEvent('motion-toggle', { detail: { paused } }));
+      sync();
+    });
+    sync();
+  });
 
   // Copy buttons for the citation blocks.
   document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {

@@ -35,18 +35,19 @@
       },
       {
         "value": "1 h",
-        "label": "paso temporal de las efemérides de JPL Horizons"
+        "label": "posiciones del Sol y la Tierra, hora por hora"
       },
       {
         "value": "360°",
-        "label": "perfil de horizonte por sitio"
+        "label": "horizonte real en todas las direcciones"
       },
       {
         "value": "2027",
-        "label": "fechas cubiertas hasta diciembre de 2027"
+        "label": "fechas hasta diciembre de 2027"
       }
     ],
-    "ctaCode": "Código fuente"
+    "ctaCode": "Código fuente",
+    "tagline": "Una herramienta web gratuita que muestra, para cualquier sitio de alunizaje y fecha, cuándo hay Sol y cuándo se ve la Tierra."
   },
   "teaser": {
     "caption": "Lunar Landing Site Navigator dibuja el Sol y la Tierra sobre el horizonte real de cada sitio de alunizaje y te dice cuánto tiempo queda cada uno a la vista.",
@@ -62,7 +63,7 @@
     "items": [
       {
         "title": "Planificación de misiones",
-        "body": "Compará sitios y fechas lado a lado y mirá cómo un atraso cambia la energía y la comunicación.",
+        "body": "Compará sitios y fechas lado a lado en el panel Detalles y mirá cómo un atraso cambia la energía y la comunicación.",
         "cta": "Comparar dos fechas"
       },
       {
@@ -92,7 +93,7 @@
       },
       {
         "title": "Unos días lo cambian todo",
-        "body": "Con un atraso de dos semanas, el mismo lugar puede pasar de tener Sol toda la semana a no tenerlo nunca."
+        "body": "Con un atraso de dos semanas, el mismo lugar puede pasar de tener Sol toda la semana a no tenerlo en toda la semana."
       }
     ],
     "hardTitle": "Por qué hoy es difícil",
@@ -123,8 +124,8 @@
     "slides": [
       {
         "eyebrow": "Polo sur",
-        "title": "El Sol a solo 6,5° sobre el horizonte",
-        "body": "Mons Mouton, 20 de noviembre de 2026. El perfil del horizonte sale de los datos de terreno de LOLA."
+        "title": "El Sol apenas sobre el horizonte",
+        "body": "En Mons Mouton, cerca del polo sur, el Sol sube solo unos pocos grados. El perfil del horizonte sale de los datos de terreno de LOLA."
       },
       {
         "eyebrow": "Cara oculta",
@@ -133,8 +134,8 @@
       },
       {
         "eyebrow": "Comparación de escenarios",
-        "title": "168 horas de Sol, y después ninguna",
-        "body": "El mismo sitio del polo sur con dos semanas de diferencia: 168 h de Sol en una semana, 0 h en la otra."
+        "title": "Mismo lugar, dos fechas",
+        "body": "El mismo sitio del polo sur con dos semanas de diferencia: compará cuántas horas de Sol y de Tierra tiene cada fecha."
       },
       {
         "eyebrow": "Detalles",
@@ -196,7 +197,7 @@
       },
       {
         "title": "Mapas polares",
-        "body": "Elegí una misión histórica, escribí coordenadas o hacé clic directamente sobre un mapa estereográfico de cualquiera de los polos."
+        "body": "Elegí una misión histórica, escribí coordenadas o hacé clic directamente sobre un mapa estereográfico de cualquiera de los polos. Para un punto nuevo, la primera respuesta puede tardar unos segundos mientras se calculan sus datos."
       },
       {
         "title": "Abierta y para el celular",
@@ -246,7 +247,7 @@
     "softwareTitle": "Software",
     "software": "three.js, Vite, Python, NumPy, Requests, rasterio, pyproj, Matplotlib, pytest, jsonschema, FastAPI, Uvicorn, HTTPX, Astro y Tailwind CSS. Imágenes del Sol y la Tierra: archivo de Figma Community “Space Elements”.",
     "aiTitle": "Uso de IA",
-    "ai": "Usamos Claude (Anthropic) como asistente de programación, y cada cambio fue revisado por alguien del equipo. El logo del equipo se generó con ChatGPT. Las traducciones que no son al español se hicieron con IA y no fueron revisadas por hablantes nativos. Los números no los genera una IA: vienen de JPL Horizons y se verifican con tests automáticos.",
+    "ai": "Sobre la herramienta: usamos Claude (Anthropic) como asistente de programación, y cada cambio lo revisó alguien del equipo. El logo del equipo se generó con ChatGPT. Los números no los genera una IA: vienen de JPL Horizons y se verifican con tests automáticos. Sobre este sitio: los textos se redactaron con ayuda de Claude, y las versiones en portugués, francés, chino e hindi no fueron revisadas por hablantes nativos.",
     "licenseTitle": "Licencia",
     "license": "El código se publica bajo la licencia MIT. Los datos pertenecen a sus fuentes y se usan según sus propios términos.",
     "disclaimerTitle": "Aviso de independencia",
@@ -418,7 +419,7 @@
         "level": "Desde 12 años",
         "steps": [
           "Elegí Apollo 11 en la herramienta y la fecha de hoy.",
-          "Mové el control de fecha de a un día y anotá la elevación del Sol cada día.",
+          "Usá el campo de fecha (Buscar sitio y fecha) para avanzar de a un día y anotá la elevación del Sol cada día.",
           "Graficá la elevación en función de la fecha. ¿Cuánto falta para que se ponga el Sol? ¿Cuánto dura un día lunar completo?"
         ]
       },
@@ -453,5 +454,9 @@
     "back": "Volver al proyecto",
     "tryIt": "Probalo en la herramienta",
     "sourcesLabel": "Fuentes"
+  },
+  "ui": {
+    "pause": "Pausar animación",
+    "play": "Reanudar animación"
   }
 }

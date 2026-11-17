@@ -14,8 +14,7 @@ const L = d.learn;
   <section class="border-b border-line">
     <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 md:py-16">
       <a href={localePath(lang)} class="text-sm text-muted hover:text-ink">← {L.back}</a>
-      <p class="kicker mt-8">{L.kicker}</p>
-      <h1 class="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">{L.title}</h1>
+      <h1 class="mt-8 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">{L.title}</h1>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{L.lede}</p>
     </div>
   </section>
@@ -48,7 +47,7 @@ const L = d.learn;
                     <li class="flex gap-2">
                       <span class="font-mono text-ink">[{n + 1}]</span>
                       <span>
-                        {s.authors} ({s.year}). <a href={s.url} class="text-ink underline decoration-line underline-offset-2 hover:decoration-ink"><cite class="not-italic">{s.title}</cite></a>. <i>{s.venue}</i>.
+                        {s.authors} ({s.year}). <a href={s.url} class="text-ink underline decoration-line underline-offset-2 hover:decoration-ink"><cite class="not-italic">{s.title}</cite></a>{s.title.endsWith('.') ? '' : '.'} <i>{s.venue}</i>.
                       </span>
                     </li>
                   ))}
