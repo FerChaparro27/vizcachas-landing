@@ -1,0 +1,86 @@
+---
+/**
+ * South-pole mosaic (USGS SIM 3316, as used in the app) with the app's map pin dropping on a
+ * sequence of points. Positions are illustrative, not real sites. Pin style copied from the app's
+ * sky.css (.sky-map__marker): red dot, white border, drop + pulse.
+ */
+interface Props {
+  alt: string;
+  class?: string;
+}
+const { alt, class: cls } = Astro.props;
+// Points inside the circle, in % of the image box.
+const points = [
+  [52, 47], [38, 63], [65, 60], [44, 30], [71, 39], [29, 42], [57, 75], [48, 55],
+];
+---
+
+<div class:list={['polar-pin', cls]} data-points={JSON.stringify(points)}>
+  <div class="polar-pin__stage">
+    <img src="/assets/pole-south.png" alt={alt} width="720" height="702" loading="lazy" decoding="async" />
+    <span class="polar-pin__marker" style={`left:${points[0][0]}%;top:${points[0][1]}%`} aria-hidden="true"></span>
+  </div>
+</div>
+
+<style>
+  .polar-pin {
+    width: min(100%, 380px);
+    border-radius: 0.75rem;
+    background: #0b0d12;
+    padding: 1.25rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .polar-pin__stage { position: relative; }
+  .polar-pin__stage img { display: block; width: 100%; height: auto; }
+  .polar-pin__marker {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #e5202a;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.55), 0 0 10px 2px rgba(229, 32, 42, 0.8);
+    animation: polar-drop 0.25s ease-out;
+  }
+  .polar-pin__marker::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 2px solid #e5202a;
+    border-radius: 50%;
+    opacity: 0;
+    animation: polar-pulse 1.8s ease-out infinite;
+  }
+  @keyframes polar-drop { from { transform: scale(2.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  @keyframes polar-pulse { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(1.8); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .polar-pin__marker, .polar-pin__marker::after { animation: none; }
+  }
+</style>
+
+<script>
+  const STEP_MS = 2500;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('.polar-pin').forEach((root) => {
+    const marker = root.querySelector<HTMLElement>('.polar-pin__marker');
+    const points: [number, number][] = JSON.parse(root.dataset.points ?? '[]');
+    if (!marker || reduced || points.length < 2) return;
+    let i = 0;
+    let timer: number | undefined;
+    const next = () => {
+      i = (i + 1) % points.length;
+      marker.style.left = `${points[i][0]}%`;
+      marker.style.top = `${points[i][1]}%`;
+      // Replay the drop animation.
+      marker.style.animation = 'none';
+      void marker.offsetWidth;
+      marker.style.animation = '';
+    };
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && timer === undefined) timer = window.setInterval(next, STEP_MS);
+      if (!e.isIntersecting && timer !== undefined) { window.clearInterval(timer); timer = undefined; }
+    }).observe(root);
+  });
+</script>

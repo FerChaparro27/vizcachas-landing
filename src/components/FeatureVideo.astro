@@ -1,0 +1,51 @@
+---
+/**
+ * Short muted loop recorded from the app (files in public/videos/<name>.{webm,mp4,webp}).
+ * Plays only while on screen; with reduced motion it shows the poster and does not autoplay.
+ */
+interface Props {
+  name: string;
+  label: string;
+  width: number;
+  height: number;
+  class?: string;
+}
+const { name, label, width, height, class: cls } = Astro.props;
+---
+
+<video
+  class:list={['feature-video', cls]}
+  muted
+  loop
+  playsinline
+  preload="none"
+  poster={`/videos/${name}.webp`}
+  width={width}
+  height={height}
+  aria-label={label}
+>
+  <source src={`/videos/${name}.webm`} type="video/webm" />
+  <source src={`/videos/${name}.mp4`} type="video/mp4" />
+</video>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        const v = e.target as HTMLVideoElement;
+        if (e.isIntersecting) {
+          if (v.preload === 'none') v.preload = 'auto';
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      }
+    }, { threshold: 0.25 });
+    document.querySelectorAll<HTMLVideoElement>('video.feature-video').forEach((v) => io.observe(v));
+  }
+</script>
+
+<style>
+  .feature-video { display: block; height: auto; }
+</style>

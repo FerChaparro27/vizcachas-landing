@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Lunar Landing Site Navigator（月球着陆点导航器）— Vizcachas fuera de órbita",
+    "title": "Lunar Landing Site Navigator（月球着陆点导航器）— Vizcacha Fuera de Órbita",
     "description": "某个月球着陆点在指定日期能否获得阳光，并与地球保持视线通信？这是一个免费、开源的教育工具，利用公开的星历和地形数据进行计算。",
     "learnTitle": "了解其中的科学 — Lunar Landing Site Navigator",
     "learnDescription": "关于月球天空几何的教学模块：方位角与高度、地平线、极区光照以及与地球的通信，并附有课堂活动。"
@@ -270,9 +270,8 @@
   },
   "team": {
     "kicker": "团队",
-    "title": "Vizcachas fuera de órbita",
-    "intro": "一个独立的开源教育项目。我们会持续改进它，让学生、教师和航天爱好者都能用真实数据探索月球的天空。",
-    "repo": "在 GitHub 上查看代码"
+    "title": "Vizcacha Fuera de Órbita",
+    "intro": "一个独立的开源教育项目。我们会持续改进它，让学生、教师和航天爱好者都能用真实数据探索月球的天空。"
   },
   "cta": {
     "title": "开始探索",

@@ -1,6 +1,6 @@
 # Lunar Landing Site Navigator — project site
 
-Presentation and educational site for **Lunar Landing Site Navigator**, an independent, open-source educational tool by *Vizcachas fuera de órbita*.
+Presentation and educational site for **Lunar Landing Site Navigator**, an independent, open-source educational tool by *Vizcacha Fuera de Órbita*.
 
 > Independent project. Not affiliated with, endorsed by, or sponsored by NASA, JPL, Caltech, USGS or any space agency. NASA/JPL, LRO/LOLA, ASU/LROC and USGS appear only as factual credits for the public data the tool uses. Do not add agency logos, insignia or mission patches to this site.
 

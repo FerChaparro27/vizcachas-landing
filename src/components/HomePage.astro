@@ -19,11 +19,20 @@ import fTimeline from '../assets/features/timeline-countdown.png';
 import fCompare from '../assets/features/compare.png';
 import fMap from '../assets/features/map.png';
 import PhoneFrame from './PhoneFrame.astro';
+import PolarMapPin from './PolarMapPin.astro';
+import FeatureVideo from './FeatureVideo.astro';
 import im2Horizon from '../data/im2-horizon.json';
 
-const team = ['Mateo Cerri', 'Fernando Chaparro', 'Facundo Grassino', 'Estepan Porporato', 'Francisco Romero', 'Tomas Vainstub'];
+const team = ['Mateo Cerri', 'Fernando Chaparro', 'Facundo Grassino', 'Esteban Porporato', 'Francisco Romero', 'Tomas Vainstub'];
 // One crop per feature, in the same order as solution.features.
 const featureShots = [fSky, fPosition, fTimeline, fCompare, fMap, mobile];
+// Recorded loops (public/videos) for features 01–04; sizes match the recorded crops.
+const featureVideos = [
+  { name: 'sky', w: 780, h: 448 },
+  { name: 'position', w: 700, h: 375 },
+  { name: 'timeline', w: 700, h: 180 },
+  { name: 'compare', w: 700, h: 500 },
+];
 
 // "How it works" diagram: file labels and IM-2's real horizon profile (360 azimuths, LOLA 30 m DEM).
 const pipelineFiles = ['horizons · IM-2', 'horizon.json', 'ephemeris.json', 'app'];
@@ -66,7 +75,7 @@ const hardIcons = [
 const bibtex = `@software{vizcachas2026navigator,
   title  = {Lunar Landing Site Navigator},
   author = {Cerri, Mateo and Chaparro, Fernando and Grassino, Facundo and
-            Porporato, Estepan and Romero, Francisco and Vainstub, Tomas},
+            Porporato, Esteban and Romero, Francisco and Vainstub, Tomas},
   year   = {2026},
   url    = {https://vizcachasfueradeorbita.vercel.app/},
   note   = {Open-source educational tool}
@@ -318,17 +327,16 @@ const bibtex = `@software{vizcachas2026navigator,
             </div>
             <div class:list={['flex min-w-0', i % 2 === 1 ? 'md:order-1 md:justify-start' : 'md:justify-end']}>
               {i === 5 ? (
-                <PhoneFrame src={featureShots[i]} alt={f.title} class="mx-auto md:mx-0" />
+                <PhoneFrame src={featureShots[i]} alt={f.title} video="mobile" class="mx-auto md:mx-0" />
+              ) : i === 4 ? (
+                <PolarMapPin alt={f.title} class="mx-auto md:mx-0" />
               ) : (
-                <Image
-                  src={featureShots[i]}
-                  alt={f.title}
-                  widths={[360, 720]}
-                  sizes="(min-width: 768px) 520px, 100vw"
-                  class:list={[
-                    'h-auto rounded-xl bg-[#0b0d12] shadow-2xl shadow-black/25 ring-1 ring-black/10',
-                    i === 4 ? 'w-[64%] max-w-[300px]' : 'w-full max-w-[520px]',
-                  ]}
+                <FeatureVideo
+                  name={featureVideos[i].name}
+                  label={f.title}
+                  width={featureVideos[i].w}
+                  height={featureVideos[i].h}
+                  class="w-full max-w-[520px] rounded-xl bg-[#0b0d12] shadow-2xl shadow-black/25 ring-1 ring-black/10"
                 />
               )}
             </div>
@@ -411,21 +419,15 @@ const bibtex = `@software{vizcachas2026navigator,
   <section id="team" class="border-t border-line">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <p class="kicker">{d.team.kicker}</p>
-      <div class="mt-3 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <div class="flex items-center gap-4">
-          <img src="/assets/logo-vizcachas.svg" alt="" width="64" height="64" class="h-16 w-16 rounded-full border border-line bg-white p-1 dark:invert" />
-          <h2 class="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.team.title}</h2>
-        </div>
-        <a href={REPO_URL} class="self-start rounded-full border border-line bg-surface px-4 py-2 text-sm hover:border-ink md:self-auto">{d.team.repo} ↗</a>
+      <div class="mt-3 flex items-center gap-4">
+        <img src="/assets/logo-vizcachas.svg" alt="" width="64" height="64" class="h-16 w-16 rounded-full border border-line bg-white p-1 dark:invert" />
+        <h2 class="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.team.title}</h2>
       </div>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.team.intro}</p>
       <ul class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-12">
         {
-          team.map((name, i) => (
-            <li class="flex items-baseline gap-4 border-t border-line py-5">
-              <span class="font-mono text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
-              <span class="font-serif text-2xl">{name}</span>
-            </li>
+          team.map((name) => (
+            <li class="border-t border-line py-5 font-serif text-2xl">{name}</li>
           ))
         }
       </ul>

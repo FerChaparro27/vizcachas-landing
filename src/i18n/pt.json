@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Lunar Landing Site Navigator — Vizcachas fuera de órbita",
+    "title": "Lunar Landing Site Navigator — Vizcacha Fuera de Órbita",
     "description": "Um local de pouso lunar terá luz solar e linha de visada com a Terra em uma data específica? Uma ferramenta educativa, gratuita e de código aberto que calcula isso com dados públicos de efemérides e terreno.",
     "learnTitle": "Aprenda a ciência — Lunar Landing Site Navigator",
     "learnDescription": "Um módulo educativo sobre a geometria do céu lunar: azimute e elevação, horizontes, iluminação polar e comunicação com a Terra, com atividades para a sala de aula."
@@ -270,9 +270,8 @@
   },
   "team": {
     "kicker": "Equipe",
-    "title": "Vizcachas fuera de órbita",
-    "intro": "Um projeto educativo independente e de código aberto. Continuamos a melhorá-lo para que estudantes, professores e entusiastas do espaço possam explorar o céu lunar com dados reais.",
-    "repo": "Ver o código no GitHub"
+    "title": "Vizcacha Fuera de Órbita",
+    "intro": "Um projeto educativo independente e de código aberto. Continuamos a melhorá-lo para que estudantes, professores e entusiastas do espaço possam explorar o céu lunar com dados reais."
   },
   "cta": {
     "title": "Comece a explorar",

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Lunar Landing Site Navigator — Vizcachas fuera de órbita",
+    "title": "Lunar Landing Site Navigator — Vizcacha Fuera de Órbita",
     "description": "Will a lunar landing site have sunlight and a line of sight to Earth on a given date? A free, open-source educational tool that computes it from public ephemeris and terrain data.",
     "learnTitle": "Learn the science — Lunar Landing Site Navigator",
     "learnDescription": "An educational module on lunar sky geometry: azimuth and elevation, horizons, polar illumination and communication with Earth, with classroom activities."
@@ -270,9 +270,8 @@
   },
   "team": {
     "kicker": "Team",
-    "title": "Vizcachas fuera de órbita",
-    "intro": "An independent, open-source educational project. We keep improving it so students, teachers and space enthusiasts can explore the lunar sky with real data.",
-    "repo": "View the code on GitHub"
+    "title": "Vizcacha Fuera de Órbita",
+    "intro": "An independent, open-source educational project. We keep improving it so students, teachers and space enthusiasts can explore the lunar sky with real data."
   },
   "cta": {
     "title": "Start exploring",

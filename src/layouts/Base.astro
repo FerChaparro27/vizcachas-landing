@@ -71,5 +71,33 @@ const ogImage = new URL('/og.png', site).href;
       <slot />
     </main>
     <Footer lang={lang} />
+    <script>
+      import { APP_URL } from '../i18n';
+      // The app's date picker starts near the current date (min was 2026-11-17 when this was written).
+      // Scenario links are written with example dates
+      // (Nov 2026); move them forward by whole synodic months so they stay valid and keep the same
+      // Sun phase. Applied in the browser, so it works without rebuilding the site.
+      const SYNODIC_MS = 29.530589 * 86400e3;
+      const HOUR = 3600e3;
+      const minStart = Date.now() + 24 * HOUR;
+      const iso = (ms: number) => new Date(Math.round(ms / HOUR) * HOUR).toISOString().slice(0, 16) + 'Z';
+      document.querySelectorAll<HTMLAnchorElement>(`a[href^="${APP_URL}"]`).forEach((a) => {
+        const url = new URL(a.href);
+        const t = url.searchParams.get('t');
+        if (!t) return;
+        const base = Date.parse(t);
+        if (Number.isNaN(base) || base >= minStart) return;
+        const shift = Math.ceil((minStart - base) / SYNODIC_MS) * SYNODIC_MS;
+        url.searchParams.set('t', iso(base + shift));
+        const c = url.searchParams.get('c');
+        if (c) {
+          url.searchParams.set('c', c.split(',').map((s) => {
+            const [site, when] = s.split('@');
+            return `${site}@${iso(Date.parse(when) + shift)}`;
+          }).join(','));
+        }
+        a.href = url.toString();
+      });
+    </script>
   </body>
 </html>
