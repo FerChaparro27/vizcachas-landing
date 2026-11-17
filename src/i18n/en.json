@@ -23,7 +23,6 @@
     "module": "Educational module"
   },
   "hero": {
-    "badge": "Open source · Educational · Free",
     "title": "Lunar Landing Site Navigator",
     "question": "If I land at this place on the Moon on this date, will I have Sun, and will I be able to talk to Earth?",
     "lede": "Near the lunar south pole the Sun and the Earth barely rise above the horizon, and any mountain can hide them. Our open tool takes a landing site and a date, finds where the Sun and the Earth are, draws them over the local horizon, and shows when there is power and when there is communication.",
@@ -47,16 +46,14 @@
         "label": "dates covered through December 2027"
       }
     ],
-    "ctaCode": "Source code",
-    "ctaCite": "Cite"
+    "ctaCode": "Source code"
   },
   "teaser": {
     "caption": "Lunar Landing Site Navigator draws the Sun and the Earth over the real horizon of each landing site, and tells you how long each one stays up.",
     "panels": [
       "Sky view at Mons Mouton (84.8° S)",
       "Details panel",
-      "Polar map",
-      "On a phone"
+      "Polar map"
     ]
   },
   "audience": {
@@ -117,7 +114,8 @@
         "caption": "General-purpose map projections distort the polar regions, so relief, light and shadow are difficult to read exactly where missions are heading."
       }
     ],
-    "conclusion": "The information exists, but no single view answers the question directly. We wanted one screen, one question, and numbers whose origin anyone can check."
+    "conclusionLead": "The information exists, ",
+    "conclusionEmphasis": "but it was hard to use."
   },
   "showcase": {
     "kicker": "See what is possible",
@@ -156,8 +154,8 @@
   },
   "solution": {
     "kicker": "Our solution",
-    "title": "One screen, one question, traceable numbers",
-    "intro": "Pick a landing site and a date. The tool shows the Sun and the Earth over the local horizon, the Sun's elevation, the hours of sunlight and of Earth visibility in the coming days, and a countdown to the next sunset or Earthset.",
+    "titleLead": "One screen, one question, ",
+    "titleEmphasis": "traceable numbers",
     "pipelineTitle": "How it works",
     "pipeline": [
       {

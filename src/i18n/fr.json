@@ -23,7 +23,6 @@
     "module": "Module pédagogique"
   },
   "hero": {
-    "badge": "Open source · Pédagogique · Gratuit",
     "title": "Lunar Landing Site Navigator",
     "question": "Si je me pose à cet endroit de la Lune à cette date, aurai-je du Soleil et pourrai-je parler avec la Terre ?",
     "lede": "Près du pôle Sud lunaire, le Soleil et la Terre dépassent à peine l'horizon, et la moindre montagne peut les cacher. Notre outil ouvert prend un site d'alunissage et une date, calcule où se trouvent le Soleil et la Terre, les dessine au-dessus de l'horizon local et montre quand il y a de l'énergie et quand il y a de la communication.",
@@ -47,16 +46,14 @@
         "label": "dates couvertes jusqu'en décembre 2027"
       }
     ],
-    "ctaCode": "Code source",
-    "ctaCite": "Citer"
+    "ctaCode": "Code source"
   },
   "teaser": {
     "caption": "Lunar Landing Site Navigator dessine le Soleil et la Terre au-dessus de l’horizon réel de chaque site d’alunissage et indique combien de temps chacun reste visible.",
     "panels": [
       "Vue du ciel à Mons Mouton (84,8° S)",
       "Panneau de détails",
-      "Carte polaire",
-      "Sur mobile"
+      "Carte polaire"
     ]
   },
   "audience": {
@@ -117,7 +114,8 @@
         "caption": "Les projections cartographiques généralistes déforment les régions polaires : relief, lumière et ombre y sont difficiles à lire, précisément là où vont les missions."
       }
     ],
-    "conclusion": "L’information existe, mais aucune vue ne répond directement à la question. Nous voulions un écran, une question et des chiffres dont chacun peut vérifier l’origine."
+    "conclusionLead": "L’information existe, ",
+    "conclusionEmphasis": "mais elle était difficile à utiliser."
   },
   "showcase": {
     "kicker": "Ce qui est possible",
@@ -156,8 +154,8 @@
   },
   "solution": {
     "kicker": "Notre solution",
-    "title": "Un écran, une question, des chiffres traçables",
-    "intro": "Choisissez un site d'alunissage et une date. L'outil montre le Soleil et la Terre au-dessus de l'horizon local, la hauteur du Soleil, les heures d'ensoleillement et de visibilité de la Terre pour les jours à venir, et un compte à rebours jusqu'au prochain coucher du Soleil ou de la Terre.",
+    "titleLead": "Un écran, une question, ",
+    "titleEmphasis": "des chiffres traçables",
     "pipelineTitle": "Comment ça marche",
     "pipeline": [
       {

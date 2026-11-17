@@ -23,7 +23,6 @@
     "module": "Módulo educativo"
   },
   "hero": {
-    "badge": "Código aberto · Educativa · Gratuita",
     "title": "Lunar Landing Site Navigator",
     "question": "Se eu pousar neste lugar da Lua nesta data, terei Sol e conseguirei falar com a Terra?",
     "lede": "Perto do polo sul lunar, o Sol e a Terra mal aparecem acima do horizonte, e qualquer montanha pode escondê-los. Nossa ferramenta aberta recebe um local de pouso e uma data, calcula onde estão o Sol e a Terra, desenha os dois sobre o horizonte local e mostra quando há energia e quando há comunicação.",
@@ -47,16 +46,14 @@
         "label": "datas cobertas até dezembro de 2027"
       }
     ],
-    "ctaCode": "Código-fonte",
-    "ctaCite": "Citar"
+    "ctaCode": "Código-fonte"
   },
   "teaser": {
     "caption": "O Lunar Landing Site Navigator desenha o Sol e a Terra sobre o horizonte real de cada local de pouso e mostra por quanto tempo cada um fica visível.",
     "panels": [
       "Vista do céu em Mons Mouton (84,8° S)",
       "Painel de detalhes",
-      "Mapa polar",
-      "No celular"
+      "Mapa polar"
     ]
   },
   "audience": {
@@ -117,7 +114,8 @@
         "caption": "Projeções de mapa de uso geral distorcem as regiões polares, então relevo, luz e sombra são difíceis de ler justamente onde as missões estão indo."
       }
     ],
-    "conclusion": "A informação existe, mas nenhuma visualização responde à pergunta diretamente. Queríamos uma tela, uma pergunta e números cuja origem qualquer pessoa possa verificar."
+    "conclusionLead": "A informação existe, ",
+    "conclusionEmphasis": "mas era difícil de usar."
   },
   "showcase": {
     "kicker": "Veja o que é possível",
@@ -156,8 +154,8 @@
   },
   "solution": {
     "kicker": "Nossa solução",
-    "title": "Uma tela, uma pergunta, números rastreáveis",
-    "intro": "Escolha um local de pouso e uma data. A ferramenta mostra o Sol e a Terra sobre o horizonte local, a elevação do Sol, as horas de luz solar e de Terra visível nos próximos dias e uma contagem regressiva até o próximo pôr do Sol ou da Terra.",
+    "titleLead": "Uma tela, uma pergunta, ",
+    "titleEmphasis": "números rastreáveis",
     "pipelineTitle": "Como funciona",
     "pipeline": [
       {

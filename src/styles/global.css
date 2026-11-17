@@ -87,6 +87,16 @@ body {
   color: #eef1f7;
 }
 .dark .band { background: radial-gradient(120% 80% at 50% 0%, rgba(108, 178, 255, 0.10), transparent 60%), #060913; }
+/* Highlighter band behind a key phrase. */
+.marker {
+  background: linear-gradient(transparent 58%, color-mix(in srgb, var(--sun) 70%, transparent) 58%, color-mix(in srgb, var(--sun) 70%, transparent) 92%, transparent 92%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding-inline: 0.08em;
+}
+.dark .marker {
+  background: linear-gradient(transparent 58%, color-mix(in srgb, var(--sun) 35%, transparent) 58%, color-mix(in srgb, var(--sun) 35%, transparent) 92%, transparent 92%);
+}
 .carousel-btn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 2.5rem; height: 2.5rem; border-radius: 9999px;

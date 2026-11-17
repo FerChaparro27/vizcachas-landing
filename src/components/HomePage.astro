@@ -18,10 +18,21 @@ import fPosition from '../assets/features/position.png';
 import fTimeline from '../assets/features/timeline-countdown.png';
 import fCompare from '../assets/features/compare.png';
 import fMap from '../assets/features/map.png';
+import PhoneFrame from './PhoneFrame.astro';
+import im2Horizon from '../data/im2-horizon.json';
 
 const team = ['Mateo Cerri', 'Fernando Chaparro', 'Facundo Grassino', 'Estepan Porporato', 'Francisco Romero', 'Tomas Vainstub'];
 // One crop per feature, in the same order as solution.features.
 const featureShots = [fSky, fPosition, fTimeline, fCompare, fMap, mobile];
+
+// "How it works" diagram: file labels and IM-2's real horizon profile (360 azimuths, LOLA 30 m DEM).
+const pipelineFiles = ['horizons · IM-2', 'horizon.json', 'ephemeris.json', 'app'];
+const elev: number[] = im2Horizon.elevation_deg;
+const EL_MIN = -2, EL_MAX = 5;
+const yOf = (el: number) => (100 - ((el - EL_MIN) / (EL_MAX - EL_MIN)) * 90).toFixed(2);
+const horizonZeroY = yOf(0);
+const horizonLine = 'M' + elev.map((el, az) => `${az},${yOf(el)}`).join(' L');
+const horizonArea = `${horizonLine} L359,100 L0,100 Z`;
 
 // Teaser figure panels (a)–(d), Nerfies-style.
 const panels = [
@@ -63,20 +74,13 @@ const bibtex = `@software{vizcachas2026navigator,
 ---
 
 <Base lang={lang} title={d.meta.title} description={d.meta.description}>
-  <!-- HERO: centered, Nerfies-style (title, authors, link buttons) with Shadowmap-like pill CTAs -->
-  <section class="px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24">
-    <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
-      <span class="h-1.5 w-1.5 rounded-full bg-sun"></span>{d.hero.badge}
-    </p>
-    <h1 class="mx-auto mt-6 max-w-4xl font-serif text-[2.6rem] leading-[1.04] font-semibold tracking-tight text-balance sm:text-6xl md:text-7xl">
+  <!-- HERO: centered title, the question, and the three main links -->
+  <section class="px-4 pt-20 pb-14 text-center sm:px-6 md:pt-28">
+    <h1 class="mx-auto max-w-4xl font-serif text-[2.6rem] leading-[1.04] font-semibold tracking-tight text-balance sm:text-6xl md:text-7xl">
       {d.hero.title}
     </h1>
     <p class="mx-auto mt-6 max-w-2xl font-serif text-xl leading-snug text-balance italic sm:text-2xl">“{d.hero.question}”</p>
-    <p class="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-muted">
-      {team.map((n, i) => <><span class="whitespace-nowrap text-ink">{n}</span>{i < team.length - 1 && <span aria-hidden="true"> · </span>}</>)}
-      <br /><span class="font-mono text-xs tracking-wide">Vizcachas fuera de órbita</span>
-    </p>
-    <ul class="mt-8 flex flex-wrap justify-center gap-2.5 text-sm font-medium">
+    <ul class="mt-10 flex flex-wrap justify-center gap-2.5 text-sm font-medium">
       <li>
         <a href={appUrl(lang)} class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-paper hover:opacity-90">
           {d.hero.ctaApp} <span aria-hidden="true">→</span>
@@ -94,12 +98,6 @@ const bibtex = `@software{vizcachas2026navigator,
           {d.hero.ctaLearn}
         </a>
       </li>
-      <li>
-        <a href="#cite" class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 hover:border-ink">
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 7h4v4H8c0 2 1 3 3 3M14 7h4v4h-3c0 2 1 3 3 3"/></svg>
-          {d.hero.ctaCite}
-        </a>
-      </li>
     </ul>
   </section>
 
@@ -107,7 +105,7 @@ const bibtex = `@software{vizcachas2026navigator,
   <section class="band">
     <div class="mx-auto max-w-6xl px-4 pt-10 pb-12 sm:px-6">
       <figure>
-        <div class="grid gap-3 md:grid-cols-[1fr_1fr_0.62fr]">
+        <div class="grid gap-3 md:grid-cols-2">
           {
             panels.map((p, i) => (
               <div class:list={['relative overflow-hidden rounded-xl ring-1 ring-white/10', p.cls]}>
@@ -125,20 +123,17 @@ const bibtex = `@software{vizcachas2026navigator,
               </div>
             ))
           }
-          <div class="relative hidden overflow-hidden rounded-xl ring-1 ring-white/10 md:col-start-3 md:row-span-2 md:row-start-1 md:block">
-            <Image src={mobile} alt={d.teaser.panels[3]} widths={[240, 480]} sizes="240px" class="h-full w-full object-cover object-top" />
-            <span class="absolute bottom-2 left-2 rounded-full bg-black/70 px-2.5 py-1 font-mono text-[0.7rem] text-white">(d) {d.teaser.panels[3]}</span>
-          </div>
         </div>
         <figcaption class="mx-auto mt-5 max-w-3xl text-center text-sm leading-relaxed text-[#a9b3c9]">{d.teaser.caption}</figcaption>
       </figure>
 
-      <dl class="mt-10 grid grid-cols-2 gap-y-6 border-t border-white/10 pt-8 md:grid-cols-4">
+      <!-- Number above label; flex-col-reverse + justify-end keeps every number on the same top line. -->
+      <dl class="mt-12 grid grid-cols-2 gap-y-8 border-t border-white/10 pt-8 md:grid-cols-4">
         {
-          d.hero.stats.map((s) => (
-            <div class="flex flex-col-reverse px-2 text-center">
-              <dt class="mt-1 text-xs leading-snug text-[#a9b3c9]">{s.label}</dt>
-              <dd class="font-mono text-3xl text-[#eef1f7]">{s.value}</dd>
+          d.hero.stats.map((s, i) => (
+            <div class:list={['flex flex-col-reverse justify-end border-white/10 px-5', i % 2 === 1 && 'border-l', i > 0 && 'md:border-l']}>
+              <dt class="mt-2 text-sm leading-snug text-[#a9b3c9]">{s.label}</dt>
+              <dd class="font-mono text-4xl leading-none text-[#eef1f7]">{s.value}</dd>
             </div>
           ))
         }
@@ -158,7 +153,7 @@ const bibtex = `@software{vizcachas2026navigator,
               {audience[i].img ? (
                 <Image src={audience[i].img!} alt="" width={720} class:list={['h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]', audience[i].pos]} />
               ) : (
-                <div class="flex h-full items-center justify-center bg-surface-2 p-6">
+                <div class="flex h-full items-center justify-center bg-surface-2 p-6 transition duration-500 group-hover:scale-[1.03]">
                   <svg viewBox="0 0 200 110" class="h-full w-auto" aria-hidden="true">
                     <rect x="0" y="80" width="200" height="30" fill="var(--line)" />
                     <line x1="0" y1="80" x2="200" y2="80" stroke="var(--ink-muted)" />
@@ -225,7 +220,9 @@ const bibtex = `@software{vizcachas2026navigator,
           }
         </ul>
       </div>
-      <p class="mx-auto mt-20 max-w-3xl text-center font-serif text-2xl leading-snug text-balance sm:text-3xl">{d.problem.conclusion}</p>
+      <p class="mx-auto mt-24 max-w-4xl text-center font-serif text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl">
+        {d.problem.conclusionLead}<span class="marker">{d.problem.conclusionEmphasis}</span>
+      </p>
     </div>
   </section>
 
@@ -281,8 +278,9 @@ const bibtex = `@software{vizcachas2026navigator,
   <!-- SOLUTION: how it works -->
   <section id="solution" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
     <p class="kicker">{d.solution.kicker}</p>
-    <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.solution.title}</h2>
-    <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.solution.intro}</p>
+    <h2 class="mt-4 max-w-4xl font-serif text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-6xl">
+      {d.solution.titleLead}<span class="text-earth-ink">{d.solution.titleEmphasis}</span>
+    </h2>
 
     <!-- Features: alternating rows, text on one side and a crop of that feature on the other. -->
     <h3 class="mt-20 font-serif text-2xl font-semibold sm:text-3xl">{d.solution.featuresTitle}</h3>
@@ -296,39 +294,75 @@ const bibtex = `@software{vizcachas2026navigator,
               <p class="mt-3 max-w-md text-lg leading-relaxed text-muted">{f.body}</p>
             </div>
             <div class:list={['flex min-w-0', i % 2 === 1 ? 'md:order-1 md:justify-start' : 'md:justify-end']}>
-              <Image
-                src={featureShots[i]}
-                alt={f.title}
-                widths={[360, 720]}
-                sizes="(min-width: 768px) 520px, 100vw"
-                class:list={[
-                  'h-auto rounded-xl bg-[#0b0d12] shadow-2xl shadow-black/25 ring-1 ring-black/10',
-                  i === 4 ? 'w-[64%] max-w-[300px]' : i === 5 ? 'w-[48%] max-w-[230px]' : 'w-full max-w-[520px]',
-                ]}
-              />
+              {i === 5 ? (
+                <PhoneFrame src={featureShots[i]} alt={f.title} class="mx-auto md:mx-0" />
+              ) : (
+                <Image
+                  src={featureShots[i]}
+                  alt={f.title}
+                  widths={[360, 720]}
+                  sizes="(min-width: 768px) 520px, 100vw"
+                  class:list={[
+                    'h-auto rounded-xl bg-[#0b0d12] shadow-2xl shadow-black/25 ring-1 ring-black/10',
+                    i === 4 ? 'w-[64%] max-w-[300px]' : 'w-full max-w-[520px]',
+                  ]}
+                />
+              )}
             </div>
           </div>
         ))
       }
     </div>
 
-    <!-- Pipeline: a data line with one node per stage (vertical on phones). -->
+    <!-- Pipeline: data-flow diagram. Each stage shows the real thing it produces (IM-2 data from the app repo). -->
     <h3 class="mt-16 font-serif text-2xl font-semibold sm:text-3xl">{d.solution.pipelineTitle}</h3>
-    <ol class="relative mt-8 grid gap-8 border-l border-line pl-6 md:grid-cols-4 md:gap-8 md:border-l-0 md:pt-9 md:pl-0">
-      <span aria-hidden="true" class="absolute top-[7px] right-0 left-0 hidden h-px bg-line md:block"></span>
+    <ol class="mt-8 grid gap-12 md:grid-cols-4 md:gap-10">
       {
         d.solution.pipeline.map((s, i) => (
-          <li class="relative">
-            <span
-              aria-hidden="true"
-              class:list={[
-                'absolute top-1 -left-[31px] h-3.5 w-3.5 rounded-full ring-4 ring-paper md:-top-9 md:left-0',
-                i < 2 ? 'bg-earth' : i === 2 ? 'bg-sun' : 'bg-ink',
-              ]}
-            ></span>
-            <span class="font-mono text-[0.7rem] tracking-wider text-muted uppercase">{s.tag}</span>
+          <li class="relative min-w-0">
+            <div class="overflow-hidden rounded-xl bg-[#0b0d12] ring-1 ring-black/10 shadow-xl shadow-black/15">
+              <div class="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
+                <span class:list={['h-2 w-2 rounded-full', i < 2 ? 'bg-[#6cb2ff]' : i === 2 ? 'bg-[#ffc54d]' : 'bg-[#eef1f7]']}></span>
+                <span class="truncate font-mono text-[0.68rem] text-[#a9b3c9]">{pipelineFiles[i]}</span>
+              </div>
+              <div class="h-36 overflow-hidden">
+                {i === 0 && (
+                  <pre class="h-full p-3 font-mono text-[0.68rem] leading-relaxed text-[#eef1f7]"><span class="text-[#a9b3c9]">2026-11-20 12:00 UTC</span>
+<span class="text-[#ffc54d]">Sun  </span> az  18.44°  el +6.49°
+<span class="text-[#6cb2ff]">Earth</span> az 323.26°  el +7.98°
+<span class="text-[#a9b3c9]">2026-11-20 13:00 UTC</span>
+…</pre>
+                )}
+                {i === 1 && (
+                  <svg viewBox="0 0 360 120" preserveAspectRatio="none" class="h-full w-full" role="img" aria-label="IM-2 horizon profile, 360 azimuths">
+                    <line x1="0" y1={horizonZeroY} x2="360" y2={horizonZeroY} stroke="#2c3758" stroke-dasharray="3 3" />
+                    <path d={horizonArea} fill="#6cb2ff" fill-opacity="0.18" />
+                    <path d={horizonLine} fill="none" stroke="#6cb2ff" stroke-width="1.6" vector-effect="non-scaling-stroke" />
+                    {['N', 'E', 'S', 'W'].map((c, k) => (
+                      <text x={k * 90 + 4} y="114" fill="#a9b3c9" font-size="10" font-family="var(--font-mono)">{c}</text>
+                    ))}
+                  </svg>
+                )}
+                {i === 2 && (
+                  <pre class="h-full p-3 font-mono text-[0.68rem] leading-relaxed text-[#eef1f7]">{'{'} <span class="text-[#6cb2ff]">"site_id"</span>: "intuitive-machines-2",
+  <span class="text-[#6cb2ff]">"time"</span>: {'{'} "step_s": 3600,
+            "count": 10224 {'}'},
+  <span class="text-[#ffc54d]">"sun"</span>: {'{'} "azimuth_deg":
+    [255.862, 255.358, …] {'}'} {'}'}</pre>
+                )}
+                {i === 3 && (
+                  <Image src={fSky} alt="" widths={[300, 600]} sizes="300px" class="h-full w-full object-cover object-[50%_70%]" />
+                )}
+              </div>
+            </div>
+            {i < 3 && (
+              <span aria-hidden="true" class="absolute left-1/2 -bottom-9 -translate-x-1/2 text-xl text-muted md:top-[4.2rem] md:-right-8 md:bottom-auto md:left-auto md:translate-x-0">
+                <span class="md:hidden">↓</span><span class="hidden md:inline">→</span>
+              </span>
+            )}
+            <p class="mt-4 font-mono text-[0.7rem] tracking-wider text-muted uppercase">{s.tag}</p>
             <p class="mt-1 font-semibold">{s.title}</p>
-            <p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
+            <p class="mt-1.5 text-sm leading-relaxed text-muted">{s.body}</p>
           </li>
         ))
       }

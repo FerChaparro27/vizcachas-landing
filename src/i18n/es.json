@@ -23,7 +23,6 @@
     "module": "Módulo didáctico"
   },
   "hero": {
-    "badge": "Código abierto · Educativa · Gratuita",
     "title": "Lunar Landing Site Navigator",
     "question": "Si alunizo en este lugar de la Luna en esta fecha, ¿voy a tener Sol y voy a poder hablar con la Tierra?",
     "lede": "Cerca del polo sur lunar el Sol y la Tierra apenas asoman sobre el horizonte, y cualquier montaña los tapa. Nuestra herramienta abierta toma un sitio y una fecha, calcula dónde están el Sol y la Tierra, los dibuja sobre el horizonte del lugar y muestra cuándo hay energía y cuándo hay comunicación.",
@@ -47,16 +46,14 @@
         "label": "fechas cubiertas hasta diciembre de 2027"
       }
     ],
-    "ctaCode": "Código fuente",
-    "ctaCite": "Citar"
+    "ctaCode": "Código fuente"
   },
   "teaser": {
     "caption": "Lunar Landing Site Navigator dibuja el Sol y la Tierra sobre el horizonte real de cada sitio de alunizaje y te dice cuánto tiempo queda cada uno a la vista.",
     "panels": [
       "Vista del cielo en Mons Mouton (84,8° S)",
       "Panel de detalles",
-      "Mapa polar",
-      "En el celular"
+      "Mapa polar"
     ]
   },
   "audience": {
@@ -117,7 +114,8 @@
         "caption": "Las proyecciones de mapa de uso general deforman las regiones polares, así que el relieve, la luz y la sombra cuestan leerse justo donde van las misiones."
       }
     ],
-    "conclusion": "La información existe, pero ninguna vista responde la pregunta de forma directa. Queríamos una pantalla, una pregunta y números cuyo origen cualquiera pueda verificar."
+    "conclusionLead": "La información existe, ",
+    "conclusionEmphasis": "pero era difícil de usar."
   },
   "showcase": {
     "kicker": "Mirá lo que es posible",
@@ -156,8 +154,8 @@
   },
   "solution": {
     "kicker": "Nuestra solución",
-    "title": "Una pantalla, una pregunta, números trazables",
-    "intro": "Elegí un sitio de alunizaje y una fecha. La herramienta muestra el Sol y la Tierra sobre el horizonte del lugar, la elevación del Sol, las horas de Sol y de Tierra visible en los próximos días, y una cuenta regresiva hasta la próxima puesta de Sol o de Tierra.",
+    "titleLead": "Una pantalla, una pregunta, ",
+    "titleEmphasis": "números trazables",
     "pipelineTitle": "Cómo funciona",
     "pipeline": [
       {
