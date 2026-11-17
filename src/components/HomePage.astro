@@ -1,0 +1,291 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import { t, appUrl, localePath, REPO_URL, CHALLENGE_URL, type Locale } from '../i18n';
+import skyPole from '../assets/shots/app-sky-pole.png';
+import details from '../assets/shots/app-details.png';
+import map from '../assets/shots/app-map.png';
+import mobile from '../assets/shots/app-mobile.png';
+import hz02 from '../assets/shots/02-horizons-buscar-luna.png';
+import hz07 from '../assets/shots/07-horizons-resultado-tabla.png';
+import mt12 from '../assets/shots/12-moontrek-shackleton.png';
+
+interface Props { lang: Locale }
+const { lang } = Astro.props;
+const d = t(lang);
+const hardShots = [hz02, hz07, mt12];
+const team = [
+  'Mateo Cerri',
+  'Fernando Chaparro',
+  'Facundo Grassino',
+  'Estepan Porporato',
+  'Francisco Romero',
+  'Tomas Vainstub',
+];
+const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
+---
+
+<Base lang={lang} title={d.meta.title} description={d.meta.description}>
+  <!-- HERO -->
+  <section class="border-b border-line">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+      <div>
+        <a
+          href={CHALLENGE_URL}
+          class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted hover:text-ink"
+        >
+          <span class="h-1.5 w-1.5 rounded-full bg-sun"></span>
+          {d.hero.badge}
+        </a>
+        <h1 class="mt-6 font-serif text-4xl leading-[1.1] font-semibold tracking-tight sm:text-5xl">
+          {d.hero.title}
+        </h1>
+        <p class="mt-5 border-l-2 border-sun pl-4 font-serif text-xl leading-snug italic sm:text-2xl">
+          “{d.hero.question}”
+        </p>
+        <p class="mt-5 max-w-xl leading-relaxed text-muted">{d.hero.lede}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={appUrl(lang)} class="rounded bg-ink px-5 py-2.5 font-medium text-paper hover:opacity-90">
+            {d.hero.ctaApp} ↗
+          </a>
+          <a
+            href={localePath(lang, 'learn')}
+            class="rounded border border-line bg-surface px-5 py-2.5 font-medium hover:border-ink"
+          >
+            {d.hero.ctaLearn} →
+          </a>
+        </div>
+      </div>
+      <figure>
+        <div class="overflow-hidden rounded-lg border border-line bg-black shadow-xl shadow-black/10">
+          <Image
+            src={skyPole}
+            alt={d.hero.figure}
+            widths={[640, 960, 1440]}
+            sizes="(min-width: 1024px) 560px, 100vw"
+            loading="eager"
+            class="h-auto w-full"
+          />
+        </div>
+        <figcaption class="figure-caption mt-3"><b>Fig. 1.</b> {d.hero.figure}</figcaption>
+      </figure>
+    </div>
+    <dl class="mx-auto grid max-w-6xl grid-cols-2 border-t border-line md:grid-cols-4">
+      {
+        d.hero.stats.map((s, i) => (
+          <div class:list={[
+            'flex flex-col-reverse justify-end border-line px-4 py-6 sm:px-6',
+            i > 0 && 'md:border-l',
+            i % 2 === 1 && 'border-l',
+            i >= 2 && 'border-t md:border-t-0',
+          ]}>
+            <dt class="mt-1 text-sm text-muted">{s.label}</dt>
+            <dd class="font-mono text-3xl font-medium">{s.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <p class="kicker">{d.problem.kicker}</p>
+    <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.problem.title}</h2>
+    <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.problem.intro}</p>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {
+        d.problem.points.map((p, i) => (
+          <article class="rounded-lg border border-line bg-surface p-6">
+            <span class="font-mono text-sm text-muted">0{i + 1}</span>
+            <h3 class="mt-2 font-serif text-xl font-semibold">{p.title}</h3>
+            <p class="mt-2 leading-relaxed text-muted">{p.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <h3 class="mt-20 font-serif text-2xl font-semibold">{d.problem.hardTitle}</h3>
+    <p class="mt-3 max-w-3xl leading-relaxed text-muted">{d.problem.hardIntro}</p>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {
+        d.problem.hard.map((h, i) => (
+          <figure>
+            <div class="aspect-[4/3] overflow-hidden rounded-lg border border-line bg-surface-2">
+              <Image src={hardShots[i]} alt={h.caption} width={720} class="h-full w-full object-cover object-top" />
+            </div>
+            <figcaption class="figure-caption mt-3">
+              <b>Fig. {i + 2}. {h.tool}.</b> {h.caption}
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+    <p class="mt-10 max-w-3xl border-l-2 border-earth pl-4 font-serif text-xl leading-snug">{d.problem.conclusion}</p>
+  </section>
+
+  <!-- SOLUTION -->
+  <section id="solution" class="border-y border-line bg-surface">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <p class="kicker">{d.solution.kicker}</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.solution.title}</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.solution.intro}</p>
+
+      <!-- Pipeline -->
+      <h3 class="mt-14 font-serif text-2xl font-semibold">{d.solution.pipelineTitle}</h3>
+      <ol class="mt-6 grid gap-3 md:grid-cols-4 md:gap-0">
+        {
+          d.solution.pipeline.map((s, i) => (
+            <li class="relative flex">
+              <div class:list={[
+                'flex-1 rounded-lg border bg-paper p-5',
+                i < 2 ? 'border-earth/60' : i === 2 ? 'border-sun/70' : 'border-ink/40',
+              ]}>
+                <span class="font-mono text-[0.7rem] tracking-wider text-muted uppercase">{s.tag}</span>
+                <p class="mt-1 font-semibold">{s.title}</p>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
+              </div>
+              {i < 3 && (
+                <span aria-hidden="true" class="hidden w-6 shrink-0 items-center justify-center text-muted md:flex">
+                  {i === 0 ? '+' : '→'}
+                </span>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-4 text-sm text-muted">{d.solution.pipelineNote}</p>
+
+      <!-- Features -->
+      <h3 class="mt-16 font-serif text-2xl font-semibold">{d.solution.featuresTitle}</h3>
+      <div class="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          d.solution.features.map((f) => (
+            <div class="border-t border-line pt-4">
+              <h4 class="font-semibold">{f.title}</h4>
+              <p class="mt-1.5 leading-relaxed text-muted">{f.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Screenshots -->
+      <div class="mt-16 grid gap-6 lg:grid-cols-[1.4fr_1fr_0.55fr] lg:items-start">
+        <figure>
+          <div class="overflow-hidden rounded-lg border border-line bg-black">
+            <Image src={details} alt={d.solution.shots[0]} widths={[640, 1024, 1440]} sizes="(min-width: 1024px) 520px, 100vw" class="h-auto w-full" />
+          </div>
+          <figcaption class="figure-caption mt-3"><b>Fig. 5.</b> {d.solution.shots[0]}</figcaption>
+        </figure>
+        <figure>
+          <div class="overflow-hidden rounded-lg border border-line bg-black">
+            <Image src={map} alt={d.solution.shots[1]} widths={[480, 960]} sizes="(min-width: 1024px) 380px, 100vw" class="h-auto w-full" />
+          </div>
+          <figcaption class="figure-caption mt-3"><b>Fig. 6.</b> {d.solution.shots[1]}</figcaption>
+        </figure>
+        <figure class="mx-auto max-w-[240px] lg:max-w-none">
+          <div class="overflow-hidden rounded-[1.25rem] border-4 border-ink/80 bg-black">
+            <Image src={mobile} alt={d.solution.shots[2]} widths={[240, 480]} sizes="240px" class="h-auto w-full" />
+          </div>
+          <figcaption class="figure-caption mt-3"><b>Fig. 7.</b> {d.solution.shots[2]}</figcaption>
+        </figure>
+      </div>
+
+      <!-- Validation & limits -->
+      <div class="mt-16 grid gap-6 md:grid-cols-2">
+        <div class="rounded-lg border border-line bg-paper p-6">
+          <h3 class="flex items-center gap-2 font-serif text-xl font-semibold">
+            <span class="text-ok" aria-hidden="true">✓</span>{d.solution.validationTitle}
+          </h3>
+          <p class="mt-2 leading-relaxed text-muted">{d.solution.validationBody}</p>
+        </div>
+        <div class="rounded-lg border border-line bg-paper p-6">
+          <h3 class="flex items-center gap-2 font-serif text-xl font-semibold">
+            <span class="text-sun-ink" aria-hidden="true">!</span>{d.solution.limitsTitle}
+          </h3>
+          <p class="mt-2 leading-relaxed text-muted">{d.solution.limitsBody}</p>
+        </div>
+      </div>
+
+      <div class="mt-12 flex flex-col items-start justify-between gap-4 rounded-lg bg-ink p-6 text-paper sm:flex-row sm:items-center sm:p-8">
+        <p class="font-serif text-xl">{d.solution.learnTeaser}</p>
+        <a href={localePath(lang, 'learn')} class="shrink-0 rounded bg-sun px-5 py-2.5 font-medium text-[#0b1020] hover:opacity-90">
+          {d.solution.learnCta} →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA & CREDITS -->
+  <section id="data" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <p class="kicker">{d.data.kicker}</p>
+    <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.data.title}</h2>
+    <div class="mt-10 overflow-hidden rounded-lg border border-line">
+      <table class="w-full text-left text-sm">
+        <tbody>
+          {
+            d.data.sources.map((s) => (
+              <tr class="border-b border-line last:border-0 even:bg-surface">
+                <th scope="row" class="px-4 py-3 align-top font-medium">
+                  <a href={s.url} class="underline decoration-line underline-offset-4 hover:decoration-ink">{s.name}</a>
+                  <span class="mt-0.5 block font-mono text-xs font-normal text-muted">{s.org}</span>
+                </th>
+                <td class="px-4 py-3 align-top text-muted">{s.use}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-10 grid gap-8 md:grid-cols-3">
+      <div>
+        <h3 class="font-semibold">{d.data.softwareTitle}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.software}</p>
+      </div>
+      <div>
+        <h3 class="font-semibold">{d.data.aiTitle}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.ai}</p>
+      </div>
+      <div>
+        <h3 class="font-semibold">{d.data.licenseTitle}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.license}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="border-t border-line">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <p class="kicker">{d.team.kicker}</p>
+      <div class="mt-3 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div class="flex items-center gap-4">
+          <img src="/assets/logo-vizcachas.svg" alt="" width="64" height="64" class="h-16 w-16 rounded-full border border-line bg-white p-1 dark:invert" />
+          <h2 class="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.team.title}</h2>
+        </div>
+        <div class="flex flex-wrap gap-3 text-sm">
+          <a href={REPO_URL} class="rounded border border-line bg-surface px-4 py-2 hover:border-ink">{d.team.repo} ↗</a>
+          <a href={CHALLENGE_URL} class="rounded border border-line bg-surface px-4 py-2 hover:border-ink">{d.team.challenge} ↗</a>
+        </div>
+      </div>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.team.intro}</p>
+      <ul class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        {
+          team.map((name, i) => (
+            <li class="rounded-lg border border-line bg-surface p-4 text-center">
+              <span
+                class:list={[
+                  'mx-auto flex h-14 w-14 items-center justify-center rounded-full font-mono text-sm font-medium',
+                  i % 2 === 0 ? 'bg-sun/25 text-sun-ink' : 'bg-earth/25 text-earth-ink',
+                ]}
+                aria-hidden="true"
+              >
+                {initials(name)}
+              </span>
+              <span class="mt-3 block text-sm font-medium">{name}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>

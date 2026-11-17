@@ -1,0 +1,84 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Palette derived from the app's theme.css (sun #ffc54d, earth #6cb2ff, navy #0b1020),
+   adjusted for text contrast on a light "paper" background. */
+:root {
+  --paper: #f8f8f5;
+  --surface: #ffffff;
+  --surface-2: #eef0f4;
+  --line: #d9dde5;
+  --ink: #0b1020;
+  --ink-muted: #4a5468;
+  --accent: #1f3a8a;
+  --sun: #ffc54d;
+  --sun-ink: #8a5a00;
+  --earth: #6cb2ff;
+  --earth-ink: #145fb5;
+  --ok: #16794a;
+}
+.dark {
+  --paper: #0b1020;
+  --surface: #121a2e;
+  --surface-2: #1a2440;
+  --line: #2c3758;
+  --ink: #eef1f7;
+  --ink-muted: #a9b3c9;
+  --accent: #9db8ff;
+  --sun-ink: #ffc54d;
+  --earth-ink: #6cb2ff;
+  --ok: #5ee08f;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-sun: var(--sun);
+  --color-sun-ink: var(--sun-ink);
+  --color-earth: var(--earth);
+  --color-earth-ink: var(--earth-ink);
+  --color-ok: var(--ok);
+  --font-sans: 'Inter', 'Noto Sans SC', 'Microsoft YaHei', 'Nirmala UI', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', 'Noto Serif SC', 'Nirmala UI', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--sun); color: #0b1020; }
+
+/* Small "paper" helpers */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.figure-caption {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+.figure-caption b { color: var(--ink); font-weight: 600; }
+.rule { border-color: var(--line); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

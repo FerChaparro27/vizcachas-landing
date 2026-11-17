@@ -1,0 +1,142 @@
+---
+/**
+ * Explanatory, schematic figures for the educational module (not to scale).
+ * Colors use the site tokens so they work in light and dark mode.
+ */
+import type { Dict } from '../i18n';
+interface Props {
+  id: string;
+  L: Dict['learn']['figLabels'];
+}
+const { id, L } = Astro.props;
+---
+
+<svg viewBox="0 0 400 220" role="img" class="h-auto w-full" font-family="var(--font-sans)" font-size="11">
+  <defs>
+    <marker id={`arr-${id}`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-muted)"></path>
+    </marker>
+  </defs>
+
+  {id === 'azel' && (
+    <g>
+      <ellipse cx="200" cy="150" rx="160" ry="45" fill="var(--surface-2)" stroke="var(--line)" />
+      <line x1="200" y1="150" x2="200" y2="18" stroke="var(--ink-muted)" stroke-dasharray="3 4" />
+      <text x="208" y="22" fill="var(--ink-muted)">{L.zenith}</text>
+      <text x="196" y="100" fill="var(--ink)" font-weight="600">{L.north}</text>
+      <text x="364" y="154" fill="var(--ink)" font-weight="600">{L.east}</text>
+      <text x="196" y="210" fill="var(--ink)" font-weight="600">{L.south}</text>
+      <text x="24" y="154" fill="var(--ink)" font-weight="600">{L.west}</text>
+      <text x="300" y="196" fill="var(--ink-muted)">{L.horizon}</text>
+      <path d="M200,105 A160,45 0 0 1 302.8,115.5" fill="none" stroke="var(--earth-ink)" stroke-width="2.5" />
+      <text x="232" y="100" fill="var(--earth-ink)" font-weight="600">{L.azimuth}</text>
+      <line x1="200" y1="150" x2="302.8" y2="115.5" stroke="var(--ink-muted)" stroke-dasharray="3 3" />
+      <line x1="302.8" y1="115.5" x2="302.8" y2="44" stroke="var(--ink-muted)" stroke-dasharray="3 3" />
+      <line x1="200" y1="150" x2="302.8" y2="40" stroke="var(--sun-ink)" stroke-width="1.5" />
+      <path d="M247.4,134.1 A50,50 0 0 0 234.1,113.5" fill="none" stroke="var(--sun-ink)" stroke-width="2.5" />
+      <text x="252" y="128" fill="var(--sun-ink)" font-weight="600">{L.elevation}</text>
+      <circle cx="302.8" cy="40" r="11" fill="var(--sun)" />
+      <text x="320" y="44" fill="var(--ink)">{L.sun}</text>
+      <circle cx="200" cy="150" r="4" fill="var(--ink)" />
+    </g>
+  )}
+
+  {id === 'horizon' && (
+    <g>
+      <g>
+        <text x="20" y="24" fill="var(--ok)" font-weight="600">{L.visible}</text>
+        <rect x="10" y="170" width="185" height="40" fill="var(--surface-2)" />
+        <line x1="10" y1="170" x2="195" y2="170" stroke="var(--ink-muted)" />
+        <line x1="34" y1="164" x2="170" y2="120" stroke="var(--sun-ink)" stroke-dasharray="4 3" />
+        <circle cx="172" cy="119" r="10" fill="var(--sun)" />
+        <path d="M28,170 l6,-10 l6,10 z" fill="var(--ink)" />
+        <text x="22" y="190" fill="var(--ink-muted)">{L.lander}</text>
+      </g>
+      <g transform="translate(205,0)">
+        <text x="10" y="24" fill="var(--sun-ink)" font-weight="600">{L.hidden}</text>
+        <path d="M0,170 L95,170 Q120,168 135,110 Q145,92 160,108 Q172,128 185,140 L185,210 L0,210 z" fill="var(--surface-2)" stroke="var(--ink-muted)" />
+        <line x1="24" y1="164" x2="132" y2="129" stroke="var(--sun-ink)" stroke-dasharray="4 3" />
+        <circle cx="162" cy="119" r="10" fill="var(--sun)" opacity="0.25" />
+        <path d="M18,170 l6,-10 l6,10 z" fill="var(--ink)" />
+        <text x="118" y="196" fill="var(--ink-muted)">{L.rim}</text>
+        <path d="M128,125 l8,8 m0,-8 l-8,8" stroke="var(--sun-ink)" stroke-width="2" />
+      </g>
+    </g>
+  )}
+
+  {id === 'refraction' && (
+    <g>
+      <rect x="0" y="0" width="400" height="140" fill="#05070f" rx="6" />
+      <circle cx="80" cy="30" r="1" fill="#fff" /><circle cx="330" cy="50" r="1" fill="#fff" /><circle cx="250" cy="20" r="0.8" fill="#fff" /><circle cx="140" cy="80" r="0.8" fill="#fff" />
+      <path d="M0,140 L400,140 L400,220 L0,220 z" fill="var(--surface-2)" />
+      <line x1="0" y1="140" x2="400" y2="140" stroke="var(--ink-muted)" stroke-width="1.5" />
+      <text x="10" y="134" fill="#a9b3c9">{L.horizon} 0°</text>
+      <clipPath id="above"><rect x="0" y="0" width="400" height="140" /></clipPath>
+      <circle cx="200" cy="148" r="26" fill="var(--sun)" opacity="0.25" />
+      <circle cx="200" cy="148" r="26" fill="var(--sun)" clip-path="url(#above)" />
+      <line x1="200" y1="148" x2="200" y2="122" stroke="#0b1020" stroke-width="1.5" />
+      <circle cx="200" cy="148" r="2.5" fill="#0b1020" />
+      <text x="236" y="118" fill="#eef1f7">↙ +r</text>
+      <text x="236" y="160" fill="var(--ink)">elev &lt; 0</text>
+      <text x="200" y="196" fill="var(--ink)" text-anchor="middle" font-family="var(--font-mono)" font-size="12">elev + r &gt; horizon → {L.visible}</text>
+    </g>
+  )}
+
+  {id === 'poles' && (
+    <g>
+      <g>
+        <text x="100" y="20" text-anchor="middle" fill="var(--ink)" font-weight="600">{L.equator}</text>
+        <rect x="10" y="170" width="180" height="40" fill="var(--surface-2)" />
+        <line x1="10" y1="170" x2="190" y2="170" stroke="var(--ink-muted)" />
+        <path d="M20,170 Q100,-30 180,170" fill="none" stroke="var(--sun-ink)" stroke-width="1.5" stroke-dasharray="4 3" marker-end={`url(#arr-${id})`} />
+        <circle cx="100" cy="70" r="10" fill="var(--sun)" />
+      </g>
+      <g transform="translate(210,0)">
+        <text x="90" y="20" text-anchor="middle" fill="var(--ink)" font-weight="600">{L.pole}</text>
+        <rect x="0" y="170" width="180" height="40" fill="var(--surface-2)" />
+        <path d="M0,170 L30,170 Q45,150 60,170 L180,170" fill="var(--surface-2)" stroke="var(--ink-muted)" />
+        <path d="M5,160 Q50,154 90,158 T175,160" fill="none" stroke="var(--sun-ink)" stroke-width="1.5" stroke-dasharray="4 3" marker-end={`url(#arr-${id})`} />
+        <circle cx="120" cy="158" r="10" fill="var(--sun)" />
+        <text x="90" y="196" text-anchor="middle" fill="var(--ink-muted)">≈ 0° – 1.5°</text>
+      </g>
+    </g>
+  )}
+
+  {id === 'earth' && (
+    <g>
+      <rect x="0" y="0" width="400" height="220" fill="#05070f" rx="6" />
+      <ellipse cx="200" cy="105" rx="80" ry="55" fill="none" stroke="#6cb2ff" stroke-dasharray="4 4" opacity="0.8" transform="rotate(-12 200 105)" />
+      <circle cx="122" cy="118" r="9" fill="#6cb2ff" opacity="0.3" />
+      <circle cx="270" cy="72" r="9" fill="#6cb2ff" opacity="0.3" />
+      <circle cx="215" cy="160" r="9" fill="#6cb2ff" opacity="0.3" />
+      <circle cx="200" cy="105" r="12" fill="#6cb2ff" />
+      <path d="M194,100 q4,-4 9,0 q-2,6 -9,0" fill="#5fd08a" />
+      <text x="216" y="100" fill="#eef1f7">{L.earth}</text>
+      <path d="M0,150 L400,150 L400,220 L0,220 z" fill="#2a2f3d" opacity="0.92" />
+      <line x1="0" y1="150" x2="400" y2="150" stroke="#a9b3c9" />
+      <text x="10" y="144" fill="#a9b3c9">{L.horizon}</text>
+      <text x="200" y="200" text-anchor="middle" fill="#eef1f7" font-family="var(--font-mono)">± 7°–8° · ~27 d</text>
+    </g>
+  )}
+
+  {id === 'dte' && (
+    <g>
+      <rect x="0" y="0" width="400" height="220" fill="#05070f" rx="6" />
+      <circle cx="50" cy="45" r="18" fill="#6cb2ff" />
+      <path d="M40,40 q8,-8 16,0 q-4,10 -16,0" fill="#5fd08a" />
+      <text x="76" y="40" fill="#eef1f7">{L.earth}</text>
+      <path d="M0,200 Q200,150 400,200 L400,220 L0,220 z" fill="#2a2f3d" />
+      <path d="M150,180 l8,-12 l8,12 z" fill="#eef1f7" />
+      <text x="128" y="205" fill="#a9b3c9">{L.lander}</text>
+      <line x1="156" y1="168" x2="62" y2="56" stroke="#5ee08f" stroke-width="1.5" />
+      <text x="70" y="120" fill="#5ee08f" font-family="var(--font-mono)">DTE</text>
+      <path d="M300,190 Q320,150 345,186" fill="#3a4152" />
+      <path d="M330,182 l8,-12 l8,12 z" fill="#eef1f7" />
+      <rect x="300" y="36" width="18" height="10" fill="#ffc54d" />
+      <line x1="290" y1="41" x2="328" y2="41" stroke="#ffc54d" stroke-width="2" />
+      <text x="262" y="26" fill="#ffc54d">{L.relay}</text>
+      <line x1="336" y1="170" x2="310" y2="48" stroke="#ffc54d" stroke-dasharray="4 3" />
+      <line x1="300" y1="42" x2="70" y2="46" stroke="#ffc54d" stroke-dasharray="4 3" />
+    </g>
+  )}
+</svg>

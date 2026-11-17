@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "title": "Lunar Landing Site Navigator — Vizcachas fuera de órbita",
+    "description": "Will a lunar landing site have sunlight and a line of sight to Earth on a given date? An open, educational tool built with NASA/JPL Horizons data for the NASA Space Apps Challenge 2026.",
+    "learnTitle": "Learn the science — Lunar Landing Site Navigator",
+    "learnDescription": "An educational module on lunar sky geometry: azimuth and elevation, horizons, polar illumination and communication with Earth, with classroom activities."
+  },
+  "nav": {
+    "problem": "Problem",
+    "solution": "Solution",
+    "learn": "Learn",
+    "data": "Data & credits",
+    "team": "Team",
+    "launch": "Launch the tool",
+    "home": "Home",
+    "language": "Language",
+    "theme": "Toggle dark mode",
+    "skip": "Skip to content",
+    "menu": "Menu"
+  },
+  "hero": {
+    "badge": "NASA Space Apps Challenge 2026 · Lunar Landing Site Navigator",
+    "title": "Lunar Landing Site Navigator",
+    "question": "If I land at this place on the Moon on this date, will I have Sun, and will I be able to talk to Earth?",
+    "lede": "Near the lunar south pole the Sun and the Earth barely rise above the horizon, and any mountain can hide them. Our open tool takes a landing site and a date, finds where the Sun and the Earth are, draws them over the local horizon, and shows when there is power and when there is communication.",
+    "ctaApp": "Launch the tool",
+    "ctaLearn": "Learn the science",
+    "figure": "Sky view from the Intuitive Machines 2 site (Mons Mouton, 84.8° S) on 20 Nov 2026. The Sun stands only 6.5° above the horizon. The panel at the bottom shows the real horizon profile from LOLA terrain data.",
+    "stats": [
+      { "value": "14", "label": "real landing sites, from Apollo 11 to IM-2" },
+      { "value": "1 h", "label": "time step of the JPL Horizons ephemerides" },
+      { "value": "360°", "label": "horizon profile per site" },
+      { "value": "2027", "label": "dates covered through December 2027" }
+    ]
+  },
+  "problem": {
+    "kicker": "§1 · The problem",
+    "title": "At the lunar south pole, sunlight and signal are scarce",
+    "intro": "Artemis and the commercial landers of NASA's CLPS program are heading to the lunar south pole, where ice is trapped in permanently shadowed craters. But the same geometry that preserves that ice makes the region hard to work in.",
+    "points": [
+      {
+        "title": "The Sun grazes the horizon",
+        "body": "The Moon's spin axis is tilted only about 1.5° from the ecliptic. Near the poles the Sun never climbs more than a few degrees, so a crater rim or a hill can put a lander in shadow for days."
+      },
+      {
+        "title": "The Earth sits low too",
+        "body": "Because the Moon always shows the same face to us, the Earth hangs almost fixed in the lunar sky. Seen from the pole it is close to the horizon, and libration slowly moves it up and down."
+      },
+      {
+        "title": "Power and communication decide the mission",
+        "body": "Solar panels need the Sun above the horizon. Direct-to-Earth radio needs a clear line of sight. If a launch slips by a few days, both can change."
+      }
+    ],
+    "hardTitle": "Why it is hard today",
+    "hardIntro": "The data already exists in NASA tools, but they are built for specialists. We tested them with one question: “does Shackleton crater get sunlight in November?”",
+    "hard": [
+      {
+        "tool": "JPL Horizons",
+        "caption": "Searching “moon” as the observer location lists Earth observatories with “Moon” in their name. Choosing the Moon requires knowing codes such as @301."
+      },
+      {
+        "tool": "JPL Horizons",
+        "caption": "The answer to “is there Sun?” is an asterisk next to the date, explained about 70 lines further down, inside a 15-column table with mixed units."
+      },
+      {
+        "tool": "NASA Moon Trek",
+        "caption": "When we searched for Shackleton, the south pole appeared as stretched stripes. Relief, light and shadow were impossible to read."
+      }
+    ],
+    "conclusion": "Horizons knows exactly where the Sun is, but none of these tools answers the question directly. We wanted one screen, one question, and numbers anyone can trust."
+  },
+  "solution": {
+    "kicker": "§2 · Our solution",
+    "title": "One screen, one question, verified numbers",
+    "intro": "Pick a landing site and a date. The tool shows the Sun and the Earth over the local horizon, the Sun's elevation, the hours of sunlight and of Earth visibility in the coming days, and a countdown to the next sunset or Earthset.",
+    "pipelineTitle": "How it works",
+    "pipeline": [
+      {
+        "tag": "Data",
+        "title": "JPL Horizons",
+        "body": "Topocentric azimuth and elevation of the Sun and the Earth seen from each site, one sample per hour."
+      },
+      {
+        "tag": "Data",
+        "title": "LOLA terrain",
+        "body": "Elevation data from the Lunar Orbiter Laser Altimeter, turned into a 360° horizon profile per site."
+      },
+      {
+        "tag": "Python",
+        "title": "Precompute",
+        "body": "Scripts query Horizons, build the horizons and validate everything against JSON schemas and tests."
+      },
+      {
+        "tag": "Web",
+        "title": "Interactive app",
+        "body": "JavaScript, Vite and three.js read the precomputed JSON and compare each body against the horizon."
+      }
+    ],
+    "pipelineNote": "An optional live API (FastAPI) queries Horizons for any latitude and longitude on the Moon and answers in the same format.",
+    "featuresTitle": "What you can do",
+    "features": [
+      { "title": "3D sky view", "body": "The Sun and the Earth at true angular scale over the horizon, with a 2D compass and elevation ruler as a fallback." },
+      { "title": "Solar elevation first", "body": "The Sun's height above the horizon is the most visible number on screen, because it drives solar power." },
+      { "title": "Timeline and countdown", "body": "A time player, a 7-day timeline of Sun and Earth visibility, and a live countdown to the next sunset or Earthset." },
+      { "title": "Scenario comparison", "body": "Two or three site–date scenarios side by side. The tool marks which has more Sun hours and which has more Earth hours, and leaves the decision to you." },
+      { "title": "Polar maps", "body": "Choose a historical mission, type coordinates, or click directly on a stereographic map of either pole." },
+      { "title": "Open and multilingual", "body": "MIT-licensed code, mobile layout, and an interface in English, Spanish, Hindi and Simplified Chinese." }
+    ],
+    "shots": [
+      "Details panel: azimuth, elevation, status and countdown for the Sun and the Earth, plus visible hours over the next 24 h, 7 days and 30 days.",
+      "Site selection: historical missions, specific coordinates, or a clickable polar map (USGS SIM 3316 mosaic).",
+      "Mobile layout of the sky view."
+    ],
+    "validationTitle": "How we know it is right",
+    "validationBody": "Every position comes from JPL Horizons, NASA's official ephemeris service, which already accounts for libration and the Moon's orbital variations. A validation panel and automated tests compare our values with saved Horizons answers and show the difference.",
+    "limitsTitle": "Honest limits",
+    "limitsBody": "The horizon silhouette uses real LOLA terrain only for sites with elevation data; elsewhere the app uses an ideal flat horizon and says so. The ground texture below the horizon and the stars are illustrative.",
+    "learnTeaser": "Want to understand the geometry behind each number?",
+    "learnCta": "Open the educational module"
+  },
+  "data": {
+    "kicker": "§3 · Data & credits",
+    "title": "Built on open data and open software",
+    "sources": [
+      { "name": "JPL Horizons System", "org": "NASA / JPL", "use": "Source of every Sun and Earth position in the app.", "url": "https://ssd.jpl.nasa.gov/horizons/" },
+      { "name": "LOLA elevation data", "org": "NASA LRO", "use": "Real horizon profiles for sites with terrain data.", "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm" },
+      { "name": "Quickmap", "org": "ASU / LROC", "use": "Checking site coordinates and terrain.", "url": "https://quickmap.lroc.asu.edu/" },
+      { "name": "Moon Trek", "org": "NASA", "use": "Exploring the sites and their topography.", "url": "https://trek.nasa.gov/moon/" },
+      { "name": "Moon Exploration", "org": "CSA", "use": "Context on international lunar exploration.", "url": "https://www.asc-csa.gc.ca/eng/astronomy/moon-exploration/" },
+      { "name": "Image mosaic of the Moon (SIM 3316)", "org": "USGS", "use": "Polar maps used for site selection.", "url": "https://pubs.usgs.gov/sim/3316/" }
+    ],
+    "softwareTitle": "Software",
+    "software": "three.js, Vite, Python, NumPy, Requests, rasterio, pyproj, Matplotlib, pytest, jsonschema, FastAPI, Uvicorn, HTTPX, Astro and Tailwind CSS. Sun and Earth images: Figma Community file “Space Elements”.",
+    "aiTitle": "Use of AI",
+    "ai": "We used Claude (Anthropic) as a coding assistant, with every change reviewed by a team member. The team logo was generated with ChatGPT. Translations other than Spanish were made with AI and have not been reviewed by native speakers. The numbers are not AI-generated: they come from JPL Horizons and are checked by automated tests.",
+    "licenseTitle": "License",
+    "license": "The code is released under the MIT License. The data belong to their sources, under their own terms. The NASA Space Apps Challenge logo is used only to identify the event; this project is not endorsed by NASA."
+  },
+  "team": {
+    "kicker": "§4 · Team",
+    "title": "Vizcachas fuera de órbita",
+    "intro": "We built this tool during the NASA Space Apps Challenge 2026 hackathon, and we keep improving it as an open, educational resource.",
+    "repo": "View the code on GitHub",
+    "challenge": "Read the challenge statement"
+  },
+  "footer": {
+    "tagline": "An open tool to read the lunar sky.",
+    "app": "Open the app",
+    "repo": "Source code",
+    "challenge": "Challenge",
+    "event": "Made for the NASA Space Apps Challenge 2026.",
+    "translationNote": "Translated with AI; not reviewed by native speakers."
+  },
+  "learn": {
+    "kicker": "Educational module",
+    "title": "Reading the lunar sky",
+    "lede": "Six short ideas explain every number the tool shows. Each one comes with a figure, and the activities at the end turn them into classroom exercises. Suggested level: secondary school and early university.",
+    "toc": "Contents",
+    "concepts": [
+      {
+        "id": "azel",
+        "title": "1. Azimuth and elevation",
+        "body": [
+          "To say where something is in the sky, we use two angles measured from where we stand. Azimuth is the compass direction: 0° is north, 90° east, 180° south, 270° west. Elevation is the height above the horizon: 0° on the horizon, 90° straight overhead, negative below it.",
+          "These coordinates are topocentric: they depend on the observer's exact place on the surface. That is why the same Sun can be high at Apollo 11 and barely visible at the south pole at the same moment."
+        ],
+        "figure": "Azimuth is measured along the horizon from north; elevation is measured upward from the horizon."
+      },
+      {
+        "id": "horizon",
+        "title": "2. The horizon is not flat",
+        "body": [
+          "On an ideal, smooth Moon the horizon would sit at 0° in every direction. Real terrain raises it: a crater rim or a mountain can block several degrees of sky in a given direction.",
+          "The tool describes the horizon as 360 numbers, one per degree of azimuth, built from LOLA laser altimetry. A body is visible only if it is above the horizon in its own direction."
+        ],
+        "figure": "The same Sun elevation can be visible over a plain and hidden behind a crater rim."
+      },
+      {
+        "id": "refraction",
+        "title": "3. No air, no refraction",
+        "body": [
+          "On Earth, the atmosphere bends light and lets us see the Sun even when it is slightly below the geometric horizon. The Moon has no atmosphere, so there is no refraction, and the sky is black even at noon.",
+          "The Sun and the Earth are disks, not points. The tool counts a body as visible as soon as the upper edge of its disk clears the horizon: center elevation + angular radius > horizon elevation. The Sun's radius is about 0.25°, the Earth's about 1°."
+        ],
+        "figure": "A body is visible when the top of its disk rises above the local horizon."
+      },
+      {
+        "id": "poles",
+        "title": "4. Sunlight at the poles",
+        "body": [
+          "The Moon's axis is tilted only about 1.5° relative to the ecliptic, so the Moon has almost no seasons. A lunar day, from one sunrise to the next, lasts about 29.5 Earth days.",
+          "At the equator the Sun rises high and stays up for about two weeks. At the poles it circles the horizon, never more than a degree or two above it. Some high ridges are lit most of the time, while deep crater floors never see the Sun: these permanently shadowed regions can hold water ice."
+        ],
+        "figure": "Near the equator the Sun climbs high; at the pole it skims along the horizon all day long."
+      },
+      {
+        "id": "earth",
+        "title": "5. The Earth hardly moves in the lunar sky",
+        "body": [
+          "The Moon is tidally locked: it turns once on its axis for every orbit, so it always shows the same face to Earth. Seen from the near side, the Earth stays in roughly the same spot of the sky, going through phases instead of rising and setting.",
+          "Libration, a small wobble in how we see the Moon, moves the Earth around that spot by up to about 7° to 8°. Near the edge of the near side and at the poles, that is enough to make the Earth rise and set over weeks."
+        ],
+        "figure": "Libration makes the Earth trace a small loop in the lunar sky over about a month."
+      },
+      {
+        "id": "dte",
+        "title": "6. Talking to Earth",
+        "body": [
+          "Direct-to-Earth (DTE) communication needs a straight line between the lander's antenna and the Earth, with no terrain in between. When the Earth is below the horizon, the lander needs a relay satellite.",
+          "On the far side the Earth is never visible. That is why China's Chang'e 4 and Chang'e 6 missions used the Queqiao relay satellites. The tool shows this as Earth hours equal to zero."
+        ],
+        "figure": "With the Earth above the horizon the signal travels directly; otherwise it needs a relay in orbit."
+      }
+    ],
+    "figLabels": {
+      "zenith": "Zenith",
+      "horizon": "Horizon",
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W",
+      "azimuth": "Azimuth",
+      "elevation": "Elevation",
+      "sun": "Sun",
+      "earth": "Earth",
+      "visible": "Visible",
+      "hidden": "Hidden",
+      "rim": "Crater rim",
+      "equator": "Equator",
+      "pole": "Pole",
+      "lander": "Lander",
+      "relay": "Relay satellite"
+    },
+    "glossaryTitle": "Glossary",
+    "glossary": [
+      { "term": "Azimuth", "def": "Horizontal direction, measured clockwise from north (0°) to 360°." },
+      { "term": "Elevation", "def": "Angle above the local horizon; negative means below it." },
+      { "term": "Topocentric", "def": "Measured from a point on the surface, not from the center of the body." },
+      { "term": "Ephemeris", "def": "A table of positions of celestial bodies over time. JPL Horizons generates them." },
+      { "term": "Libration", "def": "The apparent wobble of the Moon that lets us see about 59% of its surface from Earth over time." },
+      { "term": "LOLA", "def": "Lunar Orbiter Laser Altimeter, an instrument on NASA's Lunar Reconnaissance Orbiter that mapped the Moon's elevation." },
+      { "term": "PSR", "def": "Permanently shadowed region: crater floors near the poles that never receive direct sunlight." },
+      { "term": "DTE", "def": "Direct-to-Earth: communication between the lander and Earth with no relay." },
+      { "term": "CLPS", "def": "Commercial Lunar Payload Services, the NASA program that buys deliveries to the Moon from companies." },
+      { "term": "Lunar day", "def": "About 29.5 Earth days, from one sunrise to the next at the same place." }
+    ],
+    "activitiesTitle": "Classroom activities",
+    "activitiesIntro": "Each activity takes 20 to 40 minutes and needs only a browser. Open the tool in another tab.",
+    "activities": [
+      {
+        "title": "A lunar day at Apollo 11",
+        "level": "Ages 12+",
+        "steps": [
+          "Choose Apollo 11 in the tool and pick today's date.",
+          "Move the date slider one day at a time and write down the Sun's elevation each day.",
+          "Plot elevation against date. How long until the Sun sets? How long is a full lunar day?"
+        ]
+      },
+      {
+        "title": "Equator or pole?",
+        "level": "Ages 14+",
+        "steps": [
+          "Compare Apollo 11 (near the equator) with Intuitive Machines 2 (Mons Mouton, near the south pole) on the same date.",
+          "Note the maximum Sun elevation and the Sun hours over 7 days for each site.",
+          "Use the tilt of the Moon's axis to explain the difference."
+        ]
+      },
+      {
+        "title": "Can we call home?",
+        "level": "Ages 14+",
+        "steps": [
+          "Open Chang'e 4, which landed on the far side of the Moon.",
+          "Look at the Earth hours over the next 30 days. What do you see?",
+          "Research the Queqiao relay satellite and explain why the mission needed it."
+        ]
+      },
+      {
+        "title": "The launch slipped",
+        "level": "Ages 16+ / university",
+        "steps": [
+          "Pick a south-pole site and a date. Create a second scenario at the same site two weeks later.",
+          "Compare Sun hours and Earth hours in the scenario comparison.",
+          "Write a short recommendation for a mission that needs power more than communication, and another for the opposite case."
+        ]
+      }
+    ],
+    "back": "Back to the project",
+    "tryIt": "Try it in the tool"
+  }
+}

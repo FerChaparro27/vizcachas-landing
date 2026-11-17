@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "title": "Lunar Landing Site Navigator — Vizcachas fuera de órbita",
+    "description": "¿Un sitio de alunizaje tendrá luz solar y línea de vista con la Tierra en una fecha dada? Una herramienta abierta y didáctica hecha con datos de NASA/JPL Horizons para el NASA Space Apps Challenge 2026.",
+    "learnTitle": "Aprendé la ciencia — Lunar Landing Site Navigator",
+    "learnDescription": "Un módulo didáctico sobre la geometría del cielo lunar: azimut y elevación, horizontes, iluminación polar y comunicación con la Tierra, con actividades para el aula."
+  },
+  "nav": {
+    "problem": "Problema",
+    "solution": "Solución",
+    "learn": "Aprender",
+    "data": "Datos y créditos",
+    "team": "Equipo",
+    "launch": "Abrir la herramienta",
+    "home": "Inicio",
+    "language": "Idioma",
+    "theme": "Cambiar modo oscuro",
+    "skip": "Saltar al contenido",
+    "menu": "Menú"
+  },
+  "hero": {
+    "badge": "NASA Space Apps Challenge 2026 · Lunar Landing Site Navigator",
+    "title": "Lunar Landing Site Navigator",
+    "question": "Si alunizo en este lugar de la Luna en esta fecha, ¿voy a tener Sol y voy a poder hablar con la Tierra?",
+    "lede": "Cerca del polo sur lunar el Sol y la Tierra apenas asoman sobre el horizonte, y cualquier montaña los tapa. Nuestra herramienta abierta toma un sitio y una fecha, calcula dónde están el Sol y la Tierra, los dibuja sobre el horizonte del lugar y muestra cuándo hay energía y cuándo hay comunicación.",
+    "ctaApp": "Abrir la herramienta",
+    "ctaLearn": "Aprendé la ciencia",
+    "figure": "Vista del cielo desde el sitio de Intuitive Machines 2 (Mons Mouton, 84,8° S) el 20 de noviembre de 2026. El Sol está a solo 6,5° sobre el horizonte. El panel inferior muestra el perfil real del horizonte, calculado con datos de terreno de LOLA.",
+    "stats": [
+      { "value": "14", "label": "sitios de alunizaje reales, de Apollo 11 a IM-2" },
+      { "value": "1 h", "label": "paso temporal de las efemérides de JPL Horizons" },
+      { "value": "360°", "label": "perfil de horizonte por sitio" },
+      { "value": "2027", "label": "fechas cubiertas hasta diciembre de 2027" }
+    ]
+  },
+  "problem": {
+    "kicker": "§1 · El problema",
+    "title": "En el polo sur lunar, la luz y la señal escasean",
+    "intro": "Artemis y los módulos comerciales del programa CLPS de la NASA van hacia el polo sur lunar, donde hay hielo atrapado en cráteres en sombra permanente. Pero la misma geometría que conserva ese hielo hace que la región sea difícil para operar.",
+    "points": [
+      {
+        "title": "El Sol roza el horizonte",
+        "body": "El eje de rotación de la Luna está inclinado apenas unos 1,5° respecto de la eclíptica. Cerca de los polos el Sol nunca sube más que unos pocos grados, así que el borde de un cráter o una loma pueden dejar a un módulo en sombra durante días."
+      },
+      {
+        "title": "La Tierra también está baja",
+        "body": "Como la Luna nos muestra siempre la misma cara, la Tierra queda casi fija en el cielo lunar. Vista desde el polo está cerca del horizonte, y la libración la hace subir y bajar lentamente."
+      },
+      {
+        "title": "Energía y comunicación definen la misión",
+        "body": "Los paneles solares necesitan el Sol sobre el horizonte. La radio directa a la Tierra necesita una línea de vista despejada. Si el lanzamiento se atrasa unos días, las dos cosas pueden cambiar."
+      }
+    ],
+    "hardTitle": "Por qué hoy es difícil",
+    "hardIntro": "Los datos ya existen en herramientas de la NASA, pero están pensadas para especialistas. Las probamos con una sola pregunta: “¿el cráter Shackleton tiene Sol en noviembre?”",
+    "hard": [
+      {
+        "tool": "JPL Horizons",
+        "caption": "Al buscar “moon” como ubicación del observador aparecen observatorios de la Tierra con “Moon” en el nombre. Para elegir la Luna hay que conocer códigos como @301."
+      },
+      {
+        "tool": "JPL Horizons",
+        "caption": "La respuesta a “¿hay Sol?” es un asterisco al lado de la fecha, explicado unas 70 líneas más abajo, dentro de una tabla de 15 columnas con unidades mezcladas."
+      },
+      {
+        "tool": "NASA Moon Trek",
+        "caption": "Al buscar Shackleton, el polo sur aparece como franjas estiradas. Era imposible leer el relieve, la luz o la sombra."
+      }
+    ],
+    "conclusion": "Horizons sabe exactamente dónde está el Sol, pero ninguna de estas herramientas responde la pregunta de forma directa. Queríamos una pantalla, una pregunta y números en los que cualquiera pueda confiar."
+  },
+  "solution": {
+    "kicker": "§2 · Nuestra solución",
+    "title": "Una pantalla, una pregunta, números verificados",
+    "intro": "Elegí un sitio de alunizaje y una fecha. La herramienta muestra el Sol y la Tierra sobre el horizonte del lugar, la elevación del Sol, las horas de Sol y de Tierra visible en los próximos días, y una cuenta regresiva hasta la próxima puesta de Sol o de Tierra.",
+    "pipelineTitle": "Cómo funciona",
+    "pipeline": [
+      {
+        "tag": "Datos",
+        "title": "JPL Horizons",
+        "body": "Azimut y elevación topocéntricos del Sol y de la Tierra vistos desde cada sitio, una muestra por hora."
+      },
+      {
+        "tag": "Datos",
+        "title": "Terreno LOLA",
+        "body": "Datos de elevación del Lunar Orbiter Laser Altimeter, convertidos en un perfil de horizonte de 360° por sitio."
+      },
+      {
+        "tag": "Python",
+        "title": "Precálculo",
+        "body": "Scripts que consultan Horizons, construyen los horizontes y validan todo con esquemas JSON y tests."
+      },
+      {
+        "tag": "Web",
+        "title": "App interactiva",
+        "body": "JavaScript, Vite y three.js leen el JSON precalculado y comparan cada cuerpo con el horizonte."
+      }
+    ],
+    "pipelineNote": "Una API en vivo opcional (FastAPI) consulta Horizons para cualquier latitud y longitud de la Luna y responde en el mismo formato.",
+    "featuresTitle": "Qué podés hacer",
+    "features": [
+      { "title": "Vista del cielo en 3D", "body": "El Sol y la Tierra en su escala angular real sobre el horizonte, con una brújula 2D y una regla de elevación como alternativa." },
+      { "title": "La elevación solar primero", "body": "La altura del Sol sobre el horizonte es el número más visible de la pantalla, porque define la energía solar." },
+      { "title": "Línea de tiempo y cuenta regresiva", "body": "Un reproductor de tiempo, una línea de 7 días con la visibilidad del Sol y la Tierra, y una cuenta regresiva en vivo hasta la próxima puesta." },
+      { "title": "Comparación de escenarios", "body": "Dos o tres escenarios sitio–fecha lado a lado. La herramienta marca cuál tiene más horas de Sol y cuál más horas de Tierra, y la decisión queda en tus manos." },
+      { "title": "Mapas polares", "body": "Elegí una misión histórica, escribí coordenadas o hacé clic directamente sobre un mapa estereográfico de cualquiera de los polos." },
+      { "title": "Abierta y multilingüe", "body": "Código con licencia MIT, diseño para celulares e interfaz en inglés, español, hindi y chino simplificado." }
+    ],
+    "shots": [
+      "Panel de detalles: azimut, elevación, estado y cuenta regresiva para el Sol y la Tierra, más las horas visibles en las próximas 24 h, 7 días y 30 días.",
+      "Selección de sitio: misiones históricas, coordenadas específicas o un mapa polar clicable (mosaico USGS SIM 3316).",
+      "Vista del cielo en el celular."
+    ],
+    "validationTitle": "Cómo sabemos que está bien",
+    "validationBody": "Cada posición viene de JPL Horizons, el servicio oficial de efemérides de la NASA, que ya tiene en cuenta la libración y las variaciones orbitales de la Luna. Un panel de validación y tests automáticos comparan nuestros valores con respuestas guardadas de Horizons y muestran la diferencia.",
+    "limitsTitle": "Límites, con honestidad",
+    "limitsBody": "La silueta del horizonte usa terreno real de LOLA solo en los sitios con datos de elevación; en el resto la app usa un horizonte ideal plano y lo avisa. La textura del suelo bajo el horizonte y las estrellas son ilustrativas.",
+    "learnTeaser": "¿Querés entender la geometría detrás de cada número?",
+    "learnCta": "Abrir el módulo didáctico"
+  },
+  "data": {
+    "kicker": "§3 · Datos y créditos",
+    "title": "Hecho con datos abiertos y software libre",
+    "sources": [
+      { "name": "JPL Horizons System", "org": "NASA / JPL", "use": "Fuente de cada posición del Sol y de la Tierra en la app.", "url": "https://ssd.jpl.nasa.gov/horizons/" },
+      { "name": "Datos de elevación LOLA", "org": "NASA LRO", "use": "Perfiles de horizonte reales para los sitios con datos de terreno.", "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm" },
+      { "name": "Quickmap", "org": "ASU / LROC", "use": "Verificación de coordenadas y terreno de los sitios.", "url": "https://quickmap.lroc.asu.edu/" },
+      { "name": "Moon Trek", "org": "NASA", "use": "Exploración de los sitios y su topografía.", "url": "https://trek.nasa.gov/moon/" },
+      { "name": "Moon Exploration", "org": "CSA", "use": "Contexto sobre la exploración lunar internacional.", "url": "https://www.asc-csa.gc.ca/eng/astronomy/moon-exploration/" },
+      { "name": "Mosaico de imágenes de la Luna (SIM 3316)", "org": "USGS", "use": "Mapas polares para elegir el sitio.", "url": "https://pubs.usgs.gov/sim/3316/" }
+    ],
+    "softwareTitle": "Software",
+    "software": "three.js, Vite, Python, NumPy, Requests, rasterio, pyproj, Matplotlib, pytest, jsonschema, FastAPI, Uvicorn, HTTPX, Astro y Tailwind CSS. Imágenes del Sol y la Tierra: archivo de Figma Community “Space Elements”.",
+    "aiTitle": "Uso de IA",
+    "ai": "Usamos Claude (Anthropic) como asistente de programación, y cada cambio fue revisado por alguien del equipo. El logo del equipo se generó con ChatGPT. Las traducciones que no son al español se hicieron con IA y no fueron revisadas por hablantes nativos. Los números no los genera una IA: vienen de JPL Horizons y se verifican con tests automáticos.",
+    "licenseTitle": "Licencia",
+    "license": "El código se publica bajo la licencia MIT. Los datos pertenecen a sus fuentes, con sus propios términos. El logo del NASA Space Apps Challenge se usa solo para identificar el evento; este proyecto no está avalado por la NASA."
+  },
+  "team": {
+    "kicker": "§4 · Equipo",
+    "title": "Vizcachas fuera de órbita",
+    "intro": "Creamos esta herramienta durante la hackatón NASA Space Apps Challenge 2026 y la seguimos mejorando como un recurso abierto y didáctico.",
+    "repo": "Ver el código en GitHub",
+    "challenge": "Leer el enunciado del desafío"
+  },
+  "footer": {
+    "tagline": "Una herramienta abierta para leer el cielo lunar.",
+    "app": "Abrir la app",
+    "repo": "Código fuente",
+    "challenge": "Desafío",
+    "event": "Hecho para el NASA Space Apps Challenge 2026.",
+    "translationNote": "Traducido con IA; no revisado por hablantes nativos."
+  },
+  "learn": {
+    "kicker": "Módulo didáctico",
+    "title": "Leer el cielo lunar",
+    "lede": "Seis ideas cortas explican cada número que muestra la herramienta. Cada una viene con una figura, y las actividades del final las convierten en ejercicios para el aula. Nivel sugerido: secundaria y primeros años de universidad.",
+    "toc": "Contenido",
+    "concepts": [
+      {
+        "id": "azel",
+        "title": "1. Azimut y elevación",
+        "body": [
+          "Para decir dónde está algo en el cielo usamos dos ángulos medidos desde donde estamos parados. El azimut es la dirección de la brújula: 0° es norte, 90° este, 180° sur, 270° oeste. La elevación es la altura sobre el horizonte: 0° sobre el horizonte, 90° justo arriba de nuestra cabeza, negativa por debajo.",
+          "Estas coordenadas son topocéntricas: dependen del lugar exacto del observador en la superficie. Por eso el mismo Sol puede estar alto en Apollo 11 y apenas visible en el polo sur en el mismo momento."
+        ],
+        "figure": "El azimut se mide a lo largo del horizonte desde el norte; la elevación se mide hacia arriba desde el horizonte."
+      },
+      {
+        "id": "horizon",
+        "title": "2. El horizonte no es plano",
+        "body": [
+          "En una Luna ideal y lisa el horizonte estaría a 0° en todas las direcciones. El terreno real lo levanta: el borde de un cráter o una montaña pueden tapar varios grados de cielo en una dirección.",
+          "La herramienta describe el horizonte con 360 números, uno por grado de azimut, construidos con la altimetría láser de LOLA. Un cuerpo es visible solo si está por encima del horizonte en su propia dirección."
+        ],
+        "figure": "La misma elevación del Sol puede ser visible sobre una llanura y quedar oculta detrás del borde de un cráter."
+      },
+      {
+        "id": "refraction",
+        "title": "3. Sin aire no hay refracción",
+        "body": [
+          "En la Tierra la atmósfera curva la luz y nos deja ver el Sol aunque esté un poco por debajo del horizonte geométrico. La Luna no tiene atmósfera, así que no hay refracción y el cielo es negro incluso al mediodía.",
+          "El Sol y la Tierra son discos, no puntos. La herramienta considera visible un cuerpo apenas el borde superior de su disco supera el horizonte: elevación del centro + radio angular > elevación del horizonte. El radio del Sol es de unos 0,25° y el de la Tierra, de alrededor de 1°."
+        ],
+        "figure": "Un cuerpo es visible cuando la parte superior de su disco supera el horizonte local."
+      },
+      {
+        "id": "poles",
+        "title": "4. La luz solar en los polos",
+        "body": [
+          "El eje de la Luna está inclinado apenas unos 1,5° respecto de la eclíptica, así que la Luna casi no tiene estaciones. Un día lunar, de un amanecer al siguiente, dura unos 29,5 días terrestres.",
+          "En el ecuador el Sol sube alto y queda arriba unas dos semanas. En los polos da vueltas alrededor del horizonte, nunca más de uno o dos grados por encima. Algunas crestas altas están iluminadas la mayor parte del tiempo, mientras que el fondo de los cráteres profundos nunca ve el Sol: estas regiones en sombra permanente pueden guardar hielo de agua."
+        ],
+        "figure": "Cerca del ecuador el Sol sube alto; en el polo se desliza rozando el horizonte todo el día."
+      },
+      {
+        "id": "earth",
+        "title": "5. La Tierra casi no se mueve en el cielo lunar",
+        "body": [
+          "La Luna tiene rotación sincrónica: gira una vez sobre su eje por cada órbita, así que siempre le muestra la misma cara a la Tierra. Desde la cara visible, la Tierra queda más o menos en el mismo lugar del cielo y pasa por fases en lugar de salir y ponerse.",
+          "La libración, un pequeño bamboleo en cómo vemos la Luna, mueve a la Tierra alrededor de ese punto hasta unos 7° a 8°. Cerca del borde de la cara visible y en los polos, eso alcanza para que la Tierra salga y se ponga a lo largo de semanas."
+        ],
+        "figure": "La libración hace que la Tierra dibuje un pequeño lazo en el cielo lunar a lo largo de un mes, aproximadamente."
+      },
+      {
+        "id": "dte",
+        "title": "6. Hablar con la Tierra",
+        "body": [
+          "La comunicación directa con la Tierra (DTE, por sus siglas en inglés) necesita una línea recta entre la antena del módulo y la Tierra, sin terreno en el medio. Cuando la Tierra está bajo el horizonte, el módulo necesita un satélite de retransmisión.",
+          "En la cara oculta la Tierra nunca es visible. Por eso las misiones chinas Chang'e 4 y Chang'e 6 usaron los satélites de retransmisión Queqiao. La herramienta lo muestra como cero horas de Tierra."
+        ],
+        "figure": "Con la Tierra sobre el horizonte la señal viaja directa; si no, necesita un satélite de retransmisión en órbita."
+      }
+    ],
+    "figLabels": {
+      "zenith": "Cenit",
+      "horizon": "Horizonte",
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "O",
+      "azimuth": "Azimut",
+      "elevation": "Elevación",
+      "sun": "Sol",
+      "earth": "Tierra",
+      "visible": "Visible",
+      "hidden": "Oculto",
+      "rim": "Borde del cráter",
+      "equator": "Ecuador",
+      "pole": "Polo",
+      "lander": "Módulo",
+      "relay": "Satélite de retransmisión"
+    },
+    "glossaryTitle": "Glosario",
+    "glossary": [
+      { "term": "Azimut", "def": "Dirección horizontal, medida en sentido horario desde el norte (0°) hasta 360°." },
+      { "term": "Elevación", "def": "Ángulo sobre el horizonte local; si es negativa, el cuerpo está por debajo." },
+      { "term": "Topocéntrico", "def": "Medido desde un punto de la superficie, no desde el centro del cuerpo." },
+      { "term": "Efemérides", "def": "Tabla con las posiciones de los cuerpos celestes a lo largo del tiempo. JPL Horizons las genera." },
+      { "term": "Libración", "def": "El bamboleo aparente de la Luna que, con el tiempo, nos deja ver desde la Tierra cerca del 59% de su superficie." },
+      { "term": "LOLA", "def": "Lunar Orbiter Laser Altimeter, un instrumento del Lunar Reconnaissance Orbiter de la NASA que mapeó la elevación de la Luna." },
+      { "term": "PSR", "def": "Región en sombra permanente: fondos de cráteres cerca de los polos que nunca reciben luz solar directa." },
+      { "term": "DTE", "def": "Direct-to-Earth: comunicación entre el módulo y la Tierra sin retransmisión." },
+      { "term": "CLPS", "def": "Commercial Lunar Payload Services, el programa de la NASA que contrata a empresas para llevar cargas a la Luna." },
+      { "term": "Día lunar", "def": "Unos 29,5 días terrestres, de un amanecer al siguiente en el mismo lugar." }
+    ],
+    "activitiesTitle": "Actividades para el aula",
+    "activitiesIntro": "Cada actividad lleva entre 20 y 40 minutos y solo necesita un navegador. Abrí la herramienta en otra pestaña.",
+    "activities": [
+      {
+        "title": "Un día lunar en Apollo 11",
+        "level": "Desde 12 años",
+        "steps": [
+          "Elegí Apollo 11 en la herramienta y la fecha de hoy.",
+          "Mové el control de fecha de a un día y anotá la elevación del Sol cada día.",
+          "Graficá la elevación en función de la fecha. ¿Cuánto falta para que se ponga el Sol? ¿Cuánto dura un día lunar completo?"
+        ]
+      },
+      {
+        "title": "¿Ecuador o polo?",
+        "level": "Desde 14 años",
+        "steps": [
+          "Compará Apollo 11 (cerca del ecuador) con Intuitive Machines 2 (Mons Mouton, cerca del polo sur) en la misma fecha.",
+          "Anotá la elevación máxima del Sol y las horas de Sol en 7 días para cada sitio.",
+          "Usá la inclinación del eje lunar para explicar la diferencia."
+        ]
+      },
+      {
+        "title": "¿Podemos llamar a casa?",
+        "level": "Desde 14 años",
+        "steps": [
+          "Abrí Chang'e 4, que alunizó en la cara oculta de la Luna.",
+          "Mirá las horas de Tierra en los próximos 30 días. ¿Qué observás?",
+          "Investigá el satélite de retransmisión Queqiao y explicá por qué la misión lo necesitaba."
+        ]
+      },
+      {
+        "title": "El lanzamiento se atrasó",
+        "level": "Desde 16 años / universidad",
+        "steps": [
+          "Elegí un sitio del polo sur y una fecha. Creá un segundo escenario en el mismo sitio dos semanas después.",
+          "Compará las horas de Sol y de Tierra en la comparación de escenarios.",
+          "Escribí una recomendación breve para una misión que necesita más energía que comunicación, y otra para el caso opuesto."
+        ]
+      }
+    ],
+    "back": "Volver al proyecto",
+    "tryIt": "Probalo en la herramienta"
+  }
+}
