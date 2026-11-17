@@ -77,20 +77,20 @@ body {
 .figure-caption b { color: var(--ink); font-weight: 600; }
 .rule { border-color: var(--line); }
 
-/* Dark "stage" bands that show the tool (the app itself is dark). Same look in both themes. */
+/* Tinted bands that frame the tool; they follow the light/dark theme like the rest of the page. */
 .band {
   background:
-    radial-gradient(120% 80% at 50% 0%, rgba(108, 178, 255, 0.10), transparent 60%),
-    #0b1020;
-  color: #eef1f7;
+    radial-gradient(120% 80% at 50% 0%, rgba(108, 178, 255, 0.14), transparent 60%),
+    var(--surface-2);
+  color: var(--ink);
 }
 .dark .band { background: radial-gradient(120% 80% at 50% 0%, rgba(108, 178, 255, 0.10), transparent 60%), #060913; }
 .carousel-btn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 2.5rem; height: 2.5rem; border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.25); color: #eef1f7;
+  border: 1px solid var(--line); color: var(--ink); background: var(--surface);
 }
-.carousel-btn:hover { border-color: rgba(255, 255, 255, 0.6); }
+.carousel-btn:hover { border-color: var(--ink); }
 /* Pause/play control on feature visuals. */
 .motion-toggle {
   position: absolute; right: 0.75rem; bottom: 0.75rem; z-index: 2;

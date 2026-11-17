@@ -4,6 +4,9 @@
  * sequence of points. Positions are illustrative, not real sites. Pin style copied from the app's
  * sky.css (.sky-map__marker): red dot, white border, drop + pulse.
  */
+import { Image } from 'astro:assets';
+import mosaic from '../assets/maps/pole-south.png';
+
 interface Props {
   alt: string;
   class?: string;
@@ -17,7 +20,7 @@ const points = [
 
 <div class:list={['polar-pin', cls]} data-points={JSON.stringify(points)}>
   <div class="polar-pin__stage">
-    <img src="/assets/pole-south.png" alt={alt} width="720" height="702" loading="lazy" decoding="async" />
+    <Image src={mosaic} alt={alt} widths={[380, 720]} sizes="380px" format="webp" quality={80} loading="lazy" decoding="async" />
     <span class="polar-pin__marker" style={`left:${points[0][0]}%;top:${points[0][1]}%`} aria-hidden="true"></span>
   </div>
 </div>
@@ -26,7 +29,7 @@ const points = [
   .polar-pin {
     width: min(100%, 380px);
     border-radius: 0.75rem;
-    background: #0b0d12;
+    background: var(--surface-2);
     padding: 1.25rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     outline: 1px solid rgba(0, 0, 0, 0.1);
