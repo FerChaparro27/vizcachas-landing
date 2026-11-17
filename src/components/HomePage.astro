@@ -1,264 +1,371 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import { t, appUrl, localePath, REPO_URL, type Locale } from '../i18n';
+import { t, appUrl, localePath, scenarios, REPO_URL, type Locale } from '../i18n';
 import skyPole from '../assets/shots/app-sky-pole.png';
 import details from '../assets/shots/app-details.png';
 import map from '../assets/shots/app-map.png';
 import mobile from '../assets/shots/app-mobile.png';
+import farSide from '../assets/shots/app-far-side.png';
+import compare from '../assets/shots/app-compare2.png';
 
 interface Props { lang: Locale }
 const { lang } = Astro.props;
 const d = t(lang);
-// Simple line icons for the "why it is hard today" cards: codes, table, distorted map.
+
+const team = ['Mateo Cerri', 'Fernando Chaparro', 'Facundo Grassino', 'Estepan Porporato', 'Francisco Romero', 'Tomas Vainstub'];
+const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
+
+// Teaser figure panels (a)–(d), Nerfies-style.
+const panels = [
+  { img: skyPole, label: 'a', cls: 'md:col-span-2 aspect-[16/10]' },
+  { img: details, label: 'b', cls: 'aspect-[16/10]' },
+  { img: map, label: 'c', cls: 'aspect-[16/10]' },
+];
+
+// Audience cards: image + deep link.
+const audience = [
+  { img: compare, pos: 'object-left-top', href: appUrl(lang, scenarios.compare), ext: true },
+  { img: null, pos: '', href: localePath(lang, 'learn'), ext: false },
+  { img: farSide, pos: 'object-center', href: appUrl(lang, scenarios.farSide), ext: true },
+];
+
+// Showcase carousel slides: screenshot + scenario link.
+const slides = [
+  { img: skyPole, href: appUrl(lang, scenarios.southPole) },
+  { img: farSide, href: appUrl(lang, scenarios.farSide) },
+  { img: compare, href: appUrl(lang, scenarios.compare) },
+  { img: details, href: appUrl(lang, scenarios.southPole) },
+  { img: map, href: appUrl(lang, scenarios.southPole) },
+];
+
 const hardIcons = [
   'M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16',
   'M3 5h18v14H3zM3 10h18M3 15h18M9 5v14M15 5v14',
   'M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v16M15 6v16',
 ];
-const team = [
-  'Mateo Cerri',
-  'Fernando Chaparro',
-  'Facundo Grassino',
-  'Estepan Porporato',
-  'Francisco Romero',
-  'Tomas Vainstub',
-];
-const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
+
+const bibtex = `@software{vizcachas2026navigator,
+  title  = {Lunar Landing Site Navigator},
+  author = {Cerri, Mateo and Chaparro, Fernando and Grassino, Facundo and
+            Porporato, Estepan and Romero, Francisco and Vainstub, Tomas},
+  year   = {2026},
+  url    = {https://vizcachasfueradeorbita.vercel.app/},
+  note   = {Open-source educational tool}
+}`;
 ---
 
 <Base lang={lang} title={d.meta.title} description={d.meta.description}>
-  <!-- HERO -->
-  <section class="border-b border-line">
-    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center">
-      <div>
-        <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
-          <span class="h-1.5 w-1.5 rounded-full bg-sun"></span>
-          {d.hero.badge}
-        </p>
-        <h1 class="mt-6 font-serif text-4xl leading-[1.1] font-semibold tracking-tight sm:text-5xl">
-          {d.hero.title}
-        </h1>
-        <p class="mt-5 border-l-2 border-sun pl-4 font-serif text-xl leading-snug italic sm:text-2xl">
-          “{d.hero.question}”
-        </p>
-        <p class="mt-5 max-w-xl leading-relaxed text-muted">{d.hero.lede}</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href={appUrl(lang)} class="rounded bg-ink px-5 py-2.5 font-medium text-paper hover:opacity-90">
-            {d.hero.ctaApp} ↗
-          </a>
-          <a
-            href={localePath(lang, 'learn')}
-            class="rounded border border-line bg-surface px-5 py-2.5 font-medium hover:border-ink"
-          >
-            {d.hero.ctaLearn} →
-          </a>
-        </div>
-      </div>
+  <!-- HERO: centered, Nerfies-style (title, authors, link buttons) with Shadowmap-like pill CTAs -->
+  <section class="px-4 pt-16 pb-12 text-center sm:px-6 md:pt-24">
+    <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
+      <span class="h-1.5 w-1.5 rounded-full bg-sun"></span>{d.hero.badge}
+    </p>
+    <h1 class="mx-auto mt-6 max-w-4xl font-serif text-[2.6rem] leading-[1.04] font-semibold tracking-tight text-balance sm:text-6xl md:text-7xl">
+      {d.hero.title}
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl font-serif text-xl leading-snug text-balance italic sm:text-2xl">“{d.hero.question}”</p>
+    <p class="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-muted">
+      {team.map((n, i) => <><span class="whitespace-nowrap text-ink">{n}</span>{i < team.length - 1 && <span aria-hidden="true"> · </span>}</>)}
+      <br /><span class="font-mono text-xs tracking-wide">Vizcachas fuera de órbita</span>
+    </p>
+    <ul class="mt-8 flex flex-wrap justify-center gap-2.5 text-sm font-medium">
+      <li>
+        <a href={appUrl(lang)} class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-paper hover:opacity-90">
+          {d.hero.ctaApp} <span aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a href={REPO_URL} class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 hover:border-ink">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>
+          {d.hero.ctaCode}
+        </a>
+      </li>
+      <li>
+        <a href={localePath(lang, 'learn')} class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 hover:border-ink">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l9-3 9 3-9 3-9-3zM7 8v5c0 1.7 2.2 3 5 3s5-1.3 5-3V8M21 6v6"/></svg>
+          {d.hero.ctaLearn}
+        </a>
+      </li>
+      <li>
+        <a href="#cite" class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 hover:border-ink">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 7h4v4H8c0 2 1 3 3 3M14 7h4v4h-3c0 2 1 3 3 3"/></svg>
+          {d.hero.ctaCite}
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- TEASER BAND: the tool itself on a dark stage (OpenSpace), labeled panels (Nerfies) -->
+  <section class="band">
+    <div class="mx-auto max-w-6xl px-4 pt-10 pb-12 sm:px-6">
       <figure>
-        <div class="overflow-hidden rounded-lg border border-line bg-black shadow-xl shadow-black/10">
-          <Image
-            src={skyPole}
-            alt={d.hero.figure}
-            widths={[640, 960, 1440]}
-            sizes="(min-width: 1024px) 560px, 100vw"
-            loading="eager"
-            class="h-auto w-full"
-          />
-        </div>
-        <figcaption class="figure-caption mt-3"><b>Fig. 1.</b> {d.hero.figure}</figcaption>
-      </figure>
-    </div>
-    <dl class="mx-auto grid max-w-6xl grid-cols-2 border-t border-line md:grid-cols-4">
-      {
-        d.hero.stats.map((s, i) => (
-          <div class:list={[
-            'flex flex-col-reverse justify-end border-line px-4 py-6 sm:px-6',
-            i > 0 && 'md:border-l',
-            i % 2 === 1 && 'border-l',
-            i >= 2 && 'border-t md:border-t-0',
-          ]}>
-            <dt class="mt-1 text-sm text-muted">{s.label}</dt>
-            <dd class="font-mono text-3xl font-medium">{s.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
-  </section>
-
-  <!-- PROBLEM -->
-  <section id="problem" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-    <p class="kicker">{d.problem.kicker}</p>
-    <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.problem.title}</h2>
-    <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.problem.intro}</p>
-
-    <div class="mt-12 grid gap-6 md:grid-cols-3">
-      {
-        d.problem.points.map((p, i) => (
-          <article class="rounded-lg border border-line bg-surface p-6">
-            <span class="font-mono text-sm text-muted">0{i + 1}</span>
-            <h3 class="mt-2 font-serif text-xl font-semibold">{p.title}</h3>
-            <p class="mt-2 leading-relaxed text-muted">{p.body}</p>
-          </article>
-        ))
-      }
-    </div>
-
-    <h3 class="mt-20 font-serif text-2xl font-semibold">{d.problem.hardTitle}</h3>
-    <p class="mt-3 max-w-3xl leading-relaxed text-muted">{d.problem.hardIntro}</p>
-    <div class="mt-8 grid gap-6 md:grid-cols-3">
-      {
-        d.problem.hard.map((h, i) => (
-          <article class="rounded-lg border border-dashed border-line p-6">
-            <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="text-muted">
-              <path d={hardIcons[i]} />
-            </svg>
-            <h4 class="mt-3 font-semibold">{h.title}</h4>
-            <p class="mt-1.5 text-sm leading-relaxed text-muted">{h.caption}</p>
-          </article>
-        ))
-      }
-    </div>
-    <p class="mt-10 max-w-3xl border-l-2 border-earth pl-4 font-serif text-xl leading-snug">{d.problem.conclusion}</p>
-  </section>
-
-  <!-- SOLUTION -->
-  <section id="solution" class="border-y border-line bg-surface">
-    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <p class="kicker">{d.solution.kicker}</p>
-      <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.solution.title}</h2>
-      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.solution.intro}</p>
-
-      <!-- Pipeline -->
-      <h3 class="mt-14 font-serif text-2xl font-semibold">{d.solution.pipelineTitle}</h3>
-      <ol class="mt-6 grid gap-3 md:grid-cols-4 md:gap-0">
-        {
-          d.solution.pipeline.map((s, i) => (
-            <li class="relative flex">
-              <div class:list={[
-                'flex-1 rounded-lg border bg-paper p-5',
-                i < 2 ? 'border-earth/60' : i === 2 ? 'border-sun/70' : 'border-ink/40',
-              ]}>
-                <span class="font-mono text-[0.7rem] tracking-wider text-muted uppercase">{s.tag}</span>
-                <p class="mt-1 font-semibold">{s.title}</p>
-                <p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
-              </div>
-              {i < 3 && (
-                <span aria-hidden="true" class="hidden w-6 shrink-0 items-center justify-center text-muted md:flex">
-                  {i === 0 ? '+' : '→'}
+        <div class="grid gap-3 md:grid-cols-[1fr_1fr_0.62fr]">
+          {
+            panels.map((p, i) => (
+              <div class:list={['relative overflow-hidden rounded-xl ring-1 ring-white/10', p.cls]}>
+                <Image
+                  src={p.img}
+                  alt={d.teaser.panels[i]}
+                  widths={i === 0 ? [720, 1080, 1440] : [480, 720]}
+                  sizes={i === 0 ? '(min-width: 768px) 700px, 100vw' : '(min-width: 768px) 300px, 100vw'}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  class="h-full w-full object-cover object-left-top"
+                />
+                <span class="absolute bottom-2 left-2 rounded-full bg-black/70 px-2.5 py-1 font-mono text-[0.7rem] text-white backdrop-blur">
+                  ({p.label}) {d.teaser.panels[i]}
                 </span>
-              )}
-            </li>
-          ))
-        }
-      </ol>
-      <p class="mt-4 text-sm text-muted">{d.solution.pipelineNote}</p>
+              </div>
+            ))
+          }
+          <div class="relative hidden overflow-hidden rounded-xl ring-1 ring-white/10 md:col-start-3 md:row-span-2 md:row-start-1 md:block">
+            <Image src={mobile} alt={d.teaser.panels[3]} widths={[240, 480]} sizes="240px" class="h-full w-full object-cover object-top" />
+            <span class="absolute bottom-2 left-2 rounded-full bg-black/70 px-2.5 py-1 font-mono text-[0.7rem] text-white">(d) {d.teaser.panels[3]}</span>
+          </div>
+        </div>
+        <figcaption class="mx-auto mt-5 max-w-3xl text-center text-sm leading-relaxed text-[#a9b3c9]">{d.teaser.caption}</figcaption>
+      </figure>
 
-      <!-- Features -->
-      <h3 class="mt-16 font-serif text-2xl font-semibold">{d.solution.featuresTitle}</h3>
-      <div class="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      <dl class="mt-10 grid grid-cols-2 gap-y-6 border-t border-white/10 pt-8 md:grid-cols-4">
         {
-          d.solution.features.map((f) => (
-            <div class="border-t border-line pt-4">
-              <h4 class="font-semibold">{f.title}</h4>
-              <p class="mt-1.5 leading-relaxed text-muted">{f.body}</p>
+          d.hero.stats.map((s) => (
+            <div class="flex flex-col-reverse px-2 text-center">
+              <dt class="mt-1 text-xs leading-snug text-[#a9b3c9]">{s.label}</dt>
+              <dd class="font-mono text-3xl text-[#eef1f7]">{s.value}</dd>
             </div>
           ))
         }
-      </div>
+      </dl>
+    </div>
+  </section>
 
-      <!-- Screenshots -->
-      <div class="mt-16 grid gap-6 lg:grid-cols-[1.4fr_1fr_0.55fr] lg:items-start">
-        <figure>
-          <div class="overflow-hidden rounded-lg border border-line bg-black">
-            <Image src={details} alt={d.solution.shots[0]} widths={[640, 1024, 1440]} sizes="(min-width: 1024px) 520px, 100vw" class="h-auto w-full" />
-          </div>
-          <figcaption class="figure-caption mt-3"><b>Fig. 2.</b> {d.solution.shots[0]}</figcaption>
-        </figure>
-        <figure>
-          <div class="overflow-hidden rounded-lg border border-line bg-black">
-            <Image src={map} alt={d.solution.shots[1]} widths={[480, 960]} sizes="(min-width: 1024px) 380px, 100vw" class="h-auto w-full" />
-          </div>
-          <figcaption class="figure-caption mt-3"><b>Fig. 3.</b> {d.solution.shots[1]}</figcaption>
-        </figure>
-        <figure class="mx-auto max-w-[240px] lg:max-w-none">
-          <div class="overflow-hidden rounded-[1.25rem] border-4 border-ink/80 bg-black">
-            <Image src={mobile} alt={d.solution.shots[2]} widths={[240, 480]} sizes="240px" class="h-auto w-full" />
-          </div>
-          <figcaption class="figure-caption mt-3"><b>Fig. 4.</b> {d.solution.shots[2]}</figcaption>
-        </figure>
-      </div>
+  <!-- AUDIENCE: Shadowmap "solutions" / OpenSpace "every venue" -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <p class="kicker text-center">{d.audience.kicker}</p>
+    <h2 class="mt-3 text-center font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.audience.title}</h2>
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      {
+        d.audience.items.map((a, i) => (
+          <a
+            href={audience[i].href}
+            class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/5"
+          >
+            <div class="aspect-[16/10] overflow-hidden bg-[#0b1020]">
+              {audience[i].img ? (
+                <Image src={audience[i].img!} alt="" width={720} class:list={['h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]', audience[i].pos]} />
+              ) : (
+                <div class="flex h-full items-center justify-center bg-surface-2 p-6">
+                  <svg viewBox="0 0 200 110" class="h-full w-auto" aria-hidden="true">
+                    <rect x="0" y="80" width="200" height="30" fill="var(--line)" />
+                    <line x1="0" y1="80" x2="200" y2="80" stroke="var(--ink-muted)" />
+                    <path d="M20 80 Q100 -20 180 80" fill="none" stroke="var(--sun-ink)" stroke-dasharray="4 3" />
+                    <circle cx="100" cy="30" r="9" fill="var(--sun)" />
+                    <path d="M100 80 L100 30" stroke="var(--ink-muted)" stroke-dasharray="2 3" />
+                    <path d="M128 80 A28 28 0 0 0 120 60" fill="none" stroke="var(--earth-ink)" stroke-width="2" />
+                    <text x="134" y="70" font-size="10" fill="var(--earth-ink)" font-family="var(--font-mono)">+62°</text>
+                  </svg>
+                </div>
+              )}
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="font-serif text-xl font-semibold">{a.title}</h3>
+              <p class="mt-2 flex-1 leading-relaxed text-muted">{a.body}</p>
+              <span class="mt-5 text-sm font-semibold">
+                {a.cta} <span aria-hidden="true" class="inline-block transition group-hover:translate-x-0.5">{audience[i].ext ? '↗' : '→'}</span>
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 
-      <!-- Validation & limits -->
-      <div class="mt-16 grid gap-6 md:grid-cols-2">
-        <div class="rounded-lg border border-line bg-paper p-6">
-          <h3 class="flex items-center gap-2 font-serif text-xl font-semibold">
-            <span class="text-ok" aria-hidden="true">✓</span>{d.solution.validationTitle}
-          </h3>
-          <p class="mt-2 leading-relaxed text-muted">{d.solution.validationBody}</p>
+  <!-- PROBLEM -->
+  <section id="problem" class="border-t border-line">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <p class="kicker">{d.problem.kicker}</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.problem.title}</h2>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.problem.intro}</p>
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          d.problem.points.map((p) => (
+            <article class="rounded-2xl border border-line bg-surface p-6">
+              <h3 class="font-serif text-xl font-semibold">{p.title}</h3>
+              <p class="mt-2 leading-relaxed text-muted">{p.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <h3 class="mt-16 font-serif text-2xl font-semibold">{d.problem.hardTitle}</h3>
+      <p class="mt-3 max-w-3xl leading-relaxed text-muted">{d.problem.hardIntro}</p>
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {
+          d.problem.hard.map((h, i) => (
+            <article class="rounded-2xl border border-dashed border-line p-6">
+              <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="text-muted">
+                <path d={hardIcons[i]} />
+              </svg>
+              <h4 class="mt-3 font-semibold">{h.title}</h4>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">{h.caption}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="mt-10 max-w-3xl border-l-2 border-earth pl-4 font-serif text-xl leading-snug">{d.problem.conclusion}</p>
+    </div>
+  </section>
+
+  <!-- SHOWCASE CAROUSEL: OpenSpace "See what's possible" -->
+  <section class="band" aria-roledescription="carousel" aria-label={d.showcase.title}>
+    <div class="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p class="kicker !text-[#a9b3c9]">{d.showcase.kicker}</p>
+          <h2 class="mt-3 font-serif text-3xl font-semibold tracking-tight text-[#eef1f7] sm:text-4xl">{d.showcase.title}</h2>
+          <p class="mt-3 max-w-2xl leading-relaxed text-[#a9b3c9]">{d.showcase.intro}</p>
         </div>
-        <div class="rounded-lg border border-line bg-paper p-6">
-          <h3 class="flex items-center gap-2 font-serif text-xl font-semibold">
-            <span class="text-sun-ink" aria-hidden="true">!</span>{d.solution.limitsTitle}
-          </h3>
-          <p class="mt-2 leading-relaxed text-muted">{d.solution.limitsBody}</p>
+        <div class="flex gap-2">
+          <button type="button" data-carousel="-1" aria-label={d.showcase.prev} class="carousel-btn">←</button>
+          <button type="button" data-carousel="1" aria-label={d.showcase.next} class="carousel-btn">→</button>
         </div>
       </div>
+    </div>
+    <ul
+      id="showcase-track"
+      class="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      style="padding-inline: max(1rem, calc((100vw - 72rem) / 2 + 1.5rem)); scroll-padding-inline: max(1rem, calc((100vw - 72rem) / 2 + 1.5rem));"
+    >
+      {
+        d.showcase.slides.map((s, i) => (
+          <li class="w-[86%] shrink-0 snap-start sm:w-[540px]" aria-roledescription="slide" aria-label={`${i + 1} / ${slides.length}`}>
+            <a href={slides[i].href} class="group block overflow-hidden rounded-2xl bg-[#121a2e] ring-1 ring-white/10 hover:ring-white/30">
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <Image src={slides[i].img} alt="" widths={[540, 1080]} sizes="540px" class="h-full w-full object-cover object-left-top transition duration-500 group-hover:scale-[1.02]" />
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 pt-16">
+                  <p class="font-mono text-[0.7rem] tracking-[0.14em] text-[#ffc54d] uppercase">{s.eyebrow}</p>
+                  <h3 class="mt-1 text-lg font-semibold text-white">{s.title}</h3>
+                </div>
+              </div>
+              <div class="flex items-start justify-between gap-4 p-5">
+                <p class="text-sm leading-relaxed text-[#a9b3c9]">{s.body}</p>
+                <span class="shrink-0 text-sm font-semibold whitespace-nowrap text-[#eef1f7]">{d.showcase.open} ↗</span>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-      <div class="mt-12 flex flex-col items-start justify-between gap-4 rounded-lg bg-ink p-6 text-paper sm:flex-row sm:items-center sm:p-8">
-        <p class="font-serif text-xl">{d.solution.learnTeaser}</p>
-        <a href={localePath(lang, 'learn')} class="shrink-0 rounded bg-sun px-5 py-2.5 font-medium text-[#0b1020] hover:opacity-90">
-          {d.solution.learnCta} →
-        </a>
+  <!-- SOLUTION: how it works -->
+  <section id="solution" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <p class="kicker">{d.solution.kicker}</p>
+    <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.solution.title}</h2>
+    <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.solution.intro}</p>
+
+    <h3 class="mt-14 font-serif text-2xl font-semibold">{d.solution.pipelineTitle}</h3>
+    <ol class="mt-6 grid gap-3 md:grid-cols-4 md:gap-0">
+      {
+        d.solution.pipeline.map((s, i) => (
+          <li class="relative flex">
+            <div class:list={['flex-1 rounded-2xl border bg-surface p-5', i < 2 ? 'border-earth/60' : i === 2 ? 'border-sun/70' : 'border-ink/40']}>
+              <span class="font-mono text-[0.7rem] tracking-wider text-muted uppercase">{s.tag}</span>
+              <p class="mt-1 font-semibold">{s.title}</p>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
+            </div>
+            {i < 3 && (
+              <span aria-hidden="true" class="hidden w-6 shrink-0 items-center justify-center text-muted md:flex">{i === 0 ? '+' : '→'}</span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-4 max-w-4xl text-sm text-muted">{d.solution.pipelineNote}</p>
+
+    <h3 class="mt-16 font-serif text-2xl font-semibold">{d.solution.featuresTitle}</h3>
+    <div class="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        d.solution.features.map((f) => (
+          <div class="border-t border-line pt-4">
+            <h4 class="font-semibold">{f.title}</h4>
+            <p class="mt-1.5 leading-relaxed text-muted">{f.body}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-16 grid gap-5 md:grid-cols-2">
+      <div class="rounded-2xl border border-line bg-surface p-6">
+        <h3 class="flex items-center gap-2 font-serif text-xl font-semibold"><span class="text-ok" aria-hidden="true">✓</span>{d.solution.validationTitle}</h3>
+        <p class="mt-2 leading-relaxed text-muted">{d.solution.validationBody}</p>
       </div>
+      <div class="rounded-2xl border border-line bg-surface p-6">
+        <h3 class="flex items-center gap-2 font-serif text-xl font-semibold"><span class="text-sun-ink" aria-hidden="true">!</span>{d.solution.limitsTitle}</h3>
+        <p class="mt-2 leading-relaxed text-muted">{d.solution.limitsBody}</p>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col items-start justify-between gap-4 rounded-2xl bg-ink p-6 text-paper sm:flex-row sm:items-center sm:p-8">
+      <p class="font-serif text-xl">{d.solution.learnTeaser}</p>
+      <a href={localePath(lang, 'learn')} class="shrink-0 rounded-full bg-sun px-5 py-2.5 font-semibold text-[#0b1020] hover:brightness-95">{d.solution.learnCta} →</a>
     </div>
   </section>
 
   <!-- DATA & CREDITS -->
-  <section id="data" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-    <p class="kicker">{d.data.kicker}</p>
-    <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.data.title}</h2>
-    <div class="mt-10 overflow-hidden rounded-lg border border-line">
-      <table class="w-full text-left text-sm">
-        <tbody>
-          {
-            d.data.sources.map((s) => (
-              <tr class="border-b border-line last:border-0 even:bg-surface">
-                <th scope="row" class="px-4 py-3 align-top font-medium">
-                  <a href={s.url} class="underline decoration-line underline-offset-4 hover:decoration-ink">{s.name}</a>
-                  <span class="mt-0.5 block font-mono text-xs font-normal text-muted">{s.org}</span>
-                </th>
-                <td class="px-4 py-3 align-top text-muted">{s.use}</td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-    </div>
-    <div class="mt-10 grid gap-8 md:grid-cols-3">
-      <div>
-        <h3 class="font-semibold">{d.data.softwareTitle}</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.software}</p>
+  <section id="data" class="border-t border-line">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <p class="kicker">{d.data.kicker}</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.data.title}</h2>
+      <div class="mt-10 overflow-hidden rounded-2xl border border-line">
+        <table class="w-full text-left text-sm">
+          <tbody>
+            {
+              d.data.sources.map((s) => (
+                <tr class="border-b border-line last:border-0 even:bg-surface">
+                  <th scope="row" class="px-4 py-3 align-top font-medium">
+                    <a href={s.url} class="underline decoration-line underline-offset-4 hover:decoration-ink">{s.name}</a>
+                    <span class="mt-0.5 block font-mono text-xs font-normal text-muted">{s.org}</span>
+                  </th>
+                  <td class="px-4 py-3 align-top text-muted">{s.use}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
-      <div>
-        <h3 class="font-semibold">{d.data.aiTitle}</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.ai}</p>
+      <div class="mt-10 grid gap-8 md:grid-cols-3">
+        <div><h3 class="font-semibold">{d.data.softwareTitle}</h3><p class="mt-2 text-sm leading-relaxed text-muted">{d.data.software}</p></div>
+        <div><h3 class="font-semibold">{d.data.aiTitle}</h3><p class="mt-2 text-sm leading-relaxed text-muted">{d.data.ai}</p></div>
+        <div><h3 class="font-semibold">{d.data.licenseTitle}</h3><p class="mt-2 text-sm leading-relaxed text-muted">{d.data.license}</p></div>
       </div>
-      <div>
-        <h3 class="font-semibold">{d.data.licenseTitle}</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.license}</p>
-      </div>
-    </div>
-    <div class="mt-10 grid gap-6 md:grid-cols-[1.4fr_1fr]">
-      <aside id="independence" class="rounded-lg border border-line border-l-4 border-l-earth bg-surface p-6">
+      <aside id="independence" class="mt-10 rounded-2xl border border-line border-l-4 border-l-earth bg-surface p-6">
         <h3 class="font-semibold">{d.data.disclaimerTitle}</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">{d.data.disclaimer}</p>
+        <p class="mt-2 max-w-4xl text-sm leading-relaxed text-muted">{d.data.disclaimer}</p>
       </aside>
-      <div class="rounded-lg border border-line p-6">
-        <h3 class="font-semibold">{d.data.citationTitle}</h3>
-        <p class="mt-2 break-words rounded bg-surface-2 p-3 font-mono text-xs leading-relaxed">{d.data.citation}</p>
-      </div>
     </div>
+  </section>
+
+  <!-- CITE: Nerfies BibTeX block -->
+  <section id="cite" class="mx-auto max-w-4xl px-4 pb-20 sm:px-6">
+    <p class="kicker">{d.cite.kicker}</p>
+    <h2 class="mt-3 font-serif text-3xl font-semibold tracking-tight">{d.cite.title}</h2>
+    <p class="mt-3 leading-relaxed text-muted">{d.cite.intro}</p>
+    {
+      [
+        { label: d.cite.toolLabel, text: bibtex, id: 'cite-tool' },
+        { label: d.cite.dataLabel, text: d.cite.dataCitation, id: 'cite-data' },
+      ].map((c) => (
+        <div class="mt-6">
+          <div class="flex items-center justify-between gap-3">
+            <h3 class="text-sm font-semibold">{c.label}</h3>
+            <button type="button" class="copy-btn rounded-full border border-line px-3 py-1 text-xs hover:border-ink" data-copy={c.id} data-copied={d.cite.copied}>
+              {d.cite.copy}
+            </button>
+          </div>
+          <pre id={c.id} class="mt-2 overflow-x-auto rounded-xl bg-surface-2 p-4 font-mono text-xs leading-relaxed whitespace-pre-wrap">{c.text}</pre>
+        </div>
+      ))
+    }
   </section>
 
   <!-- TEAM -->
@@ -270,24 +377,17 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
           <img src="/assets/logo-vizcachas.svg" alt="" width="64" height="64" class="h-16 w-16 rounded-full border border-line bg-white p-1 dark:invert" />
           <h2 class="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">{d.team.title}</h2>
         </div>
-        <div class="flex flex-wrap gap-3 text-sm">
-          <a href={REPO_URL} class="rounded border border-line bg-surface px-4 py-2 hover:border-ink">{d.team.repo} ↗</a>
-        </div>
+        <a href={REPO_URL} class="self-start rounded-full border border-line bg-surface px-4 py-2 text-sm hover:border-ink md:self-auto">{d.team.repo} ↗</a>
       </div>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.team.intro}</p>
       <ul class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
         {
           team.map((name, i) => (
-            <li class="rounded-lg border border-line bg-surface p-4 text-center">
+            <li class="rounded-2xl border border-line bg-surface p-4 text-center">
               <span
-                class:list={[
-                  'mx-auto flex h-14 w-14 items-center justify-center rounded-full font-mono text-sm font-medium',
-                  i % 2 === 0 ? 'bg-sun/25 text-sun-ink' : 'bg-earth/25 text-earth-ink',
-                ]}
+                class:list={['mx-auto flex h-14 w-14 items-center justify-center rounded-full font-mono text-sm font-medium', i % 2 === 0 ? 'bg-sun/25 text-sun-ink' : 'bg-earth/25 text-earth-ink']}
                 aria-hidden="true"
-              >
-                {initials(name)}
-              </span>
+              >{initials(name)}</span>
               <span class="mt-3 block text-sm font-medium">{name}</span>
             </li>
           ))
@@ -295,4 +395,49 @@ const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
       </ul>
     </div>
   </section>
+
+  <!-- FINAL CTA: OpenSpace "Start exploring" -->
+  <section class="px-4 sm:px-6">
+    <div class="band relative mx-auto max-w-4xl overflow-hidden rounded-3xl px-6 py-14 text-center ring-1 ring-white/10">
+      <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 -bottom-24 mx-auto h-48 w-[80%] rounded-[50%] bg-[#6cb2ff]/20 blur-3xl"></div>
+      <h2 class="relative font-serif text-3xl font-semibold text-[#eef1f7] sm:text-4xl">{d.cta.title}</h2>
+      <p class="relative mt-3 text-[#a9b3c9]">{d.cta.body}</p>
+      <div class="relative mt-8 flex flex-wrap justify-center gap-3 text-sm font-semibold">
+        <a href={appUrl(lang)} class="rounded-full bg-sun px-5 py-2.5 text-[#0b1020] hover:brightness-95">{d.cta.app} →</a>
+        <a href={REPO_URL} class="rounded-full border border-white/25 px-5 py-2.5 text-[#eef1f7] hover:border-white/60">{d.cta.repo}</a>
+        <a href={localePath(lang, 'learn')} class="rounded-full border border-white/25 px-5 py-2.5 text-[#eef1f7] hover:border-white/60">{d.cta.learn}</a>
+      </div>
+    </div>
+  </section>
 </Base>
+
+<script>
+  // Carousel prev/next: scroll by one card width.
+  const track = document.getElementById('showcase-track');
+  document.querySelectorAll<HTMLButtonElement>('[data-carousel]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = track?.querySelector('li');
+      if (!track || !card) return;
+      track.scrollBy({ left: Number(btn.dataset.carousel) * (card.clientWidth + 20), behavior: 'smooth' });
+    });
+  });
+  // Copy buttons for the citation blocks.
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const pre = document.getElementById(btn.dataset.copy ?? '');
+      if (!pre) return;
+      const original = btn.textContent;
+      try {
+        await navigator.clipboard.writeText(pre.textContent ?? '');
+        btn.textContent = btn.dataset.copied ?? 'OK';
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(pre);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+      }
+      setTimeout(() => (btn.textContent = original), 1600);
+    });
+  });
+</script>

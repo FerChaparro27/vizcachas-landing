@@ -16,7 +16,9 @@
     "language": "Language",
     "theme": "Toggle dark mode",
     "skip": "Skip to content",
-    "menu": "Menu"
+    "menu": "Menu",
+    "code": "Code",
+    "cite": "Cite"
   },
   "hero": {
     "badge": "Open source · Educational · Free",
@@ -25,7 +27,6 @@
     "lede": "Near the lunar south pole the Sun and the Earth barely rise above the horizon, and any mountain can hide them. Our open tool takes a landing site and a date, finds where the Sun and the Earth are, draws them over the local horizon, and shows when there is power and when there is communication.",
     "ctaApp": "Launch the tool",
     "ctaLearn": "Learn the science",
-    "figure": "Sky view from the Intuitive Machines 2 site (Mons Mouton, 84.8° S) on 20 Nov 2026. The Sun stands only 6.5° above the horizon. The panel at the bottom shows the real horizon profile from LOLA terrain data.",
     "stats": [
       {
         "value": "14",
@@ -42,6 +43,38 @@
       {
         "value": "2027",
         "label": "dates covered through December 2027"
+      }
+    ],
+    "ctaCode": "Source code",
+    "ctaCite": "Cite"
+  },
+  "teaser": {
+    "caption": "Lunar Landing Site Navigator draws the Sun and the Earth over the real horizon of each landing site, and tells you how long each one stays up.",
+    "panels": [
+      "Sky view at Mons Mouton (84.8° S)",
+      "Details panel",
+      "Polar map",
+      "On a phone"
+    ]
+  },
+  "audience": {
+    "kicker": "Who it is for",
+    "title": "One tool, three ways to use it",
+    "items": [
+      {
+        "title": "Mission planning",
+        "body": "Compare sites and dates side by side and see how a delay changes power and communication.",
+        "cta": "Compare two dates"
+      },
+      {
+        "title": "Classroom",
+        "body": "Six short concepts, figures and ready-to-use activities for secondary school and early university.",
+        "cta": "Open the module"
+      },
+      {
+        "title": "Curious minds",
+        "body": "Stand on the far side of the Moon and watch the Earth never rise. Pick any landing site from Apollo 11 to today.",
+        "cta": "Visit the far side"
       }
     ]
   },
@@ -80,6 +113,41 @@
       }
     ],
     "conclusion": "The information exists, but no single view answers the question directly. We wanted one screen, one question, and numbers whose origin anyone can check."
+  },
+  "showcase": {
+    "kicker": "See what is possible",
+    "title": "Real scenarios, one click away",
+    "intro": "Each card opens the same scenario in the tool, so you can move the date and keep exploring from there.",
+    "open": "Open this scenario",
+    "prev": "Previous",
+    "next": "Next",
+    "slides": [
+      {
+        "eyebrow": "South pole",
+        "title": "The Sun only 6.5° above the horizon",
+        "body": "Mons Mouton, 20 Nov 2026. The horizon profile comes from LOLA terrain data."
+      },
+      {
+        "eyebrow": "Far side",
+        "title": "At Chang’e 4 the Earth never rises",
+        "body": "Zero hours of Earth in view: a lander there needs a relay satellite to talk home."
+      },
+      {
+        "eyebrow": "Scenario comparison",
+        "title": "168 hours of Sun, then none",
+        "body": "The same south-pole site two weeks apart: 168 h of sunlight in one week, 0 h in the other."
+      },
+      {
+        "eyebrow": "Details",
+        "title": "Every number, explained",
+        "body": "Azimuth, elevation, status, countdowns and visible hours, each with a short explanation."
+      },
+      {
+        "eyebrow": "Polar map",
+        "title": "Pick any point near the pole",
+        "body": "Click on a stereographic map of the lunar south or north pole and query that exact place."
+      }
+    ]
   },
   "solution": {
     "kicker": "§2 · Our solution",
@@ -136,11 +204,6 @@
         "body": "MIT-licensed code, mobile layout, and an interface in English, Spanish, Hindi and Simplified Chinese."
       }
     ],
-    "shots": [
-      "Details panel: azimuth, elevation, status and countdown for the Sun and the Earth, plus visible hours over the next 24 h, 7 days and 30 days.",
-      "Site selection: historical missions, specific coordinates, or a clickable polar map (USGS SIM 3316 mosaic).",
-      "Mobile layout of the sky view."
-    ],
     "validationTitle": "How we check the numbers",
     "validationBody": "Sun and Earth positions are computed from ephemerides retrieved from the JPL Horizons system (NASA/JPL Solar System Dynamics). A validation panel and automated tests compare the app’s values with reference answers saved from that same system and show the difference, so anyone can check them.",
     "limitsTitle": "Honest limits",
@@ -189,16 +252,31 @@
     "ai": "We used Claude (Anthropic) as a coding assistant, with every change reviewed by a team member. The team logo was generated with ChatGPT. Translations other than Spanish were made with AI and have not been reviewed by native speakers. The numbers are not AI-generated: they come from JPL Horizons and are checked by automated tests.",
     "licenseTitle": "License",
     "license": "The code is released under the MIT License. The data belong to their sources and are used under their own terms.",
-    "citationTitle": "How to cite the ephemeris data",
-    "citation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov",
     "disclaimerTitle": "Independence notice",
     "disclaimer": "Lunar Landing Site Navigator is an independent project. It is not affiliated with, endorsed by, or sponsored by NASA, JPL, Caltech, USGS or any space agency. The data come from public sources, credited above; using them does not imply endorsement by their providers."
+  },
+  "cite": {
+    "kicker": "Cite",
+    "title": "How to cite",
+    "intro": "If you use the tool in a class, a report or a paper, please cite it together with the ephemeris source.",
+    "toolLabel": "The tool (BibTeX)",
+    "dataLabel": "Ephemeris data",
+    "copy": "Copy",
+    "copied": "Copied",
+    "dataCitation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov"
   },
   "team": {
     "kicker": "§4 · Team",
     "title": "Vizcachas fuera de órbita",
     "intro": "An independent, open-source educational project. We keep improving it so students, teachers and space enthusiasts can explore the lunar sky with real data.",
     "repo": "View the code on GitHub"
+  },
+  "cta": {
+    "title": "Start exploring",
+    "body": "Free. Open source. In six languages.",
+    "app": "Launch the tool",
+    "repo": "View on GitHub",
+    "learn": "Learn the science"
   },
   "footer": {
     "tagline": "An open tool to read the lunar sky.",

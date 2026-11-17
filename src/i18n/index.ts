@@ -36,7 +36,20 @@ export function localePath(lang: Locale, page = ''): string {
 /** App languages supported by the tool itself (others fall back to English). */
 const appLangs = new Set(['en', 'es', 'hi', 'zh']);
 export const APP_URL = 'https://vizcachasfueradeorbita.vercel.app/';
-export function appUrl(lang: Locale): string {
-  return `${APP_URL}?lang=${appLangs.has(lang) ? lang : 'en'}`;
+/** Link to the tool in the visitor's language; `params` opens a specific scenario (site, t, c). */
+export function appUrl(lang: Locale, params: Record<string, string> = {}): string {
+  const q = new URLSearchParams({ lang: appLangs.has(lang) ? lang : 'en', ...params });
+  return `${APP_URL}?${q.toString()}`;
 }
+
+/** Scenarios used in the showcase and audience cards (dates within the app's data range). */
+export const scenarios = {
+  southPole: { site: 'intuitive-machines-2', t: '2026-11-20T12:00Z' },
+  farSide: { site: 'change-4', t: '2026-11-20T12:00Z' },
+  compare: {
+    site: 'intuitive-machines-2',
+    t: '2026-11-20T12:00Z',
+    c: 'intuitive-machines-2@2026-11-20T12:00Z,intuitive-machines-2@2026-12-04T12:00Z',
+  },
+};
 export const REPO_URL = 'https://github.com/VainstubTomas/NASA-APP-CHALLENGE';

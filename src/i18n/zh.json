@@ -16,7 +16,9 @@
     "language": "语言",
     "theme": "切换深色模式",
     "skip": "跳到正文",
-    "menu": "菜单"
+    "menu": "菜单",
+    "code": "代码",
+    "cite": "引用"
   },
   "hero": {
     "badge": "开源 · 教育 · 免费",
@@ -25,7 +27,6 @@
     "lede": "在月球南极附近，太阳和地球几乎只是刚刚露出地平线，任何一座山都可能把它们挡住。我们的开放工具输入一个着陆点和一个日期，计算太阳和地球的位置，把它们画在当地地平线上，并显示什么时候有能源、什么时候能通信。",
     "ctaApp": "打开工具",
     "ctaLearn": "了解其中的科学",
-    "figure": "2026 年 11 月 20 日从 Intuitive Machines 2 着陆点（Mons Mouton，南纬 84.8°）看到的天空。太阳仅高出地平线 6.5°。下方面板显示根据 LOLA 地形数据得到的真实地平线轮廓。",
     "stats": [
       {
         "value": "14",
@@ -42,6 +43,38 @@
       {
         "value": "2027",
         "label": "日期覆盖至 2027 年 12 月"
+      }
+    ],
+    "ctaCode": "源代码",
+    "ctaCite": "引用"
+  },
+  "teaser": {
+    "caption": "Lunar Landing Site Navigator 在每个着陆点的真实地平线上绘制太阳和地球，并告诉你它们各自会在天空中停留多久。",
+    "panels": [
+      "Mons Mouton（南纬 84.8°）的天空视图",
+      "详情面板",
+      "极区地图",
+      "手机端"
+    ]
+  },
+  "audience": {
+    "kicker": "适用人群",
+    "title": "一个工具，三种用法",
+    "items": [
+      {
+        "title": "任务规划",
+        "body": "并排比较不同地点和日期，看看推迟发射会如何改变能源和通信条件。",
+        "cta": "比较两个日期"
+      },
+      {
+        "title": "课堂教学",
+        "body": "六个简短概念、配图和可直接使用的活动，适合中学和大学低年级。",
+        "cta": "打开教学模块"
+      },
+      {
+        "title": "好奇的你",
+        "body": "站在月球背面，看地球永远不会升起。可选择从阿波罗 11 号至今的任意着陆点。",
+        "cta": "探访月球背面"
       }
     ]
   },
@@ -80,6 +113,41 @@
       }
     ],
     "conclusion": "信息是存在的，但没有任何一个视图能直接回答这个问题。我们想要的是：一个屏幕、一个问题，以及任何人都能核查来源的数字。"
+  },
+  "showcase": {
+    "kicker": "看看能做什么",
+    "title": "真实场景，一键打开",
+    "intro": "每张卡片都会在工具中打开相同的场景，你可以从那里调整日期继续探索。",
+    "open": "打开此场景",
+    "prev": "上一个",
+    "next": "下一个",
+    "slides": [
+      {
+        "eyebrow": "南极",
+        "title": "太阳仅高出地平线 6.5°",
+        "body": "Mons Mouton，2026 年 11 月 20 日。地平线轮廓来自 LOLA 地形数据。"
+      },
+      {
+        "eyebrow": "月球背面",
+        "title": "在嫦娥四号着陆点，地球永远不会升起",
+        "body": "地球可见时数为零：那里的着陆器需要中继卫星才能与地球通信。"
+      },
+      {
+        "eyebrow": "场景比较",
+        "title": "168 小时日照，然后一小时也没有",
+        "body": "同一个南极着陆点，相隔两周：一周有 168 小时日照，另一周为 0 小时。"
+      },
+      {
+        "eyebrow": "详情",
+        "title": "每个数字都有解释",
+        "body": "方位角、高度、状态、倒计时和可见时数，每一项都附有简短说明。"
+      },
+      {
+        "eyebrow": "极区地图",
+        "title": "选择极区附近的任意一点",
+        "body": "在月球南极或北极的立体投影地图上点击，查询该确切位置。"
+      }
+    ]
   },
   "solution": {
     "kicker": "§2 · 我们的方案",
@@ -136,11 +204,6 @@
         "body": "MIT 许可的代码、移动端布局，界面支持英语、西班牙语、印地语和简体中文。"
       }
     ],
-    "shots": [
-      "详情面板：太阳和地球的方位角、高度、状态和倒计时，以及未来 24 小时、7 天和 30 天的可见时数。",
-      "选择着陆点：历史任务、指定坐标，或可点击的极区地图（USGS SIM 3316 拼接图）。",
-      "手机上的天空视图。"
-    ],
     "validationTitle": "我们如何核查数字",
     "validationBody": "太阳和地球的位置根据从 JPL Horizons 系统（NASA/JPL Solar System Dynamics）获取的星历计算。验证面板和自动化测试会把应用的数值与从该系统保存的参考结果进行比较并显示差值，任何人都可以核查。",
     "limitsTitle": "坦诚说明局限",
@@ -189,16 +252,31 @@
     "ai": "我们使用 Claude（Anthropic）作为编程助手，每一处修改都经过团队成员审核。团队标志由 ChatGPT 生成。除西班牙语外的译文均由 AI 翻译，未经母语人士审校。数字并非由 AI 生成：它们来自 JPL Horizons，并经过自动化测试验证。",
     "licenseTitle": "许可",
     "license": "代码以 MIT 许可证发布。数据归各自来源所有，并按其各自条款使用。",
-    "citationTitle": "如何引用星历数据",
-    "citation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov",
     "disclaimerTitle": "独立性声明",
     "disclaimer": "Lunar Landing Site Navigator 是一个独立项目，与 NASA、JPL、加州理工学院、USGS 或任何航天机构均无隶属关系，也未获得其认可或赞助。数据来自上方列出的公开来源；使用这些数据并不意味着得到其提供方的认可。"
+  },
+  "cite": {
+    "kicker": "引用",
+    "title": "如何引用",
+    "intro": "如果你在课堂、报告或论文中使用本工具，请同时引用本工具和星历数据来源。",
+    "toolLabel": "本工具（BibTeX）",
+    "dataLabel": "星历数据",
+    "copy": "复制",
+    "copied": "已复制",
+    "dataCitation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov"
   },
   "team": {
     "kicker": "§4 · 团队",
     "title": "Vizcachas fuera de órbita",
     "intro": "一个独立的开源教育项目。我们会持续改进它，让学生、教师和航天爱好者都能用真实数据探索月球的天空。",
     "repo": "在 GitHub 上查看代码"
+  },
+  "cta": {
+    "title": "开始探索",
+    "body": "免费。开源。支持六种语言。",
+    "app": "打开工具",
+    "repo": "在 GitHub 上查看",
+    "learn": "了解其中的科学"
   },
   "footer": {
     "tagline": "一个用来读懂月球天空的开放工具。",

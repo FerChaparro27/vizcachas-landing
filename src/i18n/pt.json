@@ -16,7 +16,9 @@
     "language": "Idioma",
     "theme": "Alternar modo escuro",
     "skip": "Pular para o conteúdo",
-    "menu": "Menu"
+    "menu": "Menu",
+    "code": "Código",
+    "cite": "Citar"
   },
   "hero": {
     "badge": "Código aberto · Educativa · Gratuita",
@@ -25,7 +27,6 @@
     "lede": "Perto do polo sul lunar, o Sol e a Terra mal aparecem acima do horizonte, e qualquer montanha pode escondê-los. Nossa ferramenta aberta recebe um local de pouso e uma data, calcula onde estão o Sol e a Terra, desenha os dois sobre o horizonte local e mostra quando há energia e quando há comunicação.",
     "ctaApp": "Abrir a ferramenta",
     "ctaLearn": "Aprenda a ciência",
-    "figure": "Vista do céu a partir do local da Intuitive Machines 2 (Mons Mouton, 84,8° S) em 20 de novembro de 2026. O Sol está a apenas 6,5° acima do horizonte. O painel inferior mostra o perfil real do horizonte, obtido com dados de terreno do LOLA.",
     "stats": [
       {
         "value": "14",
@@ -42,6 +43,38 @@
       {
         "value": "2027",
         "label": "datas cobertas até dezembro de 2027"
+      }
+    ],
+    "ctaCode": "Código-fonte",
+    "ctaCite": "Citar"
+  },
+  "teaser": {
+    "caption": "O Lunar Landing Site Navigator desenha o Sol e a Terra sobre o horizonte real de cada local de pouso e mostra por quanto tempo cada um fica visível.",
+    "panels": [
+      "Vista do céu em Mons Mouton (84,8° S)",
+      "Painel de detalhes",
+      "Mapa polar",
+      "No celular"
+    ]
+  },
+  "audience": {
+    "kicker": "Para quem é",
+    "title": "Uma ferramenta, três formas de usar",
+    "items": [
+      {
+        "title": "Planejamento de missões",
+        "body": "Compare locais e datas lado a lado e veja como um atraso muda a energia e a comunicação.",
+        "cta": "Comparar duas datas"
+      },
+      {
+        "title": "Sala de aula",
+        "body": "Seis conceitos curtos, figuras e atividades prontas para o ensino médio e o início da universidade.",
+        "cta": "Abrir o módulo"
+      },
+      {
+        "title": "Para curiosos",
+        "body": "Fique no lado oculto da Lua e veja a Terra nunca nascer. Escolha qualquer local de pouso, da Apollo 11 até hoje.",
+        "cta": "Visitar o lado oculto"
       }
     ]
   },
@@ -80,6 +113,41 @@
       }
     ],
     "conclusion": "A informação existe, mas nenhuma visualização responde à pergunta diretamente. Queríamos uma tela, uma pergunta e números cuja origem qualquer pessoa possa verificar."
+  },
+  "showcase": {
+    "kicker": "Veja o que é possível",
+    "title": "Cenários reais, a um clique",
+    "intro": "Cada cartão abre o mesmo cenário na ferramenta, para você mudar a data e continuar explorando a partir dali.",
+    "open": "Abrir este cenário",
+    "prev": "Anterior",
+    "next": "Próximo",
+    "slides": [
+      {
+        "eyebrow": "Polo sul",
+        "title": "O Sol a apenas 6,5° acima do horizonte",
+        "body": "Mons Mouton, 20 de novembro de 2026. O perfil do horizonte vem dos dados de terreno do LOLA."
+      },
+      {
+        "eyebrow": "Lado oculto",
+        "title": "Na Chang’e 4 a Terra nunca nasce",
+        "body": "Zero horas de Terra visível: um módulo ali precisa de um satélite retransmissor para se comunicar."
+      },
+      {
+        "eyebrow": "Comparação de cenários",
+        "title": "168 horas de Sol, depois nenhuma",
+        "body": "O mesmo local do polo sul com duas semanas de diferença: 168 h de Sol em uma semana, 0 h na outra."
+      },
+      {
+        "eyebrow": "Detalhes",
+        "title": "Cada número, explicado",
+        "body": "Azimute, elevação, estado, contagens regressivas e horas visíveis, cada um com uma explicação curta."
+      },
+      {
+        "eyebrow": "Mapa polar",
+        "title": "Escolha qualquer ponto perto do polo",
+        "body": "Clique em um mapa estereográfico do polo sul ou norte lunar e consulte esse lugar exato."
+      }
+    ]
   },
   "solution": {
     "kicker": "§2 · Nossa solução",
@@ -136,11 +204,6 @@
         "body": "Código com licença MIT, layout para celular e interface em inglês, espanhol, hindi e chinês simplificado."
       }
     ],
-    "shots": [
-      "Painel de detalhes: azimute, elevação, estado e contagem regressiva para o Sol e a Terra, além das horas visíveis nas próximas 24 h, 7 dias e 30 dias.",
-      "Seleção de local: missões históricas, coordenadas específicas ou um mapa polar clicável (mosaico USGS SIM 3316).",
-      "Vista do céu no celular."
-    ],
     "validationTitle": "Como verificamos os números",
     "validationBody": "As posições do Sol e da Terra são calculadas com efemérides obtidas do sistema JPL Horizons (NASA/JPL Solar System Dynamics). Um painel de validação e testes automáticos comparam os valores do app com respostas de referência salvas desse mesmo sistema e mostram a diferença, para que qualquer pessoa possa conferi-los.",
     "limitsTitle": "Limites, com honestidade",
@@ -189,16 +252,31 @@
     "ai": "Usamos o Claude (Anthropic) como assistente de programação, e cada mudança foi revisada por alguém da equipe. O logotipo da equipe foi gerado com o ChatGPT. As traduções, exceto a espanhola, foram feitas com IA e não foram revisadas por falantes nativos. Os números não são gerados por IA: vêm do JPL Horizons e são verificados por testes automáticos.",
     "licenseTitle": "Licença",
     "license": "O código é publicado sob a licença MIT. Os dados pertencem às suas fontes e são usados conforme seus próprios termos.",
-    "citationTitle": "Como citar os dados de efemérides",
-    "citation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov",
     "disclaimerTitle": "Aviso de independência",
     "disclaimer": "O Lunar Landing Site Navigator é um projeto independente. Não é afiliado, endossado nem patrocinado pela NASA, pelo JPL, pela Caltech, pelo USGS ou por qualquer agência espacial. Os dados vêm de fontes públicas, citadas acima; usá-los não implica endosso de seus provedores."
+  },
+  "cite": {
+    "kicker": "Citar",
+    "title": "Como citar",
+    "intro": "Se você usar a ferramenta em uma aula, um relatório ou um artigo, cite-a junto com a fonte das efemérides.",
+    "toolLabel": "A ferramenta (BibTeX)",
+    "dataLabel": "Dados de efemérides",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "dataCitation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov"
   },
   "team": {
     "kicker": "§4 · Equipe",
     "title": "Vizcachas fuera de órbita",
     "intro": "Um projeto educativo independente e de código aberto. Continuamos a melhorá-lo para que estudantes, professores e entusiastas do espaço possam explorar o céu lunar com dados reais.",
     "repo": "Ver o código no GitHub"
+  },
+  "cta": {
+    "title": "Comece a explorar",
+    "body": "Gratuita. Código aberto. Em seis idiomas.",
+    "app": "Abrir a ferramenta",
+    "repo": "Ver no GitHub",
+    "learn": "Aprenda a ciência"
   },
   "footer": {
     "tagline": "Uma ferramenta aberta para ler o céu lunar.",

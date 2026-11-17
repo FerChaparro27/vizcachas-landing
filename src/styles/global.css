@@ -79,6 +79,22 @@ body {
 .figure-caption b { color: var(--ink); font-weight: 600; }
 .rule { border-color: var(--line); }
 
+/* Dark "stage" bands that show the tool (the app itself is dark). Same look in both themes. */
+.band {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(108, 178, 255, 0.10), transparent 60%),
+    #0b1020;
+  color: #eef1f7;
+}
+.dark .band { background: radial-gradient(120% 80% at 50% 0%, rgba(108, 178, 255, 0.10), transparent 60%), #060913; }
+.carousel-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.5rem; height: 2.5rem; border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25); color: #eef1f7;
+}
+.carousel-btn:hover { border-color: rgba(255, 255, 255, 0.6); }
+:focus-visible { outline: 2px solid var(--earth); outline-offset: 2px; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
