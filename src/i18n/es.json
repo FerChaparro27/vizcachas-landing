@@ -18,7 +18,9 @@
     "skip": "Saltar al contenido",
     "menu": "Menú",
     "code": "Código",
-    "cite": "Citar"
+    "cite": "Citar",
+    "showcase": "Escenarios",
+    "module": "Módulo didáctico"
   },
   "hero": {
     "badge": "Código abierto · Educativa · Gratuita",
@@ -84,14 +86,17 @@
     "intro": "Varias misiones tripuladas y robóticas próximas apuntan al polo sur lunar, donde hay hielo atrapado en cráteres en sombra permanente. Pero la misma geometría que conserva ese hielo hace que la región sea difícil para operar.",
     "points": [
       {
+        "figure": "≈1,5°",
         "title": "El Sol roza el horizonte",
         "body": "El eje de rotación de la Luna está inclinado apenas unos 1,5° respecto de la eclíptica. Cerca de los polos el Sol nunca sube más que unos pocos grados, así que el borde de un cráter o una loma pueden dejar a un módulo en sombra durante días."
       },
       {
+        "figure": "±7–8°",
         "title": "La Tierra también está baja",
         "body": "Como la Luna nos muestra siempre la misma cara, la Tierra queda casi fija en el cielo lunar. Vista desde el polo está cerca del horizonte, y la libración la hace subir y bajar lentamente."
       },
       {
+        "figure": "168 h → 0 h",
         "title": "Energía y comunicación definen la misión",
         "body": "Los paneles solares necesitan el Sol sobre el horizonte. La radio directa a la Tierra necesita una línea de vista despejada. Si el lanzamiento se atrasa unos días, las dos cosas pueden cambiar."
       }
@@ -184,8 +189,8 @@
         "body": "El Sol y la Tierra en su escala angular real sobre el horizonte, con una brújula 2D y una regla de elevación como alternativa."
       },
       {
-        "title": "La elevación solar primero",
-        "body": "La altura del Sol sobre el horizonte es el número más visible de la pantalla, porque define la energía solar."
+        "title": "La posición, de un vistazo",
+        "body": "El panel de detalles da azimut, elevación, estado y la próxima salida o puesta del Sol y de la Tierra, cada uno con una explicación breve."
       },
       {
         "title": "Línea de tiempo y cuenta regresiva",
@@ -200,14 +205,12 @@
         "body": "Elegí una misión histórica, escribí coordenadas o hacé clic directamente sobre un mapa estereográfico de cualquiera de los polos."
       },
       {
-        "title": "Abierta y multilingüe",
-        "body": "Código con licencia MIT, diseño para celulares e interfaz en inglés, español, hindi y chino simplificado."
+        "title": "Abierta y para el celular",
+        "body": "Código con licencia MIT que podés estudiar y reutilizar, y un diseño que funciona en celulares y tablets."
       }
     ],
     "validationTitle": "Cómo verificamos los números",
     "validationBody": "Las posiciones del Sol y de la Tierra se calculan con efemérides obtenidas del sistema JPL Horizons (NASA/JPL Solar System Dynamics). Un panel de validación y tests automáticos comparan los valores de la app con respuestas de referencia guardadas de ese mismo sistema y muestran la diferencia, para que cualquiera pueda comprobarlos.",
-    "limitsTitle": "Límites, con honestidad",
-    "limitsBody": "La silueta del horizonte usa terreno real de LOLA solo en los sitios con datos de elevación; en el resto la app usa un horizonte ideal plano y lo avisa. La textura del suelo bajo el horizonte y las estrellas son ilustrativas.",
     "learnTeaser": "¿Querés entender la geometría detrás de cada número?",
     "learnCta": "Abrir el módulo didáctico"
   },
@@ -273,7 +276,7 @@
   },
   "cta": {
     "title": "Empezá a explorar",
-    "body": "Gratis. Código abierto. En seis idiomas.",
+    "body": "Gratis. Código abierto.",
     "app": "Abrir la herramienta",
     "repo": "Ver en GitHub",
     "learn": "Aprendé la ciencia"

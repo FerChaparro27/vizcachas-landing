@@ -8,37 +8,34 @@ interface Props {
 const { lang, page } = Astro.props;
 const d = t(lang);
 const home = localePath(lang);
+// In-page anchors on the home page. The learn module is a separate page, shown as its own button.
 const links = [
   { href: `${home}#problem`, label: d.nav.problem },
+  { href: `${home}#showcase`, label: d.nav.showcase },
   { href: `${home}#solution`, label: d.nav.solution },
-  { href: localePath(lang, 'learn'), label: d.nav.learn },
   { href: `${home}#data`, label: d.nav.data },
   { href: `${home}#team`, label: d.nav.team },
 ];
+const learnHref = localePath(lang, 'learn');
+const bookIcon = 'M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5';
 ---
 
 <!-- Floating pill navigation (Shadowmap-style): sticky, inset from the edges. -->
 <header class="sticky top-3 z-40 px-3 sm:px-4">
   <div
-    class="mx-auto flex h-14 max-w-6xl items-center gap-2 rounded-full border border-line bg-surface/90 pr-2 pl-3 shadow-lg shadow-black/5 backdrop-blur supports-[backdrop-filter]:bg-surface/75 sm:pl-4"
+    class="mx-auto flex h-14 max-w-7xl items-center gap-2 rounded-full border border-line bg-surface/90 pr-2 pl-3 shadow-lg shadow-black/5 backdrop-blur supports-[backdrop-filter]:bg-surface/75 sm:pl-4"
   >
     <a href={home} class="flex shrink-0 items-center gap-2.5" aria-label={d.nav.home}>
       <img src="/assets/logo-vizcachas.svg" alt="" width="32" height="32" class="h-8 w-8 rounded-full border border-line bg-white p-0.5 dark:invert" />
       <span class="hidden font-serif text-[1.02rem] font-semibold leading-tight sm:block">Lunar Landing Site Navigator</span>
     </a>
 
-    <nav class="ml-auto hidden lg:block" aria-label="Main">
+    <nav class="ml-auto hidden xl:block" aria-label="Main">
       <ul class="flex items-center gap-0.5 text-sm">
         {
           links.map((l) => (
             <li>
-              <a
-                href={l.href}
-                class:list={[
-                  'rounded-full px-3 py-1.5 text-muted transition-colors hover:bg-surface-2 hover:text-ink',
-                  page === 'learn' && l.href.endsWith('learn/') && 'bg-surface-2 font-medium text-ink',
-                ]}
-              >
+              <a href={l.href} class="rounded-full px-3 py-1.5 whitespace-nowrap text-muted transition-colors hover:bg-surface-2 hover:text-ink">
                 {l.label}
               </a>
             </li>
@@ -47,7 +44,7 @@ const links = [
       </ul>
     </nav>
 
-    <div class="ml-auto flex items-center gap-1 lg:ml-1">
+    <div class="ml-auto flex items-center gap-1 xl:ml-1">
       <details class="lang-menu relative">
         <summary
           class="flex cursor-pointer list-none items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm text-muted hover:bg-surface-2 hover:text-ink"
@@ -93,7 +90,7 @@ const links = [
         </svg>
       </button>
 
-      <details class="mobile-menu relative lg:hidden">
+      <details class="mobile-menu relative xl:hidden">
         <summary class="cursor-pointer list-none rounded-full p-2 text-muted hover:bg-surface-2 hover:text-ink" aria-label={d.nav.menu}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
             <path d="M4 7h16M4 12h16M4 17h16"></path>
@@ -107,8 +104,26 @@ const links = [
               </li>
             ))
           }
+          <li class="mt-1 border-t border-line pt-1">
+            <a href={learnHref} class="flex items-center gap-2 px-3 py-2 font-medium hover:bg-surface-2">
+              <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d={bookIcon} /></svg>
+              {d.nav.module}
+            </a>
+          </li>
         </ul>
       </details>
+
+      <a
+        href={learnHref}
+        aria-current={page === 'learn' ? 'page' : undefined}
+        class:list={[
+          'ml-1 hidden items-center gap-1.5 rounded-full border px-3.5 py-[7px] text-sm font-medium whitespace-nowrap md:inline-flex',
+          page === 'learn' ? 'border-ink bg-ink text-paper' : 'border-line hover:border-ink',
+        ]}
+      >
+        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d={bookIcon} /></svg>
+        {d.nav.module}
+      </a>
 
       <a
         href={appUrl(lang)}

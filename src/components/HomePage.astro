@@ -13,8 +13,15 @@ interface Props { lang: Locale }
 const { lang } = Astro.props;
 const d = t(lang);
 
+import fSky from '../assets/features/sky.png';
+import fPosition from '../assets/features/position.png';
+import fTimeline from '../assets/features/timeline-countdown.png';
+import fCompare from '../assets/features/compare.png';
+import fMap from '../assets/features/map.png';
+
 const team = ['Mateo Cerri', 'Fernando Chaparro', 'Facundo Grassino', 'Estepan Porporato', 'Francisco Romero', 'Tomas Vainstub'];
-const initials = (n: string) => n.split(' ').map((p) => p[0]).join('');
+// One crop per feature, in the same order as solution.features.
+const featureShots = [fSky, fPosition, fTimeline, fCompare, fMap, mobile];
 
 // Teaser figure panels (a)–(d), Nerfies-style.
 const panels = [
@@ -143,14 +150,11 @@ const bibtex = `@software{vizcachas2026navigator,
   <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
     <p class="kicker text-center">{d.audience.kicker}</p>
     <h2 class="mt-3 text-center font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.audience.title}</h2>
-    <div class="mt-10 grid gap-5 md:grid-cols-3">
+    <div class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-3">
       {
         d.audience.items.map((a, i) => (
-          <a
-            href={audience[i].href}
-            class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/5"
-          >
-            <div class="aspect-[16/10] overflow-hidden bg-[#0b1020]">
+          <a href={audience[i].href} class="group flex flex-col">
+            <div class="aspect-[16/10] overflow-hidden rounded-xl bg-[#0b1020] ring-1 ring-line">
               {audience[i].img ? (
                 <Image src={audience[i].img!} alt="" width={720} class:list={['h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]', audience[i].pos]} />
               ) : (
@@ -167,10 +171,10 @@ const bibtex = `@software{vizcachas2026navigator,
                 </div>
               )}
             </div>
-            <div class="flex flex-1 flex-col p-6">
-              <h3 class="font-serif text-xl font-semibold">{a.title}</h3>
+            <div class="flex flex-1 flex-col pt-5">
+              <h3 class="font-serif text-2xl font-semibold group-hover:underline group-hover:decoration-line group-hover:underline-offset-4">{a.title}</h3>
               <p class="mt-2 flex-1 leading-relaxed text-muted">{a.body}</p>
-              <span class="mt-5 text-sm font-semibold">
+              <span class="mt-4 text-sm font-semibold">
                 {a.cta} <span aria-hidden="true" class="inline-block transition group-hover:translate-x-0.5">{audience[i].ext ? '↗' : '→'}</span>
               </span>
             </div>
@@ -186,37 +190,47 @@ const bibtex = `@software{vizcachas2026navigator,
       <p class="kicker">{d.problem.kicker}</p>
       <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.problem.title}</h2>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.problem.intro}</p>
-      <div class="mt-12 grid gap-5 md:grid-cols-3">
+      <!-- Three points as open columns led by a real figure (no boxes). -->
+      <div class="mt-14 grid md:grid-cols-3 md:divide-x md:divide-line">
         {
-          d.problem.points.map((p) => (
-            <article class="rounded-2xl border border-line bg-surface p-6">
-              <h3 class="font-serif text-xl font-semibold">{p.title}</h3>
+          d.problem.points.map((p, i) => (
+            <article class:list={['border-t border-line py-8 md:border-t-0 md:py-0', i === 0 ? 'md:pr-8' : i === 1 ? 'md:px-8' : 'md:pl-8']}>
+              <p class:list={['font-mono text-4xl tracking-tight lg:text-5xl', i === 1 ? 'text-earth-ink' : 'text-sun-ink']}>{p.figure}</p>
+              <h3 class="mt-5 font-serif text-xl font-semibold">{p.title}</h3>
               <p class="mt-2 leading-relaxed text-muted">{p.body}</p>
             </article>
           ))
         }
       </div>
-      <h3 class="mt-16 font-serif text-2xl font-semibold">{d.problem.hardTitle}</h3>
-      <p class="mt-3 max-w-3xl leading-relaxed text-muted">{d.problem.hardIntro}</p>
-      <div class="mt-8 grid gap-5 md:grid-cols-3">
-        {
-          d.problem.hard.map((h, i) => (
-            <article class="rounded-2xl border border-dashed border-line p-6">
-              <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="text-muted">
-                <path d={hardIcons[i]} />
-              </svg>
-              <h4 class="mt-3 font-semibold">{h.title}</h4>
-              <p class="mt-1.5 text-sm leading-relaxed text-muted">{h.caption}</p>
-            </article>
-          ))
-        }
+
+      <!-- Why it is hard today: a title column + a ruled list. -->
+      <div class="mt-24 grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <h3 class="font-serif text-2xl font-semibold sm:text-3xl">{d.problem.hardTitle}</h3>
+          <p class="mt-3 leading-relaxed text-muted">{d.problem.hardIntro}</p>
+        </div>
+        <ul>
+          {
+            d.problem.hard.map((h, i) => (
+              <li class="flex gap-5 border-t border-line py-6 last:border-b">
+                <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" class="mt-0.5 shrink-0 text-muted">
+                  <path d={hardIcons[i]} />
+                </svg>
+                <div>
+                  <h4 class="font-semibold">{h.title}</h4>
+                  <p class="mt-1 leading-relaxed text-muted">{h.caption}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
       </div>
-      <p class="mt-10 max-w-3xl border-l-2 border-earth pl-4 font-serif text-xl leading-snug">{d.problem.conclusion}</p>
+      <p class="mx-auto mt-20 max-w-3xl text-center font-serif text-2xl leading-snug text-balance sm:text-3xl">{d.problem.conclusion}</p>
     </div>
   </section>
 
   <!-- SHOWCASE CAROUSEL: OpenSpace "See what's possible" -->
-  <section class="band" aria-roledescription="carousel" aria-label={d.showcase.title}>
+  <section id="showcase" class="band" aria-roledescription="carousel" aria-label={d.showcase.title}>
     <div class="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div>
@@ -270,49 +284,67 @@ const bibtex = `@software{vizcachas2026navigator,
     <h2 class="mt-3 max-w-3xl font-serif text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{d.solution.title}</h2>
     <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.solution.intro}</p>
 
-    <h3 class="mt-14 font-serif text-2xl font-semibold">{d.solution.pipelineTitle}</h3>
-    <ol class="mt-6 grid gap-3 md:grid-cols-4 md:gap-0">
+    <!-- Features: alternating rows, text on one side and a crop of that feature on the other. -->
+    <h3 class="mt-20 font-serif text-2xl font-semibold sm:text-3xl">{d.solution.featuresTitle}</h3>
+    <div class="mt-4">
       {
-        d.solution.pipeline.map((s, i) => (
-          <li class="relative flex">
-            <div class:list={['flex-1 rounded-2xl border bg-surface p-5', i < 2 ? 'border-earth/60' : i === 2 ? 'border-sun/70' : 'border-ink/40']}>
-              <span class="font-mono text-[0.7rem] tracking-wider text-muted uppercase">{s.tag}</span>
-              <p class="mt-1 font-semibold">{s.title}</p>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
+        d.solution.features.map((f, i) => (
+          <div class="grid items-center gap-8 border-t border-line py-12 md:grid-cols-2 md:gap-16">
+            <div class:list={['min-w-0', i % 2 === 1 && 'md:order-2']}>
+              <p class="font-mono text-sm text-muted">{String(i + 1).padStart(2, '0')}</p>
+              <h4 class="mt-2 font-serif text-2xl font-semibold">{f.title}</h4>
+              <p class="mt-3 max-w-md text-lg leading-relaxed text-muted">{f.body}</p>
             </div>
-            {i < 3 && (
-              <span aria-hidden="true" class="hidden w-6 shrink-0 items-center justify-center text-muted md:flex">{i === 0 ? '+' : '→'}</span>
-            )}
-          </li>
-        ))
-      }
-    </ol>
-    <p class="mt-4 max-w-4xl text-sm text-muted">{d.solution.pipelineNote}</p>
-
-    <h3 class="mt-16 font-serif text-2xl font-semibold">{d.solution.featuresTitle}</h3>
-    <div class="mt-6 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        d.solution.features.map((f) => (
-          <div class="border-t border-line pt-4">
-            <h4 class="font-semibold">{f.title}</h4>
-            <p class="mt-1.5 leading-relaxed text-muted">{f.body}</p>
+            <div class:list={['flex min-w-0', i % 2 === 1 ? 'md:order-1 md:justify-start' : 'md:justify-end']}>
+              <Image
+                src={featureShots[i]}
+                alt={f.title}
+                widths={[360, 720]}
+                sizes="(min-width: 768px) 520px, 100vw"
+                class:list={[
+                  'h-auto rounded-xl bg-[#0b0d12] shadow-2xl shadow-black/25 ring-1 ring-black/10',
+                  i === 4 ? 'w-[64%] max-w-[300px]' : i === 5 ? 'w-[48%] max-w-[230px]' : 'w-full max-w-[520px]',
+                ]}
+              />
+            </div>
           </div>
         ))
       }
     </div>
 
-    <div class="mt-16 grid gap-5 md:grid-cols-2">
-      <div class="rounded-2xl border border-line bg-surface p-6">
-        <h3 class="flex items-center gap-2 font-serif text-xl font-semibold"><span class="text-ok" aria-hidden="true">✓</span>{d.solution.validationTitle}</h3>
-        <p class="mt-2 leading-relaxed text-muted">{d.solution.validationBody}</p>
-      </div>
-      <div class="rounded-2xl border border-line bg-surface p-6">
-        <h3 class="flex items-center gap-2 font-serif text-xl font-semibold"><span class="text-sun-ink" aria-hidden="true">!</span>{d.solution.limitsTitle}</h3>
-        <p class="mt-2 leading-relaxed text-muted">{d.solution.limitsBody}</p>
+    <!-- Pipeline: a data line with one node per stage (vertical on phones). -->
+    <h3 class="mt-16 font-serif text-2xl font-semibold sm:text-3xl">{d.solution.pipelineTitle}</h3>
+    <ol class="relative mt-8 grid gap-8 border-l border-line pl-6 md:grid-cols-4 md:gap-8 md:border-l-0 md:pt-9 md:pl-0">
+      <span aria-hidden="true" class="absolute top-[7px] right-0 left-0 hidden h-px bg-line md:block"></span>
+      {
+        d.solution.pipeline.map((s, i) => (
+          <li class="relative">
+            <span
+              aria-hidden="true"
+              class:list={[
+                'absolute top-1 -left-[31px] h-3.5 w-3.5 rounded-full ring-4 ring-paper md:-top-9 md:left-0',
+                i < 2 ? 'bg-earth' : i === 2 ? 'bg-sun' : 'bg-ink',
+              ]}
+            ></span>
+            <span class="font-mono text-[0.7rem] tracking-wider text-muted uppercase">{s.tag}</span>
+            <p class="mt-1 font-semibold">{s.title}</p>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-8 max-w-4xl text-sm text-muted">{d.solution.pipelineNote}</p>
+
+    <!-- Validation: a statement, not a card. -->
+    <div class="mt-20 grid gap-6 border-y border-line py-12 md:grid-cols-[auto_1fr] md:gap-10">
+      <span class="flex h-14 w-14 items-center justify-center rounded-full bg-ok/15 text-2xl text-ok" aria-hidden="true">✓</span>
+      <div>
+        <h3 class="font-serif text-2xl font-semibold">{d.solution.validationTitle}</h3>
+        <p class="mt-3 max-w-3xl font-serif text-xl leading-relaxed text-muted">{d.solution.validationBody}</p>
       </div>
     </div>
 
-    <div class="mt-12 flex flex-col items-start justify-between gap-4 rounded-2xl bg-ink p-6 text-paper sm:flex-row sm:items-center sm:p-8">
+    <div class="mt-12 flex flex-col items-start justify-between gap-4 rounded-xl bg-ink p-6 text-paper sm:flex-row sm:items-center sm:p-8">
       <p class="font-serif text-xl">{d.solution.learnTeaser}</p>
       <a href={localePath(lang, 'learn')} class="shrink-0 rounded-full bg-sun px-5 py-2.5 font-semibold text-[#0b1020] hover:brightness-95">{d.solution.learnCta} →</a>
     </div>
@@ -387,15 +419,12 @@ const bibtex = `@software{vizcachas2026navigator,
         <a href={REPO_URL} class="self-start rounded-full border border-line bg-surface px-4 py-2 text-sm hover:border-ink md:self-auto">{d.team.repo} ↗</a>
       </div>
       <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted">{d.team.intro}</p>
-      <ul class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <ul class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-12">
         {
           team.map((name, i) => (
-            <li class="rounded-2xl border border-line bg-surface p-4 text-center">
-              <span
-                class:list={['mx-auto flex h-14 w-14 items-center justify-center rounded-full font-mono text-sm font-medium', i % 2 === 0 ? 'bg-sun/25 text-sun-ink' : 'bg-earth/25 text-earth-ink']}
-                aria-hidden="true"
-              >{initials(name)}</span>
-              <span class="mt-3 block text-sm font-medium">{name}</span>
+            <li class="flex items-baseline gap-4 border-t border-line py-5">
+              <span class="font-mono text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
+              <span class="font-serif text-2xl">{name}</span>
             </li>
           ))
         }

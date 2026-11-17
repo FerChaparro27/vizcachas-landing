@@ -18,7 +18,9 @@
     "skip": "Aller au contenu",
     "menu": "Menu",
     "code": "Code",
-    "cite": "Citer"
+    "cite": "Citer",
+    "showcase": "Scénarios",
+    "module": "Module pédagogique"
   },
   "hero": {
     "badge": "Open source · Pédagogique · Gratuit",
@@ -84,14 +86,17 @@
     "intro": "Plusieurs missions habitées et robotiques à venir visent le pôle Sud lunaire, où de la glace est piégée dans des cratères en ombre permanente. Mais la géométrie même qui préserve cette glace rend la région difficile à exploiter.",
     "points": [
       {
+        "figure": "≈1,5°",
         "title": "Le Soleil rase l'horizon",
         "body": "L'axe de rotation de la Lune n'est incliné que d'environ 1,5° par rapport à l'écliptique. Près des pôles, le Soleil ne monte jamais de plus de quelques degrés : le rebord d'un cratère ou une colline peut laisser un atterrisseur dans l'ombre pendant des jours."
       },
       {
+        "figure": "±7–8°",
         "title": "La Terre est basse, elle aussi",
         "body": "Comme la Lune nous montre toujours la même face, la Terre reste presque fixe dans le ciel lunaire. Vue du pôle, elle est proche de l'horizon, et la libration la fait monter et descendre lentement."
       },
       {
+        "figure": "168 h → 0 h",
         "title": "L'énergie et la communication décident de la mission",
         "body": "Les panneaux solaires ont besoin du Soleil au-dessus de l'horizon. La radio directe vers la Terre a besoin d'une ligne de visée dégagée. Si le lancement glisse de quelques jours, les deux peuvent changer."
       }
@@ -184,8 +189,8 @@
         "body": "Le Soleil et la Terre à leur vraie échelle angulaire au-dessus de l'horizon, avec une boussole 2D et une règle de hauteur en solution de repli."
       },
       {
-        "title": "La hauteur du Soleil d'abord",
-        "body": "La hauteur du Soleil au-dessus de l'horizon est le chiffre le plus visible à l'écran, car elle détermine l'énergie solaire."
+        "title": "La position en un coup d’œil",
+        "body": "Le panneau de détails donne l’azimut, la hauteur, l’état et le prochain lever ou coucher du Soleil et de la Terre, chacun avec une courte explication."
       },
       {
         "title": "Chronologie et compte à rebours",
@@ -200,14 +205,12 @@
         "body": "Choisissez une mission historique, saisissez des coordonnées ou cliquez directement sur une carte stéréographique de l'un ou l'autre pôle."
       },
       {
-        "title": "Ouvert et multilingue",
-        "body": "Code sous licence MIT, affichage mobile et interface en anglais, espagnol, hindi et chinois simplifié."
+        "title": "Ouvert et adapté au mobile",
+        "body": "Un code sous licence MIT que vous pouvez étudier et réutiliser, et un affichage qui fonctionne sur téléphone et tablette."
       }
     ],
     "validationTitle": "Comment nous vérifions les chiffres",
     "validationBody": "Les positions du Soleil et de la Terre sont calculées à partir d’éphémérides obtenues auprès du système JPL Horizons (NASA/JPL Solar System Dynamics). Un panneau de validation et des tests automatiques comparent les valeurs de l’application à des réponses de référence enregistrées depuis ce même système et affichent l’écart, pour que chacun puisse les vérifier.",
-    "limitsTitle": "Des limites assumées",
-    "limitsBody": "La silhouette de l'horizon utilise le terrain réel LOLA uniquement pour les sites disposant de données d'altitude ; ailleurs, l'application utilise un horizon idéal plat et le signale. La texture du sol sous l'horizon et les étoiles sont illustratives.",
     "learnTeaser": "Envie de comprendre la géométrie derrière chaque chiffre ?",
     "learnCta": "Ouvrir le module pédagogique"
   },
@@ -273,7 +276,7 @@
   },
   "cta": {
     "title": "Commencez à explorer",
-    "body": "Gratuit. Open source. En six langues.",
+    "body": "Gratuit. Open source.",
     "app": "Ouvrir l’outil",
     "repo": "Voir sur GitHub",
     "learn": "Comprendre la science"

@@ -18,7 +18,9 @@
     "skip": "Skip to content",
     "menu": "Menu",
     "code": "Code",
-    "cite": "Cite"
+    "cite": "Cite",
+    "showcase": "Scenarios",
+    "module": "Educational module"
   },
   "hero": {
     "badge": "Open source · Educational · Free",
@@ -84,14 +86,17 @@
     "intro": "Several upcoming crewed and robotic missions are targeting the lunar south pole, where ice is trapped in permanently shadowed craters. But the same geometry that preserves that ice makes the region hard to work in.",
     "points": [
       {
+        "figure": "≈1.5°",
         "title": "The Sun grazes the horizon",
         "body": "The Moon's spin axis is tilted only about 1.5° from the ecliptic. Near the poles the Sun never climbs more than a few degrees, so a crater rim or a hill can put a lander in shadow for days."
       },
       {
+        "figure": "±7–8°",
         "title": "The Earth sits low too",
         "body": "Because the Moon always shows the same face to us, the Earth hangs almost fixed in the lunar sky. Seen from the pole it is close to the horizon, and libration slowly moves it up and down."
       },
       {
+        "figure": "168 h → 0 h",
         "title": "Power and communication decide the mission",
         "body": "Solar panels need the Sun above the horizon. Direct-to-Earth radio needs a clear line of sight. If a launch slips by a few days, both can change."
       }
@@ -184,8 +189,8 @@
         "body": "The Sun and the Earth at true angular scale over the horizon, with a 2D compass and elevation ruler as a fallback."
       },
       {
-        "title": "Solar elevation first",
-        "body": "The Sun's height above the horizon is the most visible number on screen, because it drives solar power."
+        "title": "Position at a glance",
+        "body": "The details panel gives azimuth, elevation, status and the next rise or set of the Sun and the Earth, each with a short explanation."
       },
       {
         "title": "Timeline and countdown",
@@ -200,14 +205,12 @@
         "body": "Choose a historical mission, type coordinates, or click directly on a stereographic map of either pole."
       },
       {
-        "title": "Open and multilingual",
-        "body": "MIT-licensed code, mobile layout, and an interface in English, Spanish, Hindi and Simplified Chinese."
+        "title": "Open and mobile-ready",
+        "body": "MIT-licensed code you can study and reuse, and a layout that works on phones and tablets."
       }
     ],
     "validationTitle": "How we check the numbers",
     "validationBody": "Sun and Earth positions are computed from ephemerides retrieved from the JPL Horizons system (NASA/JPL Solar System Dynamics). A validation panel and automated tests compare the app’s values with reference answers saved from that same system and show the difference, so anyone can check them.",
-    "limitsTitle": "Honest limits",
-    "limitsBody": "The horizon silhouette uses real LOLA terrain only for sites with elevation data; elsewhere the app uses an ideal flat horizon and says so. The ground texture below the horizon and the stars are illustrative.",
     "learnTeaser": "Want to understand the geometry behind each number?",
     "learnCta": "Open the educational module"
   },
@@ -273,7 +276,7 @@
   },
   "cta": {
     "title": "Start exploring",
-    "body": "Free. Open source. In six languages.",
+    "body": "Free. Open source.",
     "app": "Launch the tool",
     "repo": "View on GitHub",
     "learn": "Learn the science"
