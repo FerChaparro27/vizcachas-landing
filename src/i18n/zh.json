@@ -79,7 +79,7 @@
     ]
   },
   "problem": {
-    "kicker": "§1 · 问题",
+    "kicker": "问题",
     "title": "在月球南极，阳光和信号都很稀缺",
     "intro": "多项即将进行的载人和无人任务都瞄准了月球南极，那里的永久阴影陨石坑中封存着水冰。但正是保存这些冰的几何条件，让这一区域难以开展作业。",
     "points": [
@@ -150,7 +150,7 @@
     ]
   },
   "solution": {
-    "kicker": "§2 · 我们的方案",
+    "kicker": "我们的方案",
     "title": "一个屏幕，一个问题，可追溯的数字",
     "intro": "选择一个着陆点和一个日期。工具会显示太阳和地球在当地地平线上的位置、太阳高度、未来几天的日照时数和可见地球时数，以及距离下一次日落或地落的倒计时。",
     "pipelineTitle": "工作原理",
@@ -212,7 +212,7 @@
     "learnCta": "打开教学模块"
   },
   "data": {
-    "kicker": "§3 · 数据与致谢",
+    "kicker": "数据与致谢",
     "title": "基于开放数据和开源软件构建",
     "sources": [
       {
@@ -266,7 +266,7 @@
     "dataCitation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov"
   },
   "team": {
-    "kicker": "§4 · 团队",
+    "kicker": "团队",
     "title": "Vizcachas fuera de órbita",
     "intro": "一个独立的开源教育项目。我们会持续改进它，让学生、教师和航天爱好者都能用真实数据探索月球的天空。",
     "repo": "在 GitHub 上查看代码"
@@ -449,6 +449,7 @@
       }
     ],
     "back": "返回项目",
-    "tryIt": "在工具中试试"
+    "tryIt": "在工具中试试",
+    "sourcesLabel": "参考资料"
   }
 }

@@ -79,7 +79,7 @@
     ]
   },
   "problem": {
-    "kicker": "§1 · The problem",
+    "kicker": "The problem",
     "title": "At the lunar south pole, sunlight and signal are scarce",
     "intro": "Several upcoming crewed and robotic missions are targeting the lunar south pole, where ice is trapped in permanently shadowed craters. But the same geometry that preserves that ice makes the region hard to work in.",
     "points": [
@@ -150,7 +150,7 @@
     ]
   },
   "solution": {
-    "kicker": "§2 · Our solution",
+    "kicker": "Our solution",
     "title": "One screen, one question, traceable numbers",
     "intro": "Pick a landing site and a date. The tool shows the Sun and the Earth over the local horizon, the Sun's elevation, the hours of sunlight and of Earth visibility in the coming days, and a countdown to the next sunset or Earthset.",
     "pipelineTitle": "How it works",
@@ -212,7 +212,7 @@
     "learnCta": "Open the educational module"
   },
   "data": {
-    "kicker": "§3 · Data & credits",
+    "kicker": "Data & credits",
     "title": "Built on open data and open software",
     "sources": [
       {
@@ -266,7 +266,7 @@
     "dataCitation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov"
   },
   "team": {
-    "kicker": "§4 · Team",
+    "kicker": "Team",
     "title": "Vizcachas fuera de órbita",
     "intro": "An independent, open-source educational project. We keep improving it so students, teachers and space enthusiasts can explore the lunar sky with real data.",
     "repo": "View the code on GitHub"
@@ -449,6 +449,7 @@
       }
     ],
     "back": "Back to the project",
-    "tryIt": "Try it in the tool"
+    "tryIt": "Try it in the tool",
+    "sourcesLabel": "Sources"
   }
 }

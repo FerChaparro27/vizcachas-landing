@@ -79,7 +79,7 @@
     ]
   },
   "problem": {
-    "kicker": "§1 · Le problème",
+    "kicker": "Le problème",
     "title": "Au pôle Sud lunaire, la lumière et le signal sont rares",
     "intro": "Plusieurs missions habitées et robotiques à venir visent le pôle Sud lunaire, où de la glace est piégée dans des cratères en ombre permanente. Mais la géométrie même qui préserve cette glace rend la région difficile à exploiter.",
     "points": [
@@ -150,7 +150,7 @@
     ]
   },
   "solution": {
-    "kicker": "§2 · Notre solution",
+    "kicker": "Notre solution",
     "title": "Un écran, une question, des chiffres traçables",
     "intro": "Choisissez un site d'alunissage et une date. L'outil montre le Soleil et la Terre au-dessus de l'horizon local, la hauteur du Soleil, les heures d'ensoleillement et de visibilité de la Terre pour les jours à venir, et un compte à rebours jusqu'au prochain coucher du Soleil ou de la Terre.",
     "pipelineTitle": "Comment ça marche",
@@ -212,7 +212,7 @@
     "learnCta": "Ouvrir le module pédagogique"
   },
   "data": {
-    "kicker": "§3 · Données et crédits",
+    "kicker": "Données et crédits",
     "title": "Construit avec des données ouvertes et des logiciels libres",
     "sources": [
       {
@@ -266,7 +266,7 @@
     "dataCitation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov"
   },
   "team": {
-    "kicker": "§4 · Équipe",
+    "kicker": "Équipe",
     "title": "Vizcachas fuera de órbita",
     "intro": "Un projet pédagogique indépendant et open source. Nous continuons à l’améliorer pour que les élèves, les enseignants et les passionnés d’espace puissent explorer le ciel lunaire avec des données réelles.",
     "repo": "Voir le code sur GitHub"
@@ -449,6 +449,7 @@
       }
     ],
     "back": "Retour au projet",
-    "tryIt": "Essayez dans l'outil"
+    "tryIt": "Essayez dans l'outil",
+    "sourcesLabel": "Sources"
   }
 }

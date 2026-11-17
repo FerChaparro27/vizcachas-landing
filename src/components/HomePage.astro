@@ -230,15 +230,22 @@ const bibtex = `@software{vizcachas2026navigator,
         </div>
       </div>
     </div>
+    <!-- Slides are rendered twice; the second copy is decorative and makes the continuous loop seamless. -->
     <ul
       id="showcase-track"
-      class="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      style="padding-inline: max(1rem, calc((100vw - 72rem) / 2 + 1.5rem)); scroll-padding-inline: max(1rem, calc((100vw - 72rem) / 2 + 1.5rem));"
+      class="mt-10 flex gap-5 overflow-x-auto pb-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      style="padding-inline: max(1rem, calc((100vw - 72rem) / 2 + 1.5rem));"
     >
       {
-        d.showcase.slides.map((s, i) => (
-          <li class="w-[86%] shrink-0 snap-start sm:w-[540px]" aria-roledescription="slide" aria-label={`${i + 1} / ${slides.length}`}>
-            <a href={slides[i].href} class="group block overflow-hidden rounded-2xl bg-[#121a2e] ring-1 ring-white/10 hover:ring-white/30">
+        [0, 1].flatMap((copy) => d.showcase.slides.map((s, i) => (
+          <li
+            class="w-[86%] shrink-0 sm:w-[540px]"
+            data-copy={copy}
+            aria-hidden={copy === 1 ? 'true' : undefined}
+            aria-roledescription={copy === 0 ? 'slide' : undefined}
+            aria-label={copy === 0 ? `${i + 1} / ${slides.length}` : undefined}
+          >
+            <a href={slides[i].href} tabindex={copy === 1 ? -1 : undefined} class="group block overflow-hidden rounded-2xl bg-[#121a2e] ring-1 ring-white/10 hover:ring-white/30">
               <div class="relative aspect-[16/10] overflow-hidden">
                 <Image src={slides[i].img} alt="" widths={[540, 1080]} sizes="540px" class="h-full w-full object-cover object-left-top transition duration-500 group-hover:scale-[1.02]" />
                 <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 pt-16">
@@ -252,7 +259,7 @@ const bibtex = `@software{vizcachas2026navigator,
               </div>
             </a>
           </li>
-        ))
+        )))
       }
     </ul>
   </section>
@@ -412,15 +419,65 @@ const bibtex = `@software{vizcachas2026navigator,
 </Base>
 
 <script>
-  // Carousel prev/next: scroll by one card width.
+  // Showcase carousel: slow continuous scroll in a seamless loop.
+  // Pauses on hover, focus or touch, when off screen or in a hidden tab; disabled for reduced motion.
+  const SPEED_PX_S = 30;
+  const RESUME_AFTER_MS = 3000;
   const track = document.getElementById('showcase-track');
-  document.querySelectorAll<HTMLButtonElement>('[data-carousel]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const card = track?.querySelector('li');
-      if (!track || !card) return;
-      track.scrollBy({ left: Number(btn.dataset.carousel) * (card.clientWidth + 20), behavior: 'smooth' });
+  if (track) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Width of one full copy of the slides = offset of the first card of the second copy.
+    const loopWidth = () => {
+      const first = track.querySelector<HTMLElement>('li[data-copy="0"]');
+      const second = track.querySelector<HTMLElement>('li[data-copy="1"]');
+      return first && second ? second.offsetLeft - first.offsetLeft : 0;
+    };
+    let hovering = false;
+    let visible = true;
+    let pausedUntil = 0;
+    let last = 0;
+    let pos = track.scrollLeft;
+    const hold = (ms = RESUME_AFTER_MS) => (pausedUntil = performance.now() + ms);
+
+    const step = (now: number) => {
+      const dt = last ? Math.min(now - last, 100) : 0;
+      last = now;
+      const running = !reduced && visible && !hovering && !document.hidden && now > pausedUntil;
+      if (running) {
+        const w = loopWidth();
+        pos += (SPEED_PX_S * dt) / 1000;
+        if (w > 0 && pos >= w) pos -= w;
+        track.scrollLeft = pos;
+      } else {
+        pos = track.scrollLeft; // keep in sync with manual scrolling
+      }
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+
+    track.addEventListener('mouseenter', () => (hovering = true));
+    track.addEventListener('mouseleave', () => (hovering = false));
+    track.addEventListener('focusin', () => (hovering = true));
+    track.addEventListener('focusout', () => (hovering = false));
+    track.addEventListener('pointerdown', () => hold());
+    track.addEventListener('touchstart', () => hold(), { passive: true });
+    track.addEventListener('wheel', () => hold(), { passive: true });
+    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(track);
+
+    // Arrows: move one card and pause briefly.
+    document.querySelectorAll<HTMLButtonElement>('[data-carousel]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = track.querySelector('li');
+        if (!card) return;
+        hold();
+        let target = track.scrollLeft + Number(btn.dataset.carousel) * (card.clientWidth + 20);
+        const w = loopWidth();
+        if (w > 0 && target < 0) target += w;
+        if (w > 0 && target >= w) target -= w;
+        track.scrollTo({ left: target, behavior: reduced ? 'auto' : 'smooth' });
+      });
     });
-  });
+  }
   // Copy buttons for the citation blocks.
   document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
     btn.addEventListener('click', async () => {

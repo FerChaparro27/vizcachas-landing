@@ -79,7 +79,7 @@
     ]
   },
   "problem": {
-    "kicker": "§1 · O problema",
+    "kicker": "O problema",
     "title": "No polo sul lunar, luz e sinal são escassos",
     "intro": "Várias missões tripuladas e robóticas futuras têm como alvo o polo sul lunar, onde há gelo preso em crateras em sombra permanente. Mas a mesma geometria que preserva esse gelo torna a região difícil para operar.",
     "points": [
@@ -150,7 +150,7 @@
     ]
   },
   "solution": {
-    "kicker": "§2 · Nossa solução",
+    "kicker": "Nossa solução",
     "title": "Uma tela, uma pergunta, números rastreáveis",
     "intro": "Escolha um local de pouso e uma data. A ferramenta mostra o Sol e a Terra sobre o horizonte local, a elevação do Sol, as horas de luz solar e de Terra visível nos próximos dias e uma contagem regressiva até o próximo pôr do Sol ou da Terra.",
     "pipelineTitle": "Como funciona",
@@ -212,7 +212,7 @@
     "learnCta": "Abrir o módulo educativo"
   },
   "data": {
-    "kicker": "§3 · Dados e créditos",
+    "kicker": "Dados e créditos",
     "title": "Feito com dados abertos e software livre",
     "sources": [
       {
@@ -266,7 +266,7 @@
     "dataCitation": "NASA/JPL Solar System Dynamics. Data retrieved via the Horizons system. https://ssd.jpl.nasa.gov"
   },
   "team": {
-    "kicker": "§4 · Equipe",
+    "kicker": "Equipe",
     "title": "Vizcachas fuera de órbita",
     "intro": "Um projeto educativo independente e de código aberto. Continuamos a melhorá-lo para que estudantes, professores e entusiastas do espaço possam explorar o céu lunar com dados reais.",
     "repo": "Ver o código no GitHub"
@@ -449,6 +449,7 @@
       }
     ],
     "back": "Voltar ao projeto",
-    "tryIt": "Experimente na ferramenta"
+    "tryIt": "Experimente na ferramenta",
+    "sourcesLabel": "Fontes"
   }
 }
