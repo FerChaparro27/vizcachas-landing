@@ -20,8 +20,8 @@ const d = t(lang);
       </div>
     </div>
     <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm md:flex-col md:items-end">
-      <li><a class="underline-offset-4 hover:underline" href={appUrl(lang)}>{d.footer.app} ↗</a></li>
-      <li><a class="underline-offset-4 hover:underline" href={REPO_URL}>{d.footer.repo} ↗</a></li>
+      <li><a class="underline-offset-4 hover:underline" href={appUrl(lang)} target="_blank" rel="noopener noreferrer">{d.footer.app} ↗</a></li>
+      <li><a class="underline-offset-4 hover:underline" href={REPO_URL} target="_blank" rel="noopener noreferrer">{d.footer.repo} ↗</a></li>
       <li><a class="underline-offset-4 hover:underline" href={`${localePath(lang)}#data-cite`}>{d.cite.title}</a></li>
       <li><a class="underline-offset-4 hover:underline" href={`${localePath(lang)}#data-sources`}>{d.data.sectionTitle}</a></li>
     </ul>

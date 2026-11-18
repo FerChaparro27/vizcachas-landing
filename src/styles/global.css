@@ -3,15 +3,17 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Palette derived from the app's theme.css (sun #ffc54d, earth #6cb2ff, navy #0b1020),
-   adjusted for text contrast on a light "paper" background. */
+/* Palette derived from the app's theme.css (sun #ffc54d, earth #6cb2ff, navy #0b1020).
+   Light theme is a secondary option: the page defaults to dark (see Base.astro).
+   Light tokens are tuned for contrast: the paper is a cool gray so white cards and the
+   translucent navbar stand out, and borders reach ~3:1 against white (WCAG 1.4.11). */
 :root {
-  --paper: #f8f8f5;
+  --paper: #e9edf3;
   --surface: #ffffff;
-  --surface-2: #eef0f4;
-  --line: #d9dde5;
+  --surface-2: #dde3ec;
+  --line: #7c879c;
   --ink: #0b1020;
-  --ink-muted: #4a5468;
+  --ink-muted: #3b4559;
   --accent: #1f3a8a;
   --sun: #ffc54d;
   --sun-ink: #8a5a00;
@@ -91,6 +93,11 @@ body {
   border: 1px solid var(--line); color: var(--ink); background: var(--surface);
 }
 .carousel-btn:hover { border-color: var(--ink); }
+/* Mouse drag on the showcase track. */
+#showcase-track { cursor: grab; user-select: none; -webkit-user-select: none; }
+#showcase-track img { -webkit-user-drag: none; pointer-events: auto; }
+#showcase-track.is-dragging { cursor: grabbing; }
+#showcase-track.is-dragging a { pointer-events: none; }
 /* Pause/play control on feature visuals. */
 .motion-toggle {
   position: absolute; right: 0.75rem; bottom: 0.75rem; z-index: 2;

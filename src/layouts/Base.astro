@@ -32,8 +32,7 @@ const ogImage = new URL('/og.png', site).href;
     }
     <link rel="alternate" hreflang="x-default" href={new URL(localePath('en', page), site).href} />
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-    <meta name="theme-color" content="#f8f8f5" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0b1020" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -61,7 +60,8 @@ const ogImage = new URL('/og.png', site).href;
       (function () {
         try {
           var s = localStorage.getItem('theme');
-          var dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          // Dark by default; the OS light preference is ignored on purpose. The toggle saves the choice.
+          var dark = s ? s === 'dark' : true;
           if (dark) document.documentElement.classList.add('dark');
         } catch (e) {}
       })();

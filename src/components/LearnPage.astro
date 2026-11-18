@@ -47,7 +47,7 @@ const L = d.learn;
                     <li class="flex gap-2">
                       <span class="font-mono text-ink">[{n + 1}]</span>
                       <span>
-                        {s.authors} ({s.year}). <a href={s.url} class="text-ink underline decoration-line underline-offset-2 hover:decoration-ink"><cite class="not-italic">{s.title}</cite></a>{s.title.endsWith('.') ? '' : '.'} <i>{s.venue}</i>.
+                        {s.authors} ({s.year}). <a href={s.url} target="_blank" rel="noopener noreferrer" class="text-ink underline decoration-line underline-offset-2 hover:decoration-ink"><cite class="not-italic">{s.title}</cite></a>{s.title.endsWith('.') ? '' : '.'} <i>{s.venue}</i>.
                       </span>
                     </li>
                   ))}
@@ -92,7 +92,7 @@ const L = d.learn;
             </article>
           ))}
         </div>
-        <a href={appUrl(lang)} class="mt-10 inline-block rounded bg-ink px-5 py-2.5 font-medium text-paper hover:opacity-90">
+        <a href={appUrl(lang)} target="_blank" rel="noopener noreferrer" class="mt-10 inline-block rounded bg-ink px-5 py-2.5 font-medium text-paper hover:opacity-90">
           {L.tryIt} ↗
         </a>
       </section>

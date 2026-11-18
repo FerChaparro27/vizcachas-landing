@@ -86,12 +86,12 @@ const bibtex = `@software{vizcachas2026navigator,
     <p class="mx-auto mt-5 max-w-xl leading-relaxed text-balance text-muted">{d.hero.tagline}</p>
     <ul class="mt-9 flex flex-wrap justify-center gap-2.5 text-sm font-medium">
       <li>
-        <a href={appUrl(lang)} class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-paper hover:opacity-90">
+        <a href={appUrl(lang)} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-paper hover:opacity-90">
           {d.hero.ctaApp} <span aria-hidden="true">→</span>
         </a>
       </li>
       <li>
-        <a href={REPO_URL} class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 hover:border-ink">
+        <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 hover:border-ink">
           <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>
           {d.hero.ctaCode}
         </a>
@@ -145,7 +145,7 @@ const bibtex = `@software{vizcachas2026navigator,
     <div class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-3">
       {
         d.audience.items.map((a, i) => (
-          <a href={audience[i].href} class="group flex flex-col">
+          <a href={audience[i].href} target="_blank" rel="noopener noreferrer" class="group flex flex-col">
             <div class="aspect-[16/10] overflow-hidden rounded-xl bg-surface-2 ring-1 ring-line">
               <Image src={audience[i].img} alt="" width={720} class:list={['h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]', audience[i].pos]} />
             </div>
@@ -264,7 +264,7 @@ const bibtex = `@software{vizcachas2026navigator,
             aria-roledescription={copy === 0 ? 'slide' : undefined}
             aria-label={copy === 0 ? `${i + 1} / ${slides.length}` : undefined}
           >
-            <a href={slides[i].href} tabindex={copy === 1 ? -1 : undefined} class="group block overflow-hidden rounded-2xl bg-surface ring-1 ring-line hover:ring-ink/40">
+            <a href={slides[i].href} target="_blank" rel="noopener noreferrer" tabindex={copy === 1 ? -1 : undefined} class="group block overflow-hidden rounded-2xl bg-surface ring-1 ring-line hover:ring-ink/40">
               <div class="relative aspect-[16/10] overflow-hidden">
                 <Image src={slides[i].img} alt="" widths={[540, 1080]} sizes="540px" class="h-full w-full object-cover object-left-top transition duration-500 group-hover:scale-[1.02]" />
                 <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 pt-16">
@@ -358,8 +358,8 @@ const bibtex = `@software{vizcachas2026navigator,
       <h2 class="relative font-serif text-3xl font-semibold text-ink sm:text-4xl">{d.cta.title}</h2>
       <p class="relative mt-3 text-muted">{d.cta.body}</p>
       <div class="relative mt-8 flex flex-wrap justify-center gap-3 text-sm font-semibold">
-        <a href={appUrl(lang)} class="rounded-full bg-sun px-5 py-2.5 text-[#0b1020] hover:brightness-95">{d.cta.app} →</a>
-        <a href={REPO_URL} class="rounded-full border border-line px-5 py-2.5 text-ink hover:border-ink">{d.cta.repo}</a>
+        <a href={appUrl(lang)} target="_blank" rel="noopener noreferrer" class="rounded-full bg-sun px-5 py-2.5 text-[#0b1020] hover:brightness-95">{d.cta.app} →</a>
+        <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="rounded-full border border-line px-5 py-2.5 text-ink hover:border-ink">{d.cta.repo}</a>
         <a href={localePath(lang, 'learn')} class="rounded-full border border-line px-5 py-2.5 text-ink hover:border-ink">{d.cta.learn}</a>
       </div>
     </div>
@@ -449,7 +449,7 @@ const bibtex = `@software{vizcachas2026navigator,
               d.data.sources.map((s) => (
                 <tr class="border-t border-line">
                   <th scope="row" class="py-3 pr-4 align-top font-medium">
-                    <a href={s.url} class="underline decoration-line underline-offset-4 hover:decoration-ink">{s.name}</a>
+                    <a href={s.url} target="_blank" rel="noopener noreferrer" class="underline decoration-line underline-offset-4 hover:decoration-ink">{s.name}</a>
                     <span class="mt-0.5 block font-mono text-xs font-normal text-muted">{s.org}</span>
                   </th>
                   <td class="py-3 align-top text-muted">{s.use}</td>
@@ -568,6 +568,45 @@ const bibtex = `@software{vizcachas2026navigator,
     track.addEventListener('pointerdown', () => hold());
     track.addEventListener('touchstart', () => hold(), { passive: true });
     track.addEventListener('wheel', () => hold(), { passive: true });
+
+    // Mouse drag: press and pull the track left or right to move forward or back.
+    // A drag never opens the slide link under the cursor.
+    let drag: { x: number; start: number; moved: boolean } | null = null;
+    let justDragged = false;
+    track.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, start: track.scrollLeft, moved: false };
+      justDragged = false;
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) < 5) return;
+      if (!drag.moved) track.classList.add('is-dragging');
+      drag.moved = true;
+      hold(1500);
+      const w = loopWidth();
+      let next = drag.start - dx;
+      if (w > 0) next = ((next % w) + w) % w; // wrap so the loop stays seamless
+      track.scrollLeft = next;
+      pos = next;
+    });
+    const endDrag = () => {
+      if (!drag) return;
+      justDragged = drag.moved;
+      drag = null;
+      track.classList.remove('is-dragging');
+    };
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
+    track.addEventListener('click', (e) => {
+      if (!justDragged) return;
+      e.preventDefault();
+      e.stopPropagation();
+      justDragged = false;
+    }, true);
+    track.addEventListener('dragstart', (e) => e.preventDefault());
+
     new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(track);
 
     // Arrows: move one card and pause briefly.
@@ -584,6 +623,46 @@ const bibtex = `@software{vizcachas2026navigator,
       });
     });
   }
+  // Smooth wheel scrolling: the page eases toward each wheel step instead of jumping.
+  // CSS scroll-behavior only affects programmatic scrolls, so the wheel is eased here.
+  // Skipped for touch / coarse pointers, reduced motion, and inside scrollable elements.
+  if (
+    window.matchMedia('(pointer: fine)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    let target = window.scrollY;
+    let current = window.scrollY;
+    let animating = false;
+    const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
+    const frame = () => {
+      current += (target - current) * 0.14;
+      if (Math.abs(target - current) < 0.5) {
+        current = target;
+        animating = false;
+      }
+      window.scrollTo({ top: current, behavior: 'instant' });
+      if (animating) requestAnimationFrame(frame);
+    };
+    window.addEventListener('wheel', (e) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // horizontal: carousel or native
+      for (let el = e.target as HTMLElement | null; el && el !== document.body; el = el.parentElement) {
+        if (el.scrollHeight > el.clientHeight + 1 && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) return;
+      }
+      e.preventDefault();
+      if (!animating) {
+        current = window.scrollY;
+        target = current;
+      }
+      const dy = e.deltaY * (e.deltaMode === 1 ? 16 : 1); // Firefox reports lines
+      target = Math.min(maxScroll(), Math.max(0, target + dy));
+      if (!animating) {
+        animating = true;
+        requestAnimationFrame(frame);
+      }
+    }, { passive: false });
+  }
+
   // Open the matching collapsed block when the URL points to it (e.g. #data-cite from the footer).
   const openFromHash = () => {
     const el = location.hash ? document.getElementById(location.hash.slice(1)) : null;
